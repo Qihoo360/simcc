@@ -1,0 +1,39 @@
+{
+    "log4cxx_category" : "Cloud.BrowserRelative",
+    "log4cxx_config" : "/home/abc/xampp/Cloud/service_processor/browser_relative/log4cxx.conf",
+
+    "memcached_domain_sock" : "xxx/home/abc/xampp/Cloud/MemDB/var/memcached.sock",
+    "memcached_hostname" : "hpre3.yyy.ccc.xxx.net",
+    "memcached_port" : "11211",
+
+    "memcached_resource_domain_sock" : "xxxx/home/abc/xampp/Cloud/MemDB/var/memcached1.sock",
+    "memcached_resource_hostname" : "hpre3.yyy.ccc.xxx.net",
+    "memcached_resource_port" : "11212",
+    "memcached_failed_retrytimes" : 3,
+
+
+    "nearreplicas_dist_threshold" : 15,
+
+    //"nearreplicas_algorithm" : "simcos",
+    "nearreplicas_algorithm" : "simhash",
+
+    "verbose_log" : true,
+
+    //the value is utf-8
+    "type":
+    {
+        "0" :"\u8d44\u8baf",
+        "1" :"\u56fe\u7247",
+        "2" :"\u89c6\u9891",
+        "3" :"\u56e2\u8d2d",
+        "4" :"\u8f6f\u4ef6",
+        "5" :"\u8d2d\u7269",
+        "99":"\u5176\u4ed6"
+    },
+
+
+    "browser_relative_key1" : "This is the browser_relative config value 1",
+    "browser_relative_key2" : "This is the browser_relative config value 2",
+
+}
+

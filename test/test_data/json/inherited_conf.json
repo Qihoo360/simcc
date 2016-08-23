@@ -1,0 +1,11 @@
+{
+	"inherited_from" : "../json/common_conf.json",
+    "log4cxx_category" : "Cloud.BrowserRelative.Newvalue",
+    "type":
+    {
+        "99":"99_newvalue",
+		"100":"100_new_key_value",
+		"bool":false,
+    },
+}
+

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<conf>	
+	<!--Server Internal net rhead-->
+	<num_server_net_thread></num_server_net_thread>
+	
+	<!--PatchMarshalServer host-->
+	<!--  <pm_url>192.168.3.153</pm_url> -->
+	<pm_host>192.168.0.43</pm_host>
+	<pm_port>12000</pm_port>
+	
+	
+	<!--For Listen actor-->
+    <actor_host></actor_host>
+	<actor_port>11000</actor_port>
+    <actor_ds_host></actor_ds_host>
+	<actor_ds_port>11001</actor_ds_port>
+	<num_actor_net_thread></num_actor_net_thread>
+	
+	
+	<!--Mono Path-->
+	<glue_mono_assembly>../mono/Hipihi.Server.ConnectServer.dll</glue_mono_assembly>
+	<user_mono_assembly>../mono/ConnectServer/ConnectServer.dll</user_mono_assembly>
+
+	<!--Resource File-->
+	<res_file_download_url>http://192.168.0.40/filewebserver/get.php</res_file_download_url>
+	<res_file_upload_url>http://192.168.0.40/filewebserver/post.php</res_file_upload_url>
+	
+	<!--UserFile-->
+	<user_file_download_url>http://192.168.0.40/filewebserver/get.php</user_file_download_url>
+	<user_file_upload_url>http://192.168.0.40/filewebserver/post.php</user_file_upload_url>
+	
+	<!--PatchFile-->
+	<patch_file_download_url>http://192.168.0.40/filewebserver/get.php</patch_file_download_url>
+	<patch_file_upload_url>http://192.168.0.40/filewebserver/post.php</patch_file_upload_url>
+	
+	<!--AvatarFile-->
+	<avatar_file_upload_url>http://192.168.0.40/filewebserver/post.php</avatar_file_upload_url>
+	<!--http://192.168.0.44/logicwebserver/avatar/update.do?userid=100000000000000006&avataruuid=uuid-->
+	<avatar_update_url>http://192.168.0.44/logicwebserver/avatar/update.do</avatar_update_url>
+	
+	
+	<!--max number of patchs the server can support. maybe 1000-->
+	<max_patch>1000</max_patch>
+	
+	<!--max number of patchs the server can handle per time. maybe 200-->
+	<max_patch_waitstart>200</max_patch_waitstart>
+	
+	<!--max number of logins waiting. maybe 200-->
+	<max_waitlogin>200</max_waitlogin>
+	
+	
+	<!--mysql config-->
+	<mysqlthreadnum>1</mysqlthreadnum>
+	<mysqlprotocol>tcp</mysqlprotocol>
+	<mysqlhost>192.168.0.44</mysqlhost>
+	<mysqlport>3306</mysqlport>
+	<mysqluser>connectserver</mysqluser>
+	<mysqluserpassword>cs</mysqluserpassword>
+	<mysqldatabase>connectserver</mysqldatabase>
+	
+	<!-- When actor id is bigger than this actor_id_base_num_verbose id, we will print verbose debug message -->
+	<actor_id_base_num_verbose>10000000000000000</actor_id_base_num_verbose>
+	
+
+
+
+
+	<!-- update time, the default unit is in seconds -->
+	<!-- When an actor is out of my vision, I delay 2 circles to delete it instead of deleting it immediately -->
+	<broadcast_actor_out_of_vision_delay_times>2</broadcast_actor_out_of_vision_delay_times>
+	<!-- We broadcast actors' state in and out of my vision every time after this period-->
+	<broadcast_in_and_out_of_vision_actors_period>2.0</broadcast_in_and_out_of_vision_actors_period>
+	
+	<!-- the time out when loading patch -->
+	<load_patch_time_out>20.0</load_patch_time_out>
+	<!-- broadcast actors' movement state data time period -->
+	<broadcast_move_data_period>0.1</broadcast_move_data_period>
+	<!-- notify ps actors' request move time period -->	
+	<notify_ps_actor_request_move_period>0.1</notify_ps_actor_request_move_period>
+	
+	<!-- the time which the connect server sleep every frame -->	
+	<execution_time_per_frame>30.0</execution_time_per_frame>
+	<execution_time_per_frame_highest>250.0</execution_time_per_frame_highest>
+	<execution_time_per_frame_higher_normal>100.0</execution_time_per_frame_higher_normal>
+	<execution_time_per_frame_normal>70.0</execution_time_per_frame_normal>
+	<execution_time_per_frame_low>30.0</execution_time_per_frame_low>
+	
+	
+	<!-- when the count of elements which a QuadTreeNode holds is larger than m_nQuadTreeNodeFissionThresholds, 
+		the QuadTreeNode fission itself to 4 children, default 50 -->
+	<quad_tree_node_fission_thresholds>50</quad_tree_node_fission_thresholds>
+	<!-- when the count of elements which a QuadTreeNode holds is less than m_nQuadTreeFusionThresholds, 
+		the QuadTreeNode delete its 4 children, default 25 -->
+	<quad_tree_node_fusion_thresholds>25</quad_tree_node_fusion_thresholds>
+	<!-- the QuadTree's max depths, default 4  -->
+	<quad_tree_max_depth>4</quad_tree_max_depth>
+	
+	<!-- span time to notify move state. maybe 0.4 seconds. -->
+	<tm_span_actor_notify_movestate>0.45</tm_span_actor_notify_movestate>
+	<!--span time to notify script event. maybe 0.5 seconds -->
+	<tm_span_actor_notify_script_event>0.5</tm_span_actor_notify_script_event>
+	<!--span time to notify world stat info to all cs -->
+	<tm_span_actor_notify_world_stat_info>20</tm_span_actor_notify_world_stat_info>
+	
+	
+	
+	<!-- This section is used for detecting client violent attack -->
+	<stat_network_rate_period>10</stat_network_rate_period> <!-- second, we stat the network rate from one client in this period -->
+	<!-- ActorSendBufferOverflowSize over which the move message will be discarded. in KB -->
+	<num_actor_sendbuffer_overflow_size>10</num_actor_sendbuffer_overflow_size>
+	<!-- ActorSendBufferOverflow message number. over which the move message will be discarded. in KB -->
+	<num_actor_sendbuffer_overflow_message>50</num_actor_sendbuffer_overflow_message>
+	<!-- Time span to check send buffer overflow. over which the client will be closed.-->
+	<tm_actor_sendbuffer_overflow_span>60</tm_actor_sendbuffer_overflow_span>
+	
+	
+		<!-- Whether script is enabled.-->
+	<script_enabled>false</script_enabled>
+</conf>

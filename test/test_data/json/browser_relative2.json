@@ -1,0 +1,53 @@
+{
+    //"video_request_query_url" : "http://223.203.188.11/index.php",
+    //"video_request_query_url" : "http://192.168.100.173:2234/1?",
+    //"video_request_query_url" : "http://192.168.100.173:2234/1?",
+    //"video_request_query_url" : "http://192.168.100.173:2234/1?",
+    //"video_request_query_url" : "http://192.168.100.173:2234/1?",
+    "video_request_filter_host" /* AAAA */: /* AAAA */ "movie.douban.com,www.mtime.com,movie.mtime.com,news.mtime.com,theater.mtime.com,ent.qq.com,ent.sina.com.cn,slide.ent.sina.com.cn,yule.sohu.com,pic.yule.sohu.com,ent.163.com,ent.ifeng.com", /* AAAA */ //aaaaa
+/* AAAA */    "video_log4cxx_category"/* AAAA */ : /* AAAA */"Cloud.BrowserRelativeVideoRequest",/* AAAA */
+/* AAAA */
+/* AAAA */
+/* AAAA */
+/* AAAA */
+/* AAAA */
+    //taboo
+    "taboo_filter_enable" : false,
+    "taboo_retry_time" : 0,
+    "taboo_request_timeout" : 1,
+    "taboo_query_url" : "http://yyy1.sxxe.lft.xxxx.net:9998/keyword?filter=v_type=0;v_levels=e;&name=",
+    "taboo_log4cxx_category" : "Cloud.BrowserRelativeTaboo",
+
+    //news
+    "news_request_enable" : true,
+    "news_keyword_extractor_conf_ini_path" : "/home/abc/xampp/Cloud/service_processor/browser_relative/newskeyword/map_key_extract.ini",
+    "news_keyword_extractor_so_path" : "/home/abc/xampp/Cloud/service_processor/browser_relative/newskeyword/libKeywordExtract.so",
+    "news_request_timeout" : 1,
+    "news_request_retry_time" : 0,
+    //"news_request_url" : "http://10.119.87.43:8180/search.htm?ics=UTF8&ocs=UTF8&kw=",
+    //"news_request_url" : "http://10.119.87.43:8360/jsearch.htm?ics=UTF8&ocs=UTF8&filter=type:=0;&param=sep_uniq:title1md5&kw=title1",
+    //"news_request_url" : "http://10.119.87.43:8360/jsearch.htm?filter=type:=0;&param=sep_uniq:title1md5|sep_code:utf8&kw=title1",
+    "news_request_url" : "http://10.119.81.8:8360/jsearch.htm?filter=type:=0;&param=sep_uniq:title1md5|sep_code:utf8&kw=title1",
+    "new_min_title_chinese_charactor_count" : 8,
+    "new_min_keyword_count" : 3,
+    //"new_min_title_chinese_charactor_count" : 0,
+    //"new_min_keyword_count" : 0,
+    "news_request_filter_host" : "news.sina.com.cn,mil.news.sina.com.cn,sports.sina.com.cn,edu.sina.com.cn,finance.sina.com.cn,ent.sina.com.cn,eladies.sina.com.cn,health.sina.com.cn,tech.sina.com.cn,auto.sina.com.cn,house.sina.com.cn,life.sina.com.cn,news.sohu.com,mil.news.sohu.com,business.sohu.com,it.sohu.com,sports.sohu.com,auto.sohu.com,house.sohu.com,learning.sohu.com,cul.sohu.com,women.sohu.com,health.sohu.com,news.xinhuanet.com,www.chinanews.com,finance.chinanews.com,news.ifeng.com,finance.ifeng.com,ent.ifeng.com,tech.ifeng.com,auto.ifeng.com,house.ifeng.com,china.huanqiu.com,world.huanqiu.com,finance.huanqiu.com,mil.huanqiu.com,ent.huanqiu.com,health.huanqiu.com,tech.huanqiu.com,auto.huanqiu.com,society.huanqiu.com,www.zaobao.com,sports.zaobao.com,news.163.com,tech.163.com,ent.163.com,sports.163.com,money.163.com,auto.163.com,war.163.com,sports.163.com,edu.163.com,lady.163.com,news.qq.com,tech.qq.com,auto.qq.com,sports.qq.com,ent.qq.com,health.qq.com,finance.qq.com,tech.qq.com,edu.qq.com,lady.qq.com,politics.people.com.cn,finance.people.com.cn,legal.people.com.cn,society.people.com.cn,ccnews.people.com.cn,world.people.com.cn,auto.people.com.cn,energy.people.com.cn,lady.people.com.cn,it.people.com.cn,health.people.com.cn,military.people.com.cn,edu.people.com.cn,news.21cn.com,finance.21cn.com,et.21cn.com,sports.21cn.com,auto.21cn.com,news.china.com,auto.china.com,lady.china.com,military.china.com,sports.china.com,ent.china.com,tech.china.com,culture.china.com,edu.china.com,gb.cri.cn,news.cyol.com,law.cyol.com,edu.cyol.com,life.cyol.com,jingji.cyol.com,auto1.cyol.com,news.cn.yahoo.com,biz.cn.yahoo.com,ent.cn.yahoo.com,sports.cn.yahoo.com,mili.cn.yahoo.com,cul.cn.yahoo.com,news.tom.com,yule.tom.com,auto.tom.com,it.tom.com,gcontent.oeeee.com,news.ycwb.com,ent.ycwb.com,money.ycwb.com,edu.ycwb.com,life.ycwb.com,auto.ycwb.com,health.ycwb.com,news.eastday.com,mil.eastday.com,enjoy.eastday.com,sports.eastday.com",
+    "news_log4cxx_category" : "Cloud.BrowserRelativeNewsRequest",
+
+    "verbose_log" : true,
+    //"verbose_log" : false,
+
+    //the value is utf-8
+    "type":
+    {
+        "0" :"\u8d44\u8baf",
+        "1" :"\u56fe\u7247",
+        "2" :"\u89c6\u9891",
+        "3" :"\u56e2\u8d2d",
+        "4" :"\u8f6f\u4ef6",
+        "5" :"\u8d2d\u7269",
+        "99":"\u5176\u4ed6"
+    },
+}
+

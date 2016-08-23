@@ -1,0 +1,41 @@
+{
+    "qlog_category" : "Cloud",
+    //"qlog_config" : "/home/abc/xampp/Cloud/QueryEngine/conf/qlog.conf",
+    "qlog_config" : "/home/abc/xampp/Cloud/service_processor/browser_relative/qlog.conf",
+
+    "memcached_domain_sock" : "xxx/home/abc/xampp/Cloud/QueryEngine/MemDB/var/memcached.sock",
+    "memcached_hostname" : "hpre3.ccc.xxx.com",
+    "memcached_port" : "11211",
+
+    "memcached_resource_domain_sock" : "xxxx/home/abc/xampp/Cloud/QueryEngine/MemDB/var/memcached1.sock",
+    "memcached_resource_hostname" : "hpre3.ccc.xxx.com",
+    "memcached_resource_port" : "19212",
+    "memcached_failed_retrytimes" : 3,
+
+
+    "nearreplicas_dist_threshold" : 15,
+
+    //"nearreplicas_algorithm" : "simcos",
+    "nearreplicas_algorithm" : "simhash",
+
+    "verbose_log" : true,
+
+    //the value is utf-8
+    "type":
+    {
+        "0" :"0",
+        "1" :"1",
+        "2" :"2",
+        "3" :"3",
+        "4" :"4",
+        "5" :"5",
+        "99":"99",
+        "bool":true
+    },
+
+
+    "browser_relative_key1" : "This is the browser_relative config value 1",
+    "browser_relative_key2" : "This is the browser_relative config value 2",
+
+}
+

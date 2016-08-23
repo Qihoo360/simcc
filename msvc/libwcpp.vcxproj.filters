@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="time">
+      <UniqueIdentifier>{db27fc34-e756-45b7-92eb-38df61f5dae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inner">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{e715fd1b-4f7b-45cb-bc45-af4bf8e7e4a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="io">
+      <UniqueIdentifier>{01fc31b9-ddf4-4df4-895d-5ebaa0ab0318}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc">
+      <UniqueIdentifier>{ab492614-67f4-4b70-a7e9-eaa3967b74d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc\md5">
+      <UniqueIdentifier>{170151c6-9c01-4eaf-8b12-983111ab7cfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc\crc">
+      <UniqueIdentifier>{9720a2dc-c455-445c-b78b-ce664978b427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="json">
+      <UniqueIdentifier>{ae935b76-7f48-45c7-a6d9-3d854c084dd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="string">
+      <UniqueIdentifier>{c490adf2-b606-4c48-9e42-ba1111525828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="string\modp_b64">
+      <UniqueIdentifier>{f7bcd88b-f932-42ac-ba65-270267b5b99a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\wcpp\inner_pre.cc">
+      <Filter>inner</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\pch.cc">
+      <Filter>inner</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\duration.cc">
+      <Filter>time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\data_stream.cc">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\file_util.cc">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\json\json_array.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\json\json_object.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\json\json_parser.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\json\inherited_conf_json.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\json\json_common.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\json\json_value.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\misc\double_buffering.cc">
+      <Filter>misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\misc\md5.cc">
+      <Filter>misc\md5</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\misc\php_md5.cc">
+      <Filter>misc\md5</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\misc\crc16.cc">
+      <Filter>misc\crc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\misc\crc32.cc">
+      <Filter>misc\crc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\ini_parser.cc">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\string_util.cc">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\misc\modp_b64.cc">
+      <Filter>string\modp_b64</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\base64.cc">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\wcpp\misc\dynlib.cc">
+      <Filter>misc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\wcpp\exp.h">
+      <Filter>inner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\inner_pre.h">
+      <Filter>inner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\wcpp_export.h">
+      <Filter>inner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\platform_config.h">
+      <Filter>inner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\duration.h">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\duration.inl.h">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\gettimeofday.h">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\timestamp.h">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\timestamp.inl.h">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\utility.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\memmem.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\any.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\type_traits_ext.h">
+      <Filter>inner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\data_stream.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\data_stream.inl.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\file_util.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\file_util.inl.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\json\json.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\json\json_array.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\json\json_cast.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\json\json_common.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\json\json_object.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\json\json_tokener.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\json\json_utf8_inl.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\json\json_value.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\json\inherited_conf_json.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\json\json_parser.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\ref_object.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\misc\double_buffering.h">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\random.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\misc\md5.h">
+      <Filter>misc\md5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\misc\php_md5.h">
+      <Filter>misc\md5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\misc\crc16.h">
+      <Filter>misc\crc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\misc\crc32.h">
+      <Filter>misc\crc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\ini_parser.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\tokener.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\slice.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\string_util.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\gcc_list.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\misc\modp_b64.h">
+      <Filter>string\modp_b64</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\misc\modp_b64_data.h">
+      <Filter>string\modp_b64</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\base64.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\misc\dynlib.h">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\misc\lru.h">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\wcpp\misc\dgram_filter.h">
+      <Filter>misc</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

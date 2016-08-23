@@ -1,0 +1,17 @@
+title=百度搜索_ipad2
+url=http://www.baidu.com/s?bs=ipad&f=8&rsv_bp=1&wd=ipad2&inputT=397
+url_md5=5844a75423cd3372e1997360bd110a25
+refferrer=http://www.google.com
+anchor_text=google
+ret_form=json
+ret_start=0
+ret_limit=50
+page_info=0,0,50
+1,0,20
+local=0
+mid=c4ca4238a0b923820dcc509a6f75849b
+product=dlctest
+combo=dlctest
+version=1.0.0.1
+debug=1
+encoding=1

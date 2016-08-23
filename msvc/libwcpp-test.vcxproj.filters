@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="gtest">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{6ca2fb00-be15-47fe-9feb-f1d90072f75e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\test\time_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\any_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\utility_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\gtest\src\gtest_main.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\gtest\src\gtest-all.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\winmain.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\string_util_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\data_stream_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\tokent_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\file_util_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\inherited_conf_json_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\json_merge_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\json_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\json2_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\ini_parser_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\ref_object_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\double_buffering_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\md5_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\crc_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\lru_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\dgram_filter_test.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\test\test_common.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
