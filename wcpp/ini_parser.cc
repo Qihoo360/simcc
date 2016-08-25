@@ -251,7 +251,7 @@ void INIParser::SetParseListener(ParseListener pl) {
 }
 
 int64_t INIParser::GetInteger(const string& key, int64_t default_value /*= 0*/) const {
-    return GetInteger(empty_string_, key, default_value);
+    return GetInteger(StringUtil::kEmpty, key, default_value);
 }
 
 int64_t INIParser::GetInteger(const string& section, const string& key, int64_t default_value /*= 0*/) const {
@@ -265,7 +265,7 @@ int64_t INIParser::GetInteger(const string& section, const string& key, int64_t 
 }
 
 bool INIParser::GetBool(const string& key, bool default_value /*= false*/) const {
-    return GetBool(empty_string_, key, default_value);
+    return GetBool(StringUtil::kEmpty, key, default_value);
 }
 
 bool INIParser::GetBool(const string& section, const string& key, bool default_value /*= false*/) const {
@@ -279,7 +279,7 @@ bool INIParser::GetBool(const string& section, const string& key, bool default_v
 }
 
 double INIParser::GetDouble(const string& key, double default_value /*= 0.0*/) const {
-    return GetDouble(empty_string_, key, default_value);
+    return GetDouble(StringUtil::kEmpty, key, default_value);
 }
 
 double INIParser::GetDouble(const string& section, const string& key, double default_value /*= 0.0*/) const {
@@ -293,7 +293,7 @@ double INIParser::GetDouble(const string& section, const string& key, double def
 }
 
 const string& INIParser::Get(const string& key, bool* found) const {
-    return Get(empty_string_, key, found);
+    return Get(StringUtil::kEmpty, key, found);
 }
 
 const string& INIParser::Get(const string& section, const string& key, bool* found) const {
@@ -316,7 +316,7 @@ const string& INIParser::Get(const string& section, const string& key, bool* fou
         if (found) {
             *found = false;
         }
-        return empty_string_;
+        return StringUtil::kEmpty;
     }
 
     auto it = sectionit->second.find(*pkey);
@@ -325,7 +325,7 @@ const string& INIParser::Get(const string& section, const string& key, bool* fou
         if (found) {
             *found = false;
         }
-        return empty_string_;
+        return StringUtil::kEmpty;
     }
 
     if (found) {
@@ -377,7 +377,7 @@ const char* INIParser::SkipSpaces(const char* szsrc) {
 }
 
 const INIParser::ssmap& INIParser::GetDefaultKeyValueMap() {
-    return GetKeyValueMap(empty_string_);
+    return GetKeyValueMap(StringUtil::kEmpty);
 }
 
 const INIParser::ssmap& INIParser::GetKeyValueMap(const string& section) const {

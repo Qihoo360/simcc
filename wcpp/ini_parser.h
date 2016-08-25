@@ -253,8 +253,6 @@ private:
     std::string line_sep_;// The key/value separator
     SectionList section_list_; // pair<section string, keys list>
 
-    std::string empty_string_;
-
     ErrorCode error_code_;
     bool compatible_;
 
