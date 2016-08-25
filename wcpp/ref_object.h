@@ -1,6 +1,3 @@
-#ifndef OSLIB_HObject_H
-#define OSLIB_HObject_H
-
 #pragma once
 
 #include "wcpp/inner_pre.h"
@@ -208,9 +205,5 @@ void swap(wcpp::RefPtr<T>& l , wcpp::RefPtr<T>& r) {
     return l.Swap(r);
 }
 }
-
-
-#endif  //_Object_H
-
 
 
