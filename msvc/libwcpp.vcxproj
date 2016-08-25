@@ -82,7 +82,7 @@
     <ClInclude Include="..\wcpp\utility.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4877AA94-AD55-407F-9ED3-D4503FAB2A7F}</ProjectGuid>
+    <ProjectGuid>{BB61EB9B-F8D2-4E8A-A6E0-68D6AFA10AEA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>libevent</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>

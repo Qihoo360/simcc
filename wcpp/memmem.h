@@ -26,6 +26,9 @@
 # define __builtin_expect(expr, val)   (expr)
 #endif
 
+#ifndef H_MEMMEM
+#define H_MEMMEM
+
 #undef memmem
 
 // @see https://raw.githubusercontent.com/jaysi/jlib/3f7a190e1e80b270c9a07cac46aeab960a802cd1/src/memmem.c
@@ -77,5 +80,7 @@ memmem(const void* haystack,
 
     return NULL;
 }
+
+#endif // end of H_MEMMEM
 
 #endif
