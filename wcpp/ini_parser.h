@@ -159,6 +159,9 @@ public:
         case_sensitive_ = b;
     }
     void set_trim_chars(const std::string& trimchars);
+    void set_keep_sequence(bool b) {
+        keep_sequence_ = b;
+    }
 
     //Separator
 public:
