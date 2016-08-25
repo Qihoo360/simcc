@@ -66,6 +66,7 @@
     <ClInclude Include="..\wcpp\misc\php_md5.h" />
     <ClInclude Include="..\wcpp\ref_object.h" />
     <ClInclude Include="..\wcpp\random.h" />
+    <ClInclude Include="..\wcpp\singleton.h" />
     <ClInclude Include="..\wcpp\string_util.h" />
     <ClInclude Include="..\wcpp\tokener.h" />
     <ClInclude Include="..\wcpp\type_traits_ext.h" />

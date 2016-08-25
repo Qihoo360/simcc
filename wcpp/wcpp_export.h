@@ -23,6 +23,6 @@
 #   endif
 #else
 #   define WCPP_EXPORT
-#endif // H_STATIC_LIB_
+#endif
 
 

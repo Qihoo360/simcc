@@ -234,5 +234,8 @@
     <ClInclude Include="..\wcpp\misc\dgram_filter.h">
       <Filter>misc</Filter>
     </ClInclude>
+    <ClInclude Include="..\wcpp\singleton.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
