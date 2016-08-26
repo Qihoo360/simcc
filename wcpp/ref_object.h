@@ -192,12 +192,13 @@ typedef RefPtr<RefObject> RefObjectPtr;
 
 
 
+#ifndef H_REFERENCE_METHODS
 #define H_REFERENCE_METHODS( ConcreteClass )                                \
     public:                                                                 \
         virtual void Ref() const      { return ConcreteClass::Ref(); }      \
         virtual void Release() const  { return ConcreteClass::Release(); }  \
         virtual int  RefCount() const { return ConcreteClass::RefCount(); }
-
+#endif
 
 namespace std {
 template<class T>

@@ -9,8 +9,6 @@
 #define H_CASE_STRING_END()  default:return "Unknown";break;}
 #endif
 
-#define H_FREE( p ) if(p){ ::free( (p) ); p = 0;}
-
 #include <string>
 
 namespace wcpp {
