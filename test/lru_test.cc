@@ -1,11 +1,11 @@
 #include "test_common.h"
 
-#include "wcpp/misc/lru.h"
+#include "simcc/misc/lru.h"
 
 
 TEST_UNIT(testLRUCacheH4) {
     //LRU lru(2, 1000, LRU::SizeofFunctor(), LRU::DeleteFunctor());
-    wcpp::LRUCacheH4<std::string, int64_t> lru(2, 1000);
+    simcc::LRUCacheH4<std::string, int64_t> lru(2, 1000);
     lru.insert("key1", 1);
     H_TEST_ASSERT(lru.size() == 1);
     lru.insert("key2", 2);
@@ -53,7 +53,7 @@ struct Deleter : std::unary_function<int64_t, void> {
 TEST_UNIT(testLRUCacheH4MemoryLRU) {
     delete_count = 0;
     {
-        wcpp::LRUCacheH4<std::string, int64_t, Sizeof, Deleter> lru(1000, 56, Sizeof(), Deleter());
+        simcc::LRUCacheH4<std::string, int64_t, Sizeof, Deleter> lru(1000, 56, Sizeof(), Deleter());
         lru.insert("key1", 1);
         H_TEST_ASSERT(lru.size() == 1);
         H_TEST_ASSERT(delete_count == 0);

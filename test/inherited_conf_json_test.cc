@@ -1,19 +1,19 @@
 
 #include "test_common.h"
-#include "wcpp/json/json.h"
-#include "wcpp/json/inherited_conf_json.h"
+#include "simcc/json/json.h"
+#include "simcc/json/inherited_conf_json.h"
 #include <iostream>
 
 TEST_UNIT(inherited_conf_json_test1) {
 
     std::string concrete_conf = "../test/test_data/json/inherited_conf.json";
-    wcpp::json::JSONObjectPtr jconf = wcpp::json::InheritedConfJSONObject::Parse(concrete_conf);
+    simcc::json::JSONObjectPtr jconf = simcc::json::InheritedConfJSONObject::Parse(concrete_conf);
     H_TEST_ASSERT(jconf.get());
     //std::cout << jconf->ToString(true,true);
     H_TEST_ASSERT(jconf->GetString("memcached_hostname") == "hpre3.ccc.xxx.com");
     H_TEST_ASSERT(jconf->GetString("log4cxx_category") == "Cloud.BrowserRelative.Newvalue");
     H_TEST_ASSERT(jconf->GetBool("verbose_log") == true);
-    wcpp::json::JSONObject* subj1 = new wcpp::json::JSONObject;
+    simcc::json::JSONObject* subj1 = new simcc::json::JSONObject;
     subj1->Put("0" , "0");
     subj1->Put("1" , "1");
     subj1->Put("2" , "2");
@@ -30,7 +30,7 @@ TEST_UNIT(inherited_conf_json_test1) {
 
 TEST_UNIT(inherited_conf_json_test_failed) {
     std::string concrete_conf = "../test/test_data/json/inherited_conf.json.mockfailed";
-    wcpp::json::JSONObjectPtr jconf = wcpp::json::InheritedConfJSONObject::Parse(concrete_conf);
+    simcc::json::JSONObjectPtr jconf = simcc::json::InheritedConfJSONObject::Parse(concrete_conf);
     H_TEST_ASSERT(!jconf.get());
 }
 

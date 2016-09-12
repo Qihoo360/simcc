@@ -1,6 +1,6 @@
 
 all : 
-	$(MAKE) -C wcpp
+	$(MAKE) -C simcc
 	$(MAKE) -C 3rdparty
 
 test : all
@@ -13,7 +13,7 @@ check : all
 	$(MAKE) check -C test
 
 clean:
-	$(MAKE) clean -C wcpp
+	$(MAKE) clean -C simcc
 	$(MAKE) clean -C test
 	$(MAKE) clean -C 3rdparty
 

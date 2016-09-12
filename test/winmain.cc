@@ -1,6 +1,6 @@
 #include "test_common.h"
 
-#include "wcpp/exp.h"
+#include "simcc/exp.h"
 
 namespace {
 #ifdef _WIN32

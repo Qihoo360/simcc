@@ -1,7 +1,7 @@
 #include "test_common.h"
-#include "wcpp/json/json.h"
-#include "wcpp/base64.h"
-#include "wcpp/timestamp.h"
+#include "simcc/json/json.h"
+#include "simcc/base64.h"
+#include "simcc/timestamp.h"
 
 #include <rapidjson/document.h>
 #include <rapidjson/prettywriter.h>
@@ -12,12 +12,12 @@
 
 TEST_UNIT(testJSONObjectGetDecimal) {
     const char* s = "{\"errno\":10,\"float\":0.1}";
-    wcpp::json::ObjectPtr o = wcpp::json::JSONParser::Load(s);
+    simcc::json::ObjectPtr o = simcc::json::JSONParser::Load(s);
     H_TEST_ASSERT(o);
-    H_TEST_ASSERT(o->IsTypeOf(wcpp::json::kJSONObject));
+    H_TEST_ASSERT(o->IsTypeOf(simcc::json::kJSONObject));
 
-    wcpp::json::JSONObject* jo = (wcpp::json::JSONObject*)(o.get());
-    wcpp::float64 f = jo->GetDecimal("errno");
+    simcc::json::JSONObject* jo = (simcc::json::JSONObject*)(o.get());
+    simcc::float64 f = jo->GetDecimal("errno");
     H_TEST_ASSERT(f == 10);
 
     f = jo->GetDecimal("float");
@@ -50,27 +50,27 @@ TEST_UNIT(testJSONPerformanceParsing) {
     "thr": "3.3.x"
 }
 */
-    std::string d = wcpp::Base64::Decode("ewogICAgImtleSI6ICJhYmNkIiwgCiAgICAidGFibGUiOiAiMSIsIAogICAgInVybCI6ICJodHRwOi8vdi55b3VrdS5jb20vdl9zaG93L2lkX1hNVEl3T0RFM01USTAuaHRtbCIsIAogICAgImJ0aHVtYiI6ICIiLCAKICAgICJjbGFzcyI6ICIwIiwgCiAgICAibGVuZ3RoIjogIjI3NjUiLCAKICAgICJzcmMiOiAieW91a3UiLCAKICAgICJzdGFyIjogIuWImOS9qeeQpizlvpDlg6cs546L5pawLOmprOWigyzoiJLnoJos5p2c5rqQIiwgCiAgICAidGl0bGUiOiAi54u854Of5YyX5bmzIiwgCiAgICAidHlwZSI6ICLmiJjkuonliacs6Z2p5ZG95YmnIiwgCiAgICAiY21kIjogIm1lcmdlIiwgCiAgICAiZm9vIjogIjEuMC4wIC0gMi45OTk5Ljk5OTkiLCAKICAgICJiYXIiOiAiPj0xLjAuMiA8Mi4xLjIiLCAKICAgICJiYXoiOiAiPjEuMC4yIDw9Mi4zLjQiLCAKICAgICJib28iOiAiMi4wLjEiLCAKICAgICJxdXgiOiAiPDEuMC4wIHx8ID49Mi4zLjEgPDIuNC41IHx8ID49Mi41LjIgPDMuMC4wIiwgCiAgICAiYXNkIjogImh0dHA6Ly9hc2RmLmNvbS9hc2RmLnRhci5neiIsIAogICAgInRpbCI6ICJ+MS4yIiwgCiAgICAiZWxmIjogIn4xLjIuMyIsIAogICAgInR3byI6ICIyLngiLCAKICAgICJ0aHIiOiAiMy4zLngiCn0=");
+    std::string d = simcc::Base64::Decode("ewogICAgImtleSI6ICJhYmNkIiwgCiAgICAidGFibGUiOiAiMSIsIAogICAgInVybCI6ICJodHRwOi8vdi55b3VrdS5jb20vdl9zaG93L2lkX1hNVEl3T0RFM01USTAuaHRtbCIsIAogICAgImJ0aHVtYiI6ICIiLCAKICAgICJjbGFzcyI6ICIwIiwgCiAgICAibGVuZ3RoIjogIjI3NjUiLCAKICAgICJzcmMiOiAieW91a3UiLCAKICAgICJzdGFyIjogIuWImOS9qeeQpizlvpDlg6cs546L5pawLOmprOWigyzoiJLnoJos5p2c5rqQIiwgCiAgICAidGl0bGUiOiAi54u854Of5YyX5bmzIiwgCiAgICAidHlwZSI6ICLmiJjkuonliacs6Z2p5ZG95YmnIiwgCiAgICAiY21kIjogIm1lcmdlIiwgCiAgICAiZm9vIjogIjEuMC4wIC0gMi45OTk5Ljk5OTkiLCAKICAgICJiYXIiOiAiPj0xLjAuMiA8Mi4xLjIiLCAKICAgICJiYXoiOiAiPjEuMC4yIDw9Mi4zLjQiLCAKICAgICJib28iOiAiMi4wLjEiLCAKICAgICJxdXgiOiAiPDEuMC4wIHx8ID49Mi4zLjEgPDIuNC41IHx8ID49Mi41LjIgPDMuMC4wIiwgCiAgICAiYXNkIjogImh0dHA6Ly9hc2RmLmNvbS9hc2RmLnRhci5neiIsIAogICAgInRpbCI6ICJ+MS4yIiwgCiAgICAiZWxmIjogIn4xLjIuMyIsIAogICAgInR3byI6ICIyLngiLCAKICAgICJ0aHIiOiAiMy4zLngiCn0=");
 
     int loop = 10000;
-    wcpp::Timestamp t1 = wcpp::Timestamp::Now();
+    simcc::Timestamp t1 = simcc::Timestamp::Now();
     for (int i = 0; i < loop; i++) {
         rapidjson::Document doc;
         doc.Parse(d.data());
     }
-    wcpp::Timestamp t2 = wcpp::Timestamp::Now();
+    simcc::Timestamp t2 = simcc::Timestamp::Now();
     for (int i = 0; i < loop; i++) {
-        wcpp::json::JSONObject j;
+        simcc::json::JSONObject j;
         j.Parse(d.data(), d.size());
     }
-    wcpp::Timestamp t3 = wcpp::Timestamp::Now();
-    wcpp::Duration rapidjson_cost = t2 - t1;
-    wcpp::Duration wcppjson_cost = t3 - t2;
-    std::cout << ">>>>>>>>>>>>>>>>  wcppjson_cost=" << wcppjson_cost.Milliseconds() << "\n";
+    simcc::Timestamp t3 = simcc::Timestamp::Now();
+    simcc::Duration rapidjson_cost = t2 - t1;
+    simcc::Duration simccjson_cost = t3 - t2;
+    std::cout << ">>>>>>>>>>>>>>>>  simccjson_cost=" << simccjson_cost.Milliseconds() << "\n";
     std::cout << ">>>>>>>>>>>>>>>> rapidjson_cost=" << rapidjson_cost.Milliseconds() << "\n";
-    std::cout << ">>>>>>>>>>>>>>>> wcppjson_cost/rapidjson_cost=" << wcppjson_cost.Seconds() / rapidjson_cost.Seconds() << "\n";
-    if (wcppjson_cost.Seconds() < rapidjson_cost.Seconds()) {
-        std::cout << ">>>>>>>>>>>>>>>> wcpp json parsing fast!\n";
+    std::cout << ">>>>>>>>>>>>>>>> simccjson_cost/rapidjson_cost=" << simccjson_cost.Seconds() / rapidjson_cost.Seconds() << "\n";
+    if (simccjson_cost.Seconds() < rapidjson_cost.Seconds()) {
+        std::cout << ">>>>>>>>>>>>>>>> simcc json parsing fast!\n";
     } else {
         std::cout << ">>>>>>>>>>>>>>>> rapidjson parsing fast!\n";
     }
@@ -124,13 +124,13 @@ TEST_UNIT(testJSONPerformanceGet) {
     std::string two = "two";
     std::string thr = "thr";
 
-    std::string d = wcpp::Base64::Decode("ewogICAgImtleSI6ICJhYmNkIiwgCiAgICAidGFibGUiOiAiMSIsIAogICAgInVybCI6ICJodHRwOi8vdi55b3VrdS5jb20vdl9zaG93L2lkX1hNVEl3T0RFM01USTAuaHRtbCIsIAogICAgImJ0aHVtYiI6ICIiLCAKICAgICJjbGFzcyI6ICIwIiwgCiAgICAibGVuZ3RoIjogIjI3NjUiLCAKICAgICJzcmMiOiAieW91a3UiLCAKICAgICJzdGFyIjogIuWImOS9qeeQpizlvpDlg6cs546L5pawLOmprOWigyzoiJLnoJos5p2c5rqQIiwgCiAgICAidGl0bGUiOiAi54u854Of5YyX5bmzIiwgCiAgICAidHlwZSI6ICLmiJjkuonliacs6Z2p5ZG95YmnIiwgCiAgICAiY21kIjogIm1lcmdlIiwgCiAgICAiZm9vIjogIjEuMC4wIC0gMi45OTk5Ljk5OTkiLCAKICAgICJiYXIiOiAiPj0xLjAuMiA8Mi4xLjIiLCAKICAgICJiYXoiOiAiPjEuMC4yIDw9Mi4zLjQiLCAKICAgICJib28iOiAiMi4wLjEiLCAKICAgICJxdXgiOiAiPDEuMC4wIHx8ID49Mi4zLjEgPDIuNC41IHx8ID49Mi41LjIgPDMuMC4wIiwgCiAgICAiYXNkIjogImh0dHA6Ly9hc2RmLmNvbS9hc2RmLnRhci5neiIsIAogICAgInRpbCI6ICJ+MS4yIiwgCiAgICAiZWxmIjogIn4xLjIuMyIsIAogICAgInR3byI6ICIyLngiLCAKICAgICJ0aHIiOiAiMy4zLngiCn0=");
+    std::string d = simcc::Base64::Decode("ewogICAgImtleSI6ICJhYmNkIiwgCiAgICAidGFibGUiOiAiMSIsIAogICAgInVybCI6ICJodHRwOi8vdi55b3VrdS5jb20vdl9zaG93L2lkX1hNVEl3T0RFM01USTAuaHRtbCIsIAogICAgImJ0aHVtYiI6ICIiLCAKICAgICJjbGFzcyI6ICIwIiwgCiAgICAibGVuZ3RoIjogIjI3NjUiLCAKICAgICJzcmMiOiAieW91a3UiLCAKICAgICJzdGFyIjogIuWImOS9qeeQpizlvpDlg6cs546L5pawLOmprOWigyzoiJLnoJos5p2c5rqQIiwgCiAgICAidGl0bGUiOiAi54u854Of5YyX5bmzIiwgCiAgICAidHlwZSI6ICLmiJjkuonliacs6Z2p5ZG95YmnIiwgCiAgICAiY21kIjogIm1lcmdlIiwgCiAgICAiZm9vIjogIjEuMC4wIC0gMi45OTk5Ljk5OTkiLCAKICAgICJiYXIiOiAiPj0xLjAuMiA8Mi4xLjIiLCAKICAgICJiYXoiOiAiPjEuMC4yIDw9Mi4zLjQiLCAKICAgICJib28iOiAiMi4wLjEiLCAKICAgICJxdXgiOiAiPDEuMC4wIHx8ID49Mi4zLjEgPDIuNC41IHx8ID49Mi41LjIgPDMuMC4wIiwgCiAgICAiYXNkIjogImh0dHA6Ly9hc2RmLmNvbS9hc2RmLnRhci5neiIsIAogICAgInRpbCI6ICJ+MS4yIiwgCiAgICAiZWxmIjogIn4xLjIuMyIsIAogICAgInR3byI6ICIyLngiLCAKICAgICJ0aHIiOiAiMy4zLngiCn0=");
     std::string val;
 
     rapidjson::Document doc;
     doc.Parse(d.data());
     int loop = 10000;
-    wcpp::Timestamp t1 = wcpp::Timestamp::Now();
+    simcc::Timestamp t1 = simcc::Timestamp::Now();
     for (int i = 0; i < loop; i++) {
         val = doc[key].GetString();
         val = doc[table].GetString();
@@ -153,9 +153,9 @@ TEST_UNIT(testJSONPerformanceGet) {
         val = doc[two].GetString();
         val = doc[thr].GetString();
     }
-    wcpp::Timestamp t2 = wcpp::Timestamp::Now();
+    simcc::Timestamp t2 = simcc::Timestamp::Now();
 
-    wcpp::json::JSONObject j;
+    simcc::json::JSONObject j;
     j.Parse(d.data(), d.size());
     for (int i = 0; i < loop; i++) {
         val = j.GetString(key);
@@ -179,14 +179,14 @@ TEST_UNIT(testJSONPerformanceGet) {
         val = j.GetString(two);
         val = j.GetString(thr);
     }
-    wcpp::Timestamp t3 = wcpp::Timestamp::Now();
-    wcpp::Duration rapidjson_cost = t2 - t1;
-    wcpp::Duration wcppjson_cost = t3 - t2;
-    std::cout << ">>>>>>>>>>>>>>>>  wcppjson_cost=" << wcppjson_cost.Milliseconds() << "\n";
+    simcc::Timestamp t3 = simcc::Timestamp::Now();
+    simcc::Duration rapidjson_cost = t2 - t1;
+    simcc::Duration simccjson_cost = t3 - t2;
+    std::cout << ">>>>>>>>>>>>>>>>  simccjson_cost=" << simccjson_cost.Milliseconds() << "\n";
     std::cout << ">>>>>>>>>>>>>>>> rapidjson_cost=" << rapidjson_cost.Milliseconds() << "\n";
-    std::cout << ">>>>>>>>>>>>>>>> wcppjson_cost/rapidjson_cost=" << wcppjson_cost.Seconds() / rapidjson_cost.Seconds() << "\n";
-    if (wcppjson_cost.Seconds() < rapidjson_cost.Seconds()) {
-        std::cout << ">>>>>>>>>>>>>>>> wcpp json GetString fast!\n";
+    std::cout << ">>>>>>>>>>>>>>>> simccjson_cost/rapidjson_cost=" << simccjson_cost.Seconds() / rapidjson_cost.Seconds() << "\n";
+    if (simccjson_cost.Seconds() < rapidjson_cost.Seconds()) {
+        std::cout << ">>>>>>>>>>>>>>>> simcc json GetString fast!\n";
     } else {
         std::cout << ">>>>>>>>>>>>>>>> rapidjson GetString fast!\n";
     }
@@ -220,35 +220,35 @@ TEST_UNIT(testJSONPerformanceSerialize) {
     "thr": "3.3.x"
 }
 */
-    std::string d = wcpp::Base64::Decode("ewogICAgImtleSI6ICJhYmNkIiwgCiAgICAidGFibGUiOiAiMSIsIAogICAgInVybCI6ICJodHRwOi8vdi55b3VrdS5jb20vdl9zaG93L2lkX1hNVEl3T0RFM01USTAuaHRtbCIsIAogICAgImJ0aHVtYiI6ICIiLCAKICAgICJjbGFzcyI6ICIwIiwgCiAgICAibGVuZ3RoIjogIjI3NjUiLCAKICAgICJzcmMiOiAieW91a3UiLCAKICAgICJzdGFyIjogIuWImOS9qeeQpizlvpDlg6cs546L5pawLOmprOWigyzoiJLnoJos5p2c5rqQIiwgCiAgICAidGl0bGUiOiAi54u854Of5YyX5bmzIiwgCiAgICAidHlwZSI6ICLmiJjkuonliacs6Z2p5ZG95YmnIiwgCiAgICAiY21kIjogIm1lcmdlIiwgCiAgICAiZm9vIjogIjEuMC4wIC0gMi45OTk5Ljk5OTkiLCAKICAgICJiYXIiOiAiPj0xLjAuMiA8Mi4xLjIiLCAKICAgICJiYXoiOiAiPjEuMC4yIDw9Mi4zLjQiLCAKICAgICJib28iOiAiMi4wLjEiLCAKICAgICJxdXgiOiAiPDEuMC4wIHx8ID49Mi4zLjEgPDIuNC41IHx8ID49Mi41LjIgPDMuMC4wIiwgCiAgICAiYXNkIjogImh0dHA6Ly9hc2RmLmNvbS9hc2RmLnRhci5neiIsIAogICAgInRpbCI6ICJ+MS4yIiwgCiAgICAiZWxmIjogIn4xLjIuMyIsIAogICAgInR3byI6ICIyLngiLCAKICAgICJ0aHIiOiAiMy4zLngiCn0=");
+    std::string d = simcc::Base64::Decode("ewogICAgImtleSI6ICJhYmNkIiwgCiAgICAidGFibGUiOiAiMSIsIAogICAgInVybCI6ICJodHRwOi8vdi55b3VrdS5jb20vdl9zaG93L2lkX1hNVEl3T0RFM01USTAuaHRtbCIsIAogICAgImJ0aHVtYiI6ICIiLCAKICAgICJjbGFzcyI6ICIwIiwgCiAgICAibGVuZ3RoIjogIjI3NjUiLCAKICAgICJzcmMiOiAieW91a3UiLCAKICAgICJzdGFyIjogIuWImOS9qeeQpizlvpDlg6cs546L5pawLOmprOWigyzoiJLnoJos5p2c5rqQIiwgCiAgICAidGl0bGUiOiAi54u854Of5YyX5bmzIiwgCiAgICAidHlwZSI6ICLmiJjkuonliacs6Z2p5ZG95YmnIiwgCiAgICAiY21kIjogIm1lcmdlIiwgCiAgICAiZm9vIjogIjEuMC4wIC0gMi45OTk5Ljk5OTkiLCAKICAgICJiYXIiOiAiPj0xLjAuMiA8Mi4xLjIiLCAKICAgICJiYXoiOiAiPjEuMC4yIDw9Mi4zLjQiLCAKICAgICJib28iOiAiMi4wLjEiLCAKICAgICJxdXgiOiAiPDEuMC4wIHx8ID49Mi4zLjEgPDIuNC41IHx8ID49Mi41LjIgPDMuMC4wIiwgCiAgICAiYXNkIjogImh0dHA6Ly9hc2RmLmNvbS9hc2RmLnRhci5neiIsIAogICAgInRpbCI6ICJ+MS4yIiwgCiAgICAiZWxmIjogIn4xLjIuMyIsIAogICAgInR3byI6ICIyLngiLCAKICAgICJ0aHIiOiAiMy4zLngiCn0=");
     std::string val;
 
     rapidjson::Document doc;
     doc.Parse(d.data());
     int loop = 10000;
-    wcpp::Timestamp t1 = wcpp::Timestamp::Now();
+    simcc::Timestamp t1 = simcc::Timestamp::Now();
     for (int i = 0; i < loop; i++) {
         using namespace rapidjson;
         GenericStringBuffer<UTF8<>, MemoryPoolAllocator<> > buf;
         Writer< GenericStringBuffer<UTF8<>, MemoryPoolAllocator<> > > writer(buf);
         doc.Accept(writer);
     }
-    wcpp::Timestamp t2 = wcpp::Timestamp::Now();
+    simcc::Timestamp t2 = simcc::Timestamp::Now();
 
-    wcpp::json::JSONObject j;
+    simcc::json::JSONObject j;
     j.Parse(d.data(), d.size());
     for (int i = 0; i < loop; i++) {
-        wcpp::DataStream buf(768);
+        simcc::DataStream buf(768);
         j.ToStringBuf(buf);
     }
-    wcpp::Timestamp t3 = wcpp::Timestamp::Now();
-    wcpp::Duration rapidjson_cost = t2 - t1;
-    wcpp::Duration wcppjson_cost = t3 - t2;
-    std::cout << ">>>>>>>>>>>>>>>>  wcppjson_cost=" << wcppjson_cost.Milliseconds() << "\n";
+    simcc::Timestamp t3 = simcc::Timestamp::Now();
+    simcc::Duration rapidjson_cost = t2 - t1;
+    simcc::Duration simccjson_cost = t3 - t2;
+    std::cout << ">>>>>>>>>>>>>>>>  simccjson_cost=" << simccjson_cost.Milliseconds() << "\n";
     std::cout << ">>>>>>>>>>>>>>>> rapidjson_cost=" << rapidjson_cost.Milliseconds() << "\n";
-    std::cout << ">>>>>>>>>>>>>>>> wcppjson_cost/rapidjson_cost=" << wcppjson_cost.Seconds() / rapidjson_cost.Seconds() << "\n";
-    if (wcppjson_cost.Seconds() < rapidjson_cost.Seconds()) {
-        std::cout << ">>>>>>>>>>>>>>>> wcpp json Serialize fast!\n";
+    std::cout << ">>>>>>>>>>>>>>>> simccjson_cost/rapidjson_cost=" << simccjson_cost.Seconds() / rapidjson_cost.Seconds() << "\n";
+    if (simccjson_cost.Seconds() < rapidjson_cost.Seconds()) {
+        std::cout << ">>>>>>>>>>>>>>>> simcc json Serialize fast!\n";
     } else {
         std::cout << ">>>>>>>>>>>>>>>> rapidjson Serialize fast!\n";
     }

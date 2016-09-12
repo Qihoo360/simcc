@@ -1,15 +1,15 @@
 
 #include "test_common.h"
-#include "wcpp/data_stream.h"
-#include "wcpp/file_util.h"
+#include "simcc/data_stream.h"
+#include "simcc/file_util.h"
 
 #include <iostream>
 
-using namespace wcpp;
+using namespace simcc;
 
 namespace {
 
-//typedef wcpp::Map<int, double> intdoublemap;
+//typedef simcc::Map<int, double> intdoublemap;
 typedef std::map<int, double> intdoublemap;
 typedef std::set<int> intset;
 typedef std::list<int> intlist;
@@ -294,12 +294,12 @@ void test_read_write_file() {
     H_TEST_ASSERT(ds.WriteFile(path));
     DataStream file;
     H_TEST_ASSERT(file.ReadFile(path));
-    wcpp::FileUtil::Unlink(path);
-    H_TEST_ASSERT(wcpp::DataStream::IsContentEquals(file, ds));
+    simcc::FileUtil::Unlink(path);
+    H_TEST_ASSERT(simcc::DataStream::IsContentEquals(file, ds));
 }
 
 void test_toText() {
-    wcpp::DataStream ds;
+    simcc::DataStream ds;
     ds.Reserve(512);
     ds.ToText();
     H_TEST_ASSERT(ds.size() == 0);
@@ -415,12 +415,12 @@ public:
     int b;
     std::string c;
 public:
-    friend wcpp::DataStream& operator <<(wcpp::DataStream& out, const TestStruct1& val) {
+    friend simcc::DataStream& operator <<(simcc::DataStream& out, const TestStruct1& val) {
         out << val.a << val.b << val.c;
         return out;
     }
 
-    friend wcpp::DataStream& operator >> (wcpp::DataStream& out, TestStruct1& val) {
+    friend simcc::DataStream& operator >> (simcc::DataStream& out, TestStruct1& val) {
         out >> val.a >> val.b >> val.c;
         return out;
     }
@@ -433,12 +433,12 @@ struct TestStruct2 {
 
 
 void TestStructSerialize() {
-    wcpp::DataStream* os = new wcpp::DataStream();
-    std::unique_ptr<wcpp::DataStream> p(os);
+    simcc::DataStream* os = new simcc::DataStream();
+    std::unique_ptr<simcc::DataStream> p(os);
 
     std::string str = "hello world";
-    wcpp::uint32 i1 = 1;
-    wcpp::float32 f1 = 0.5f;
+    simcc::uint32 i1 = 1;
+    simcc::float32 f1 = 0.5f;
     TestStruct1 stru1a;
 
     TestStruct2 stru2a = { 111, "test_stru" };
@@ -450,12 +450,12 @@ void TestStructSerialize() {
         << stru1a
         << stru2a;
 
-    wcpp::DataStream out;
+    simcc::DataStream out;
     out.Write(os->GetCurrentReadBuffer(), os->GetReadableSize());
 
     std::string strO;
-    wcpp::uint32 u321O = 2;
-    wcpp::float32 f321O = 5.0f;
+    simcc::uint32 u321O = 2;
+    simcc::float32 f321O = 5.0f;
     TestStruct1 stru1b;
 
     TestStruct2 stru2b;

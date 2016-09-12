@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="time">
+      <UniqueIdentifier>{db27fc34-e756-45b7-92eb-38df61f5dae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inner">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{e715fd1b-4f7b-45cb-bc45-af4bf8e7e4a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="io">
+      <UniqueIdentifier>{01fc31b9-ddf4-4df4-895d-5ebaa0ab0318}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc">
+      <UniqueIdentifier>{ab492614-67f4-4b70-a7e9-eaa3967b74d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc\md5">
+      <UniqueIdentifier>{170151c6-9c01-4eaf-8b12-983111ab7cfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc\crc">
+      <UniqueIdentifier>{9720a2dc-c455-445c-b78b-ce664978b427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="json">
+      <UniqueIdentifier>{ae935b76-7f48-45c7-a6d9-3d854c084dd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="string">
+      <UniqueIdentifier>{c490adf2-b606-4c48-9e42-ba1111525828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="string\modp_b64">
+      <UniqueIdentifier>{f7bcd88b-f932-42ac-ba65-270267b5b99a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\simcc\inner_pre.cc">
+      <Filter>inner</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\pch.cc">
+      <Filter>inner</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\duration.cc">
+      <Filter>time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\data_stream.cc">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\file_util.cc">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\json\json_array.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\json\json_object.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\json\json_parser.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\json\inherited_conf_json.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\json\json_common.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\json\json_value.cc">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\misc\double_buffering.cc">
+      <Filter>misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\misc\md5.cc">
+      <Filter>misc\md5</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\misc\php_md5.cc">
+      <Filter>misc\md5</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\misc\crc16.cc">
+      <Filter>misc\crc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\misc\crc32.cc">
+      <Filter>misc\crc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\ini_parser.cc">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\string_util.cc">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\misc\modp_b64.cc">
+      <Filter>string\modp_b64</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\base64.cc">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\misc\dynlib.cc">
+      <Filter>misc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\simcc\exp.h">
+      <Filter>inner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\inner_pre.h">
+      <Filter>inner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\simcc_export.h">
+      <Filter>inner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\platform_config.h">
+      <Filter>inner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\duration.h">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\duration.inl.h">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\gettimeofday.h">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\timestamp.h">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\timestamp.inl.h">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\utility.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\memmem.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\any.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\type_traits_ext.h">
+      <Filter>inner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\data_stream.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\data_stream.inl.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\file_util.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\file_util.inl.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\json\json.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\json\json_array.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\json\json_cast.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\json\json_common.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\json\json_object.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\json\json_tokener.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\json\json_utf8_inl.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\json\json_value.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\json\inherited_conf_json.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\json\json_parser.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\ref_object.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\misc\double_buffering.h">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\random.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\misc\md5.h">
+      <Filter>misc\md5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\misc\php_md5.h">
+      <Filter>misc\md5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\misc\crc16.h">
+      <Filter>misc\crc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\misc\crc32.h">
+      <Filter>misc\crc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\ini_parser.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\tokener.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\slice.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\string_util.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\gcc_list.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\misc\modp_b64.h">
+      <Filter>string\modp_b64</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\misc\modp_b64_data.h">
+      <Filter>string\modp_b64</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\base64.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\misc\dynlib.h">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\misc\lru.h">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\misc\dgram_filter.h">
+      <Filter>misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\singleton.h">
+      <Filter>common</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

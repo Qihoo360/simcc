@@ -2,13 +2,13 @@
 
 #include <atomic>
 #include <thread>
-#include <wcpp/ref_object.h>
+#include <simcc/ref_object.h>
 
 namespace {
 static std::atomic<int> ref_count(0);
 static std::atomic<int> release_count(0);
 
-class MyRefCounted : public wcpp::RefObject {
+class MyRefCounted : public simcc::RefObject {
 public:
     MyRefCounted() {
         ref_count++;
@@ -26,13 +26,13 @@ TEST_UNIT(testRefObject) {
     const int size = 1000;
     auto f = [size]() {
         for (int i = 0; i < size; i++) {
-            wcpp::RefPtr<MyRefCounted> r1 = new MyRefCounted;
-            wcpp::RefPtr<MyRefCounted> r2 = r1;
-            wcpp::RefPtr<MyRefCounted> r3 = r2;
-            wcpp::RefPtr<MyRefCounted> r4 = r3;
-            wcpp::RefPtr<MyRefCounted> r5 = r4;
-            wcpp::RefPtr<MyRefCounted> r6 = r5;
-            wcpp::RefPtr<MyRefCounted> r7 = r6;
+            simcc::RefPtr<MyRefCounted> r1 = new MyRefCounted;
+            simcc::RefPtr<MyRefCounted> r2 = r1;
+            simcc::RefPtr<MyRefCounted> r3 = r2;
+            simcc::RefPtr<MyRefCounted> r4 = r3;
+            simcc::RefPtr<MyRefCounted> r5 = r4;
+            simcc::RefPtr<MyRefCounted> r6 = r5;
+            simcc::RefPtr<MyRefCounted> r7 = r6;
             H_TEST_ASSERT(r1.use_count() == 7);
             H_TEST_ASSERT(r2.use_count() == 7);
             H_TEST_ASSERT(r3.use_count() == 7);
@@ -72,7 +72,7 @@ TEST_UNIT(testRefObject) {
 
 //#include <map>
 //#include <string>
-//#include <wcpp/inner_pre.h>
+//#include <simcc/inner_pre.h>
 //
 //namespace {
 //class DgramFilter {

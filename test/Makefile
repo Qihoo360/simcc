@@ -17,11 +17,11 @@ CPPFLAGS= -g -c -fPIC -D_DEBUG \
 RTFLAGS := \
     -Wl,-rpath=. \
     -Wl,-rpath=$(GCC472_PATH)/lib64 \
-    -Wl,-rpath=$(CURRENT_DIR)/../wcpp
+    -Wl,-rpath=$(CURRENT_DIR)/../simcc
 
 LDFLAGS= $(RTFLAGS) \
-	 -L$(CURRENT_DIR)/../wcpp \
-	 -lwcpp
+	 -L$(CURRENT_DIR)/../simcc \
+	 -lsimcc
 
 DIRNAME=$(shell basename `pwd`)
 

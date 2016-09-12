@@ -1,14 +1,14 @@
 
-#include "wcpp/exp.h"
+#include "simcc/exp.h"
 #include "./test_common.h"
-#include "wcpp/duration.h"
-#include "wcpp/timestamp.h"
+#include "simcc/duration.h"
+#include "simcc/timestamp.h"
 
 TEST_UNIT(testDuration) {
-    wcpp::Duration d0(0);
-    wcpp::Duration d1(1);
-    wcpp::Duration d2(2);
-    wcpp::Duration d3(2);
+    simcc::Duration d0(0);
+    simcc::Duration d1(1);
+    simcc::Duration d2(2);
+    simcc::Duration d3(2);
     H_TEST_ASSERT(d0 < d1);
     H_TEST_ASSERT(d1 < d2);
     H_TEST_ASSERT(d2 == d3);
@@ -32,7 +32,7 @@ TEST_UNIT(testDuration) {
 //}
 //
 //TEST_UNIT(testTimestamp) {
-//    wcpp::Timestamp ts = wcpp::Timestamp::Now();
+//    simcc::Timestamp ts = simcc::Timestamp::Now();
 //    auto us = utcmicrosecond();
 //    std::cout << "==================> us=" << us << " ts=" << ts.UnixNano() / 1000 << "\n";
 //    H_TEST_ASSERT(ts.UnixNano() / 1000 == us);

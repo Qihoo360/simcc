@@ -1,13 +1,13 @@
 
 #include "test_common.h"
 
-#include "wcpp/tokener.h"
+#include "simcc/tokener.h"
 
 namespace {
 
 void test_token_0() {
     const char* text = "0";
-    wcpp::Tokener token(text);
+    simcc::Tokener token(text);
     std::string s = token.NextSlice().ToString();
     H_TEST_ASSERT(s == "0");
 
@@ -19,7 +19,7 @@ void test_token_0() {
 
 void test_token_1() {
     const char* text = "a\t\nb\t c\td";
-    wcpp::Tokener token(text);
+    simcc::Tokener token(text);
     std::string s = token.NextString();
     H_TEST_ASSERT(s == "a");
     token.SkipSpaces();
@@ -49,7 +49,7 @@ void test_token_1() {
 
 void test_token_2() {
     const char* text = "a\t\nb\t c\td";
-    wcpp::Tokener token(text);
+    simcc::Tokener token(text);
     H_TEST_ASSERT(token.GetCurrent() == text);
     token.SkipSpaces();
     H_TEST_ASSERT(token.GetCurrent() == text);
@@ -71,7 +71,7 @@ void test_token_2() {
 
 void test_token_3() {
     const char* text = "abcd";
-    wcpp::Tokener token(text);
+    simcc::Tokener token(text);
     H_TEST_ASSERT(token.Next() == 'a');
     H_TEST_ASSERT(token.Next() == 'b');
     H_TEST_ASSERT(token.Next() == 'c');

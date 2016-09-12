@@ -1,9 +1,9 @@
 
 #include "test_common.h"
-#include "wcpp/random.h"
-#include "wcpp/data_stream.h"
-#include "wcpp/misc/md5.h"
-#include "wcpp/misc/php_md5.h"
+#include "simcc/random.h"
+#include "simcc/data_stream.h"
+#include "simcc/misc/md5.h"
+#include "simcc/misc/php_md5.h"
 
 #include <iostream>
 
@@ -798,12 +798,12 @@ TEST_UNIT(md5_test_1)
     rsacc::MD5::getRawMD5(data, data_len, r1);
     php_md5(data, data_len, r2);
     H_TEST_ASSERT(memcmp(r1, r2, sizeof(r1)) == 0);
-    wcpp::MD5::Sum(data, data_len, r3);
-    wcpp::MD5::Sum(data, data_len, r3);
+    simcc::MD5::Sum(data, data_len, r3);
+    simcc::MD5::Sum(data, data_len, r3);
     H_TEST_ASSERT(memcmp(r1, r3, sizeof(r1)) == 0);
 
     std::string s1 = rsacc::MD5::hexdigest(data, data_len);
-    std::string s2 = wcpp::MD5::Sumh(data, data_len);
+    std::string s2 = simcc::MD5::Sumh(data, data_len);
     H_TEST_ASSERT(s1 == s2);
 }
 
@@ -840,14 +840,14 @@ TEST_UNIT(md5_convert_hex_binary_test)
 #if 0
     const char* hexmd5 = "c5928f43965a3f48d2dcca2e60d6f195";
     MID mid;
-    wcpp::MD5::hex2bin(hexmd5, 32, mid.d_);
+    simcc::MD5::hex2bin(hexmd5, 32, mid.d_);
     std::cout << "         hexmd5=" << hexmd5 << std::endl;
     std::cout << " binarymd5.low8=" << mid.l_ << std::endl;
     std::cout << "binarymd5.high8=" << mid.h_ << std::endl;
 
 
     hexmd5 = "361ec4d456066efa11886a43ebf7f3f1";
-    wcpp::MD5::hex2bin(hexmd5, 32, mid.d_);
+    simcc::MD5::hex2bin(hexmd5, 32, mid.d_);
     std::cout << "         hexmd5=" << hexmd5 << std::endl;
     std::cout << " binarymd5.low8=" << mid.l_ << std::endl;
     std::cout << "binarymd5.high8=" << mid.h_ << std::endl;
@@ -856,7 +856,7 @@ TEST_UNIT(md5_convert_hex_binary_test)
 
 TEST_UNIT(md5_test2)
 {
-    wcpp::DataStream ds;
+    simcc::DataStream ds;
     ds  << "abcdaljdslfjalsdjfqpoiuerpoqiuewr9127834012384-08fjsd;lfjas;ldfa'sdfp"
         << "['qpoweirqwuier-01984-2307419273sdajf;aj  jas;ldfjapoifuq987401234dsjfa;ljasjd;flasjdf;"
         << "ljasd;fjasdfoihasdpoifhpasoidfpqwoeiurpqowief;lksdj;kxncv/zxcnv/,zxcv;wqejrpoweiur01239874"
@@ -867,7 +867,7 @@ TEST_UNIT(md5_test2)
 
         //new MD5
         {
-            wcpp::MD5 md5;
+            simcc::MD5 md5;
             md5.Update( (unsigned char *)ds.GetCache(), ds.size() );
             md5.Finalizeh(result);
             //std::cout << result << std::endl;
@@ -877,7 +877,7 @@ TEST_UNIT(md5_test2)
         {
             char result1[33] = {0};
             {
-                wcpp::MD5 md5;
+                simcc::MD5 md5;
                 for ( unsigned int i = 0; i < ds.size(); ++i )
                 {
                     md5.Update( ((unsigned char*)ds.GetCache()) + i, 1 );
@@ -887,7 +887,7 @@ TEST_UNIT(md5_test2)
 
             char result8[33] = {0};
             {
-                wcpp::MD5 md5;
+                simcc::MD5 md5;
                 const int UNIT_LEN = 8;
                 int oct = ds.size()/UNIT_LEN;
                 for ( int i = 0; i < oct; ++i )
@@ -913,15 +913,15 @@ TEST_UNIT(md5_test2)
 TEST_UNIT(md5_test3)
 {
     std::string d = "abcdaljdslfjalsdjfqpoiuerpoqiuewr9127834012384-08fjsd;lfjas;ldfa'sdfp";
-    std::string a = wcpp::MD5::Sum(d.data(), d.size());
-    std::string b = wcpp::MD5::Sum(d);
+    std::string a = simcc::MD5::Sum(d.data(), d.size());
+    std::string b = simcc::MD5::Sum(d);
     H_TEST_ASSERT( a == b );
 }
 TEST_UNIT(md5_test4)
 {
     std::string d = "abcdaljdslfjalsdjfqpoiuerpoqiuewr9127834012384-08fjsd;lfjas;ldfa'sdfp";
-    std::string a = wcpp::MD5::Sumh(d.data(), d.size());
-    std::string b = wcpp::MD5::Sumh(d);
+    std::string a = simcc::MD5::Sumh(d.data(), d.size());
+    std::string b = simcc::MD5::Sumh(d);
     H_TEST_ASSERT( a == b );
 }
 
@@ -980,9 +980,9 @@ namespace {
 
     void hex2bin_test(size_t randlen)
     {
-        std::string rs = wcpp::RandomString::Rand(randlen);
-        std::string hex = wcpp::MD5::Bin2Hex(rs.data(), rs.size());
-        std::string bin = wcpp::MD5::Hex2Bin(hex.data(), hex.size());
+        std::string rs = simcc::RandomString::Rand(randlen);
+        std::string hex = simcc::MD5::Bin2Hex(rs.data(), rs.size());
+        std::string bin = simcc::MD5::Hex2Bin(hex.data(), hex.size());
         H_TEST_ASSERT(bin == rs);
     }
 }
@@ -992,12 +992,12 @@ TEST_UNIT(dehexchar_test)
     std::string hex1 = "0123456789ABCDEF";
     for (size_t i = 0; i < hex1.size(); ++i)
     {
-        H_TEST_ASSERT(wcpp::MD5::DehexChar(hex1[i]) == dehexchar(hex1[i]));
+        H_TEST_ASSERT(simcc::MD5::DehexChar(hex1[i]) == dehexchar(hex1[i]));
     }
     std::string hex2 = "0123456789abcdef;asjf;ijp984170293842phnfvzx.,nv;ih p98y340127341";
     for (size_t i = 0; i < hex2.size(); ++i)
     {
-        H_TEST_ASSERT(wcpp::MD5::DehexChar(hex2[i]) == dehexchar(hex2[i]));
+        H_TEST_ASSERT(simcc::MD5::DehexChar(hex2[i]) == dehexchar(hex2[i]));
     }
 }
 

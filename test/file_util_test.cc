@@ -1,12 +1,12 @@
 
 #include "test_common.h"
-#include "wcpp/exp.h"
-#include "wcpp/data_stream.h"
-#include "wcpp/file_util.h"
+#include "simcc/exp.h"
+#include "simcc/data_stream.h"
+#include "simcc/file_util.h"
 
 #include <iostream>
 
-using namespace wcpp;
+using namespace simcc;
 
 namespace {
 void is_directory_1() {

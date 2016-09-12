@@ -46,7 +46,7 @@ apps/evnsq/evnsqtail/evnsqtail
 
 3rdparty/libevent-2.1.5-beta/
 ConsoleApplication1/
-msvc/libwcpp.VC.VC.opendb
-msvc/libwcpp.VC.db
+msvc/libsimcc.VC.VC.opendb
+msvc/libsimcc.VC.db
 res
 

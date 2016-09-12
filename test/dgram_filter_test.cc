@@ -1,9 +1,9 @@
 
 #include "test_common.h"
-#include "wcpp/misc/dgram_filter.h"
+#include "simcc/misc/dgram_filter.h"
 
 TEST_UNIT(testDgramFilter) {
-    wcpp::DgramFilter<2> filter;
+    simcc::DgramFilter<2> filter;
     uint32_t max_threshold = 3;
     size_t lru_max_item_count = 3;
     size_t lru_max_memery_size_mb = 1;

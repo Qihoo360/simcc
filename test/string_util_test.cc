@@ -1,6 +1,6 @@
 #include "test_common.h"
-#include "wcpp/exp.h"
-#include "wcpp/string_util.h"
+#include "simcc/exp.h"
+#include "simcc/string_util.h"
 
 #include <map>
 #include <iostream>
@@ -9,7 +9,7 @@ namespace {
 void test_StringUtil_split_null_1() {
     std::string s = "|a||c|d";
     std::vector<std::string> v;
-    wcpp::StringUtil::Split(v, s, "|");
+    simcc::StringUtil::Split(v, s, "|");
     H_TEST_ASSERT(v.size() == 5);
     H_TEST_ASSERT(v[0] == "");
     H_TEST_ASSERT(v[1] == "a");
@@ -21,7 +21,7 @@ void test_StringUtil_split_null_1() {
 void test_StringUtil_split_null_2() {
     std::string s = "|a||c|d|";
     std::vector<std::string> v;
-    wcpp::StringUtil::Split(v, s, "|");
+    simcc::StringUtil::Split(v, s, "|");
     H_TEST_ASSERT(v.size() == 6);
     H_TEST_ASSERT(v[0] == "");
     H_TEST_ASSERT(v[1] == "a");
@@ -34,7 +34,7 @@ void test_StringUtil_split_null_2() {
 void test_StringUtil_split_null_3() {
     std::string s = "|a||c;d|;";
     std::vector<std::string> v;
-    wcpp::StringUtil::Split(v, s, "|;");
+    simcc::StringUtil::Split(v, s, "|;");
     H_TEST_ASSERT(v.size() == 7);
     H_TEST_ASSERT(v[0] == "");
     H_TEST_ASSERT(v[1] == "a");
@@ -49,7 +49,7 @@ void test_StringUtil_split_null_3() {
 void test_StringUtil_split_null_4() {
     std::string s = "|a||c;d|;";
     std::vector<std::string> v;
-    wcpp::StringUtil::Split(v, s, "|; ");
+    simcc::StringUtil::Split(v, s, "|; ");
     H_TEST_ASSERT(v.size() == 7);
     H_TEST_ASSERT(v[0] == "");
     H_TEST_ASSERT(v[1] == "a");
@@ -63,7 +63,7 @@ void test_StringUtil_split_null_4() {
 void test_StringUtil_split_5() {
     std::string s = "a|b|c|d|e";
     std::vector<std::string> v;
-    wcpp::StringUtil::Split(v, s, "|; ", 2);
+    simcc::StringUtil::Split(v, s, "|; ", 2);
     H_TEST_ASSERT(v.size() == 2);
     H_TEST_ASSERT(v[0] == "a");
     H_TEST_ASSERT(v[1] == "b|c|d|e");
@@ -72,7 +72,7 @@ void test_StringUtil_split_5() {
 void test_StringUtil_split_6() {
     std::string s = "a|b|c|d|e";
     std::vector<std::string> v;
-    wcpp::StringUtil::Split(v, s, '|', 2);
+    simcc::StringUtil::Split(v, s, '|', 2);
     H_TEST_ASSERT(v.size() == 2);
     H_TEST_ASSERT(v[0] == "a");
     H_TEST_ASSERT(v[1] == "b|c|d|e");
@@ -81,7 +81,7 @@ void test_StringUtil_split_6() {
 void test_StringUtil_split_7() {
     std::string s = "a|b|c|d|e";
     std::vector<std::string> v;
-    wcpp::StringUtil::Split(v, s, '|');
+    simcc::StringUtil::Split(v, s, '|');
     H_TEST_ASSERT(v.size() == 5);
     H_TEST_ASSERT(v[0] == "a");
     H_TEST_ASSERT(v[1] == "b");
@@ -93,8 +93,8 @@ void test_StringUtil_split_7() {
 
 void test_StringUtil_split_slice_6() {
     std::string s = "a|b|c|d|e";
-    std::vector<wcpp::Slice> v;
-    wcpp::StringUtil::Split(v, s, '|', 2);
+    std::vector<simcc::Slice> v;
+    simcc::StringUtil::Split(v, s, '|', 2);
     H_TEST_ASSERT(v.size() == 2);
     H_TEST_ASSERT(v[0] == "a");
     H_TEST_ASSERT(v[1] == "b|c|d|e");
@@ -102,8 +102,8 @@ void test_StringUtil_split_slice_6() {
 
 void test_StringUtil_split_slice_7() {
     std::string s = "a|b|c|d|e";
-    std::vector<wcpp::Slice> v;
-    wcpp::StringUtil::Split(v, s, '|');
+    std::vector<simcc::Slice> v;
+    simcc::StringUtil::Split(v, s, '|');
     H_TEST_ASSERT(v.size() == 5);
     H_TEST_ASSERT(v[0] == "a");
     H_TEST_ASSERT(v[1] == "b");
@@ -115,9 +115,9 @@ void test_StringUtil_split_slice_7() {
 
 void test_StringUtil_split_slice_8() {
     std::string s = "a|b|c|d|e";
-    wcpp::Slice v[3];
+    simcc::Slice v[3];
     size_t vcount = 3;
-    wcpp::StringUtil::Split(s, '|', v, vcount);
+    simcc::StringUtil::Split(s, '|', v, vcount);
     H_TEST_ASSERT(vcount == 3);
     H_TEST_ASSERT(v[0] == "a");
     H_TEST_ASSERT(v[1] == "b");
@@ -127,9 +127,9 @@ void test_StringUtil_split_slice_8() {
 
 void test_StringUtil_split_slice_9() {
     std::string s = "a|b|c|d|e";
-    wcpp::Slice v[8];
+    simcc::Slice v[8];
     size_t vcount = 8;
-    wcpp::StringUtil::Split(s, '|', v, vcount);
+    simcc::StringUtil::Split(s, '|', v, vcount);
     H_TEST_ASSERT(vcount == 5);
     H_TEST_ASSERT(v[0] == "a");
     H_TEST_ASSERT(v[1] == "b");
@@ -141,9 +141,9 @@ void test_StringUtil_split_slice_9() {
 
 void test_StringUtil_split_slice_10() {
     std::string s = "a|b|c;d|e";
-    wcpp::Slice v[8];
+    simcc::Slice v[8];
     size_t vcount = 8;
-    wcpp::StringUtil::Split(s, ";|", v, vcount);
+    simcc::StringUtil::Split(s, ";|", v, vcount);
     H_TEST_ASSERT(vcount == 5);
     H_TEST_ASSERT(v[0] == "a");
     H_TEST_ASSERT(v[1] == "b");
@@ -155,10 +155,10 @@ void test_StringUtil_split_slice_10() {
 
 
 void test_StringUtil_split_slice_11() {
-    wcpp::Slice s = "a|b|c|d|e";
-    wcpp::Slice v[8];
+    simcc::Slice s = "a|b|c|d|e";
+    simcc::Slice v[8];
     size_t vcount = 8;
-    wcpp::StringUtil::Split(s, '|', v, vcount);
+    simcc::StringUtil::Split(s, '|', v, vcount);
     H_TEST_ASSERT(vcount == 5);
     H_TEST_ASSERT(v[0] == "a");
     H_TEST_ASSERT(v[1] == "b");
@@ -168,20 +168,20 @@ void test_StringUtil_split_slice_11() {
 }
 
 void test_StringUtil_split_slice_12() {
-    wcpp::Slice s = "a|b|c|d|e";
-    wcpp::Slice v[3];
+    simcc::Slice s = "a|b|c|d|e";
+    simcc::Slice v[3];
     size_t vcount = 3;
-    wcpp::StringUtil::Split(s, '|', v, vcount);
+    simcc::StringUtil::Split(s, '|', v, vcount);
     H_TEST_ASSERT(vcount == 3);
     H_TEST_ASSERT(v[0] == "a");
     H_TEST_ASSERT(v[1] == "b");
     H_TEST_ASSERT(v[2] == "c|d|e");
 }
 void test_StringUtil_split_slice_13() {
-    wcpp::Slice s("afb|c|d|e", 2);
-    wcpp::Slice v[2];
+    simcc::Slice s("afb|c|d|e", 2);
+    simcc::Slice v[2];
     size_t vcount = 2;
-    wcpp::StringUtil::Split(s, '|', v, vcount);
+    simcc::StringUtil::Split(s, '|', v, vcount);
     H_TEST_ASSERT(vcount == 1);
     H_TEST_ASSERT(v[0] == "af");
 }
@@ -213,7 +213,7 @@ TEST_UNIT(stringutil_split_null) {
 TEST_UNIT(string_util_split_limit_test) {
     std::string s = "a|b|c";
     std::vector<std::string> v;
-    wcpp::StringUtil::Split(v, s, "|", 2);
+    simcc::StringUtil::Split(v, s, "|", 2);
     H_TEST_ASSERT(v.size() == 2);
     H_TEST_ASSERT(v[0] == "a");
     H_TEST_ASSERT(v[1] == "b|c");
@@ -223,7 +223,7 @@ TEST_UNIT(string_util_split_limit_test) {
 TEST_UNIT(string_util_split_limit_test2) {
     std::string s = "a|b";
     std::vector<std::string> v;
-    wcpp::StringUtil::Split(v, s, "|", 2);
+    simcc::StringUtil::Split(v, s, "|", 2);
     H_TEST_ASSERT(v.size() == 2);
     H_TEST_ASSERT(v[0] == "a");
     H_TEST_ASSERT(v[1] == "b");
@@ -233,7 +233,7 @@ TEST_UNIT(string_util_split_limit_test2) {
 TEST_UNIT(string_util_split_limit_test3) {
     std::string s = "a|";
     std::vector<std::string> v;
-    wcpp::StringUtil::Split(v, s, "|", 2);
+    simcc::StringUtil::Split(v, s, "|", 2);
     H_TEST_ASSERT(v.size() == 2);
     H_TEST_ASSERT(v[0] == "a");
     H_TEST_ASSERT(v[1] == "");
@@ -241,15 +241,15 @@ TEST_UNIT(string_util_split_limit_test3) {
 
 TEST_UNIT(string_util_split_slicetoslice_vec_limit) {
     std::string s = "a|bcde|def|sss";
-    wcpp::Slice slice(s.data(), s.size());
-    std::vector<wcpp::Slice> vv;
-    wcpp::StringUtil::Split(slice, '|', vv, 2);
+    simcc::Slice slice(s.data(), s.size());
+    std::vector<simcc::Slice> vv;
+    simcc::StringUtil::Split(slice, '|', vv, 2);
     H_TEST_ASSERT(vv.size() == 2);
     H_TEST_ASSERT(vv[0] == "a");
     H_TEST_ASSERT(vv[1] == "bcde|def|sss");
 
     vv.clear();
-    wcpp::StringUtil::Split(slice, '|', vv);
+    simcc::StringUtil::Split(slice, '|', vv);
     H_TEST_ASSERT(vv.size() == 4);
     H_TEST_ASSERT(vv[0] == "a");
     H_TEST_ASSERT(vv[1] == "bcde");
@@ -261,7 +261,7 @@ TEST_UNIT(string_util_split_slicetoslice_vec_limit) {
 namespace {
 
 void test_string_util() {
-    using namespace wcpp;
+    using namespace simcc;
 
     //cout << "bool StringUtil::StartsWith( const string& str, const string& pattern, bool bCaseSensitive )"<<endl;
     H_TEST_ASSERT(!StringUtil::StartsWith("abcdef", "aBc"));
@@ -315,7 +315,7 @@ void test_string_util() {
 }
 
 void test_split() {
-    using namespace wcpp;
+    using namespace simcc;
 
     std::vector<int64_t> vec;
     vec.push_back(12);
@@ -440,23 +440,23 @@ void test_std_string_assign_append() {
 
 static int FLAGS_md5_index = 4;
 
-wcpp::Slice SpliteCommand(const char* command, size_t len) {
+simcc::Slice SpliteCommand(const char* command, size_t len) {
     int count = 0;
     const char* begin = command;
     for (size_t i = 0; i < len; ++i) {
         if (begin[i] == '\t') {
             ++count;
             if (count == FLAGS_md5_index) {
-                return wcpp::Slice(begin + i + 1, 32);
+                return simcc::Slice(begin + i + 1, 32);
             }
         }
     }
 
-    return wcpp::Slice();
+    return simcc::Slice();
 }
 
 void test_slice() {
-    std::map<wcpp::Slice, wcpp::Slice> ssmap;
+    std::map<simcc::Slice, simcc::Slice> ssmap;
     ssmap["a"] = "aaa";
     ssmap["b"] = "bbb";
     H_TEST_ASSERT(ssmap["a"] == "aaa");
@@ -473,30 +473,30 @@ void test_string_replace_1() {
     std::string new_value = "AA";
 
     std::string base1 = base;
-    wcpp::StringUtil::Replace(base1, needle, new_value, 0, 1);
+    simcc::StringUtil::Replace(base1, needle, new_value, 0, 1);
     H_TEST_ASSERT(base1 == base_replaced1);
 
     std::string base2 = base;
-    wcpp::StringUtil::Replace(base2, needle, new_value, 0, 2);
+    simcc::StringUtil::Replace(base2, needle, new_value, 0, 2);
     H_TEST_ASSERT(base2 == base_replaced2);
 
     std::string base3 = base;
-    wcpp::StringUtil::Replace(base3, needle, new_value, 0, 3);
+    simcc::StringUtil::Replace(base3, needle, new_value, 0, 3);
     H_TEST_ASSERT(base3 == base_replaced3);
 
     std::string base_all = base;
-    wcpp::StringUtil::Replace(base_all, needle, new_value);
+    simcc::StringUtil::Replace(base_all, needle, new_value);
     H_TEST_ASSERT(base_all == base_replaced3);
 
     std::string base_replaced1_1 = "this AA a test string. It is very fun.";
     std::string base_replaced1_2 = "this AA a test string. It AA very fun.";
 
     std::string base_1_1 = base;
-    wcpp::StringUtil::Replace(base_1_1, needle, new_value, 3, 1);
+    simcc::StringUtil::Replace(base_1_1, needle, new_value, 3, 1);
     H_TEST_ASSERT(base_1_1 == base_replaced1_1);
 
     std::string base_1_2 = base;
-    wcpp::StringUtil::Replace(base_1_2, needle, new_value, 3, 2);
+    simcc::StringUtil::Replace(base_1_2, needle, new_value, 3, 2);
     H_TEST_ASSERT(base_1_2 == base_replaced1_2);
 }
 }
@@ -519,7 +519,7 @@ TEST_UNIT(string_util_test_1) {
 //TODO change 360 string
 TEST_UNIT(test_SpliteCommand) {
     std::string data1 = "dfbc22a2ba2fbff94d4557a707fb9c15\twd\turlproc\t2.1.0.1001\t2d7d233ef132096f2f5ba843972e4fad\t255\taHR0cDovL3d3dy5iYWlkdS5jb20vcz93b3JkPSVDNiVCRCVCQSVGRSVDNiVGQiVCMyVCNSVENSVCRSVCNSVFNyVCQiVCMCZ0bj1zaXRlaGFvMTIzJmY9Mw==\t1331165275$";
-    wcpp::Slice slice = SpliteCommand(data1.data(), data1.size());
+    simcc::Slice slice = SpliteCommand(data1.data(), data1.size());
     H_TEST_ASSERT(slice.ToString() == "2d7d233ef132096f2f5ba843972e4fad");
 
     std::string data2 = "dfbc22a2ba2fbff94d4557a707fb9c15\twd\turlproc";
@@ -534,10 +534,10 @@ TEST_UNIT(test_slice) {
 
 
 TEST_UNIT(test_StringUtil_spilt_1) {
-    using namespace wcpp;
+    using namespace simcc;
     std::string abc = "abc";
     std::vector<std::string> v;
-    wcpp::StringUtil::Split(v, abc, ",");
+    simcc::StringUtil::Split(v, abc, ",");
     H_TEST_ASSERT(v.size() == 1 && v[0] == abc);
 }
 
@@ -545,7 +545,7 @@ TEST_UNIT(StringUtil_split_no_needle_test) {
     std::string needle = "|";
     std::string s = "abc";
     std::vector<std::string> vv;
-    wcpp::StringUtil::Split(vv, s, needle);
+    simcc::StringUtil::Split(vv, s, needle);
     H_TEST_ASSERT(vv.size() == 1);
     H_TEST_ASSERT(vv[0] == s);
 }
@@ -563,21 +563,21 @@ TEST_UNIT(String_find_null) {
 TEST_UNIT(StringUtil_contains_null) {
     std::string needle = "";
     std::string s = "abc";
-    bool b = wcpp::StringUtil::Contains(s, needle);
+    bool b = simcc::StringUtil::Contains(s, needle);
     H_TEST_ASSERT(b);
     needle = "a";
-    b = wcpp::StringUtil::Contains(s, needle);
+    b = simcc::StringUtil::Contains(s, needle);
     H_TEST_ASSERT(b);
     needle = "Ab";
-    b = wcpp::StringUtil::Contains(s, needle);
+    b = simcc::StringUtil::Contains(s, needle);
     H_TEST_ASSERT(!b);
 }
 
 
 TEST_UNIT(StringUtil_split_slice) {
     std::string s = "a|b|c";
-    std::vector<wcpp::Slice> vv;
-    wcpp::StringUtil::Split(vv, s, "|");
+    std::vector<simcc::Slice> vv;
+    simcc::StringUtil::Split(vv, s, "|");
     H_TEST_ASSERT(vv.size() == 3);
     H_TEST_ASSERT(vv[0] == "a");
 }
@@ -585,106 +585,106 @@ TEST_UNIT(StringUtil_split_slice) {
 
 TEST_UNIT(StringUtil_trim_string_char1) {
     std::string s = "ac";
-    wcpp::StringUtil::Trim(s, 'c');
+    simcc::StringUtil::Trim(s, 'c');
     H_TEST_ASSERT(s == "a");
 }
 
 TEST_UNIT(StringUtil_trim_string_char2) {
     std::string s = "c";
-    wcpp::StringUtil::Trim(s, 'c');
+    simcc::StringUtil::Trim(s, 'c');
     H_TEST_ASSERT(s == "");
 }
 
 TEST_UNIT(StringUtil_trim_string_char3) {
     std::string s = "cac";
-    wcpp::StringUtil::Trim(s, 'c');
+    simcc::StringUtil::Trim(s, 'c');
     H_TEST_ASSERT(s == "a");
 }
 
 TEST_UNIT(StringUtil_trim_string_char4) {
     std::string s = "acccc";
-    wcpp::StringUtil::TrimLeft(s, 'c');
+    simcc::StringUtil::TrimLeft(s, 'c');
     H_TEST_ASSERT(s == "acccc");
 }
 
 TEST_UNIT(StringUtil_trim_string_char5) {
     std::string s = "acccc";
-    wcpp::StringUtil::TrimRight(s, 'c');
+    simcc::StringUtil::TrimRight(s, 'c');
     H_TEST_ASSERT(s == "a");
 }
 
 TEST_UNIT(StringUtil_trim_string_char6) {
     std::string s = "ac";
-    wcpp::StringUtil::TrimRight(s, 'd');
+    simcc::StringUtil::TrimRight(s, 'd');
     H_TEST_ASSERT(s == "ac");
 }
 
 
 TEST_UNIT(StringUtil_trim_slice_char1) {
-    wcpp::Slice s = "ac";
-    wcpp::StringUtil::Trim(s, 'c');
+    simcc::Slice s = "ac";
+    simcc::StringUtil::Trim(s, 'c');
     H_TEST_ASSERT(s == "a");
 }
 
 TEST_UNIT(StringUtil_trim_slice_char2) {
-    wcpp::Slice s = "c";
-    wcpp::StringUtil::Trim(s, 'c');
+    simcc::Slice s = "c";
+    simcc::StringUtil::Trim(s, 'c');
     H_TEST_ASSERT(s == "");
 }
 
 TEST_UNIT(StringUtil_trim_slice_char3) {
-    wcpp::Slice s = "cac";
-    wcpp::StringUtil::Trim(s, 'c');
+    simcc::Slice s = "cac";
+    simcc::StringUtil::Trim(s, 'c');
     H_TEST_ASSERT(s == "a");
 }
 
 TEST_UNIT(StringUtil_trim_slice_char4) {
-    wcpp::Slice s = "acccc";
-    wcpp::StringUtil::TrimLeft(s, 'c');
+    simcc::Slice s = "acccc";
+    simcc::StringUtil::TrimLeft(s, 'c');
     H_TEST_ASSERT(s == "acccc");
 }
 
 TEST_UNIT(StringUtil_trim_slice_char5) {
-    wcpp::Slice s = "acccc";
-    wcpp::StringUtil::TrimRight(s, 'c');
+    simcc::Slice s = "acccc";
+    simcc::StringUtil::TrimRight(s, 'c');
     H_TEST_ASSERT(s == "a");
 }
 
 TEST_UNIT(StringUtil_trim_slice_char6) {
-    wcpp::Slice s = "ac";
-    wcpp::StringUtil::TrimRight(s, 'd');
+    simcc::Slice s = "ac";
+    simcc::StringUtil::TrimRight(s, 'd');
     H_TEST_ASSERT(s == "ac");
 }
 
 
 TEST_UNIT(StringUtil_trim_string_string1) {
     std::string s = " \t\r\nac\t\r\n  ";
-    wcpp::StringUtil::Trim(s);
+    simcc::StringUtil::Trim(s);
     H_TEST_ASSERT(s == "ac");
 }
 
 TEST_UNIT(StringUtil_trim_string_string2) {
     std::string s = " \t\r\nac";
-    wcpp::StringUtil::Trim(s);
+    simcc::StringUtil::Trim(s);
     H_TEST_ASSERT(s == "ac");
 }
 
 TEST_UNIT(StringUtil_trim_string_string3) {
     std::string s = "ac\t\r\n  ";
-    wcpp::StringUtil::Trim(s);
+    simcc::StringUtil::Trim(s);
     H_TEST_ASSERT(s == "ac");
 }
 
 TEST_UNIT(StringUtil_trim_string_string4) {
     std::string s = "ac";
-    wcpp::StringUtil::Trim(s);
+    simcc::StringUtil::Trim(s);
     H_TEST_ASSERT(s == "ac");
 }
 
 
 TEST_UNIT(StringUtil_trim_string_string5) {
     std::string s = "cbabcc";
-    wcpp::StringUtil::Trim(s, "bc");
+    simcc::StringUtil::Trim(s, "bc");
     H_TEST_ASSERT(s == "a");
 }
 
@@ -693,7 +693,7 @@ TEST_UNIT(test_string_trim_ending0) {
     char buf[8] = {};
     memset(buf, 'c', 2);
     std::string s(buf, sizeof(buf));
-    wcpp::StringUtil::Trim(s);
+    simcc::StringUtil::Trim(s);
     H_TEST_ASSERT(s.size() == 2);
 }
 
@@ -701,14 +701,14 @@ TEST_UNIT(test_string_trim_ending0) {
 TEST_UNIT(test_string_trim_ending0_2) {
     char buf[8] = { 0 };
     std::string s(buf, sizeof(buf));
-    wcpp::StringUtil::Trim(s);
+    simcc::StringUtil::Trim(s);
     H_TEST_ASSERT(s.size() == 0);
 }
 
 
 TEST_UNIT(test_string_trim_ending0_3) {
     std::string s;
-    wcpp::StringUtil::Trim(s);
+    simcc::StringUtil::Trim(s);
     H_TEST_ASSERT(s.size() == 0);
 }
 
@@ -780,7 +780,7 @@ TEST_UNIT(string_rot13_test) {
     };
 
     for (size_t i = 0; i < H_ARRAYSIZE(data); ++i) {
-        std::string a = wcpp::StringUtil::Rot13(data[i]);
+        std::string a = simcc::StringUtil::Rot13(data[i]);
         std::string b = StringRot13(data[i]);
         H_TEST_ASSERT(a == b);
     }
@@ -788,25 +788,25 @@ TEST_UNIT(string_rot13_test) {
 
 TEST_UNIT(test_string_rot13) {
     std::string a = "hello world";
-    std::string b = wcpp::StringUtil::Rot13(a);
-    std::string c = wcpp::StringUtil::Rot13(b);
+    std::string b = simcc::StringUtil::Rot13(a);
+    std::string c = simcc::StringUtil::Rot13(b);
     H_TEST_ASSERT(a == c);
 
     a = "";
-    b = wcpp::StringUtil::Rot13(a);
-    c = wcpp::StringUtil::Rot13(b);
+    b = simcc::StringUtil::Rot13(a);
+    c = simcc::StringUtil::Rot13(b);
     H_TEST_ASSERT(a == c);
 
     a = "xx";
-    b = wcpp::StringUtil::Rot13(a);
-    c = wcpp::StringUtil::Rot13(b);
+    b = simcc::StringUtil::Rot13(a);
+    c = simcc::StringUtil::Rot13(b);
     H_TEST_ASSERT(a == c);
 }
 
 TEST_UNIT(test_split_trim) {
     std::string f = " false, true ";
     std::vector<std::string> v;
-    wcpp::StringUtil::Split(v, f, ",");
+    simcc::StringUtil::Split(v, f, ",");
     H_TEST_ASSERT(v[0] == " false");
     H_TEST_ASSERT(v[1] == " true ");
 }
@@ -814,13 +814,13 @@ TEST_UNIT(test_split_trim) {
 
 TEST_UNIT(test_split_and_trimSlice) {
     std::string f = "abcd\r\nbcdef\nadfsdf\r\ndefa";
-    std::vector<wcpp::Slice> v;
-    wcpp::StringUtil::Split(v, f, "\r");
+    std::vector<simcc::Slice> v;
+    simcc::StringUtil::Split(v, f, "\r");
     H_TEST_ASSERT(v.size() == 3);
 
-    wcpp::StringUtil::Trim(v[0], '\n');
-    wcpp::StringUtil::Trim(v[1], '\n');
-    wcpp::StringUtil::Trim(v[2], '\n');
+    simcc::StringUtil::Trim(v[0], '\n');
+    simcc::StringUtil::Trim(v[1], '\n');
+    simcc::StringUtil::Trim(v[2], '\n');
     H_TEST_ASSERT(v[0] == "abcd");
     H_TEST_ASSERT(v[1] == "bcdef\nadfsdf");
     H_TEST_ASSERT(v[2] == "defa");
@@ -835,14 +835,14 @@ TEST_UNIT(test_explode1) {
     std::string delim = "||";
 
     std::vector<std::string> sv;
-    wcpp::StringUtil::Explode(s, delim, sv, -1);
+    simcc::StringUtil::Explode(s, delim, sv, -1);
     H_TEST_ASSERT(sv.size() == 3);
     H_TEST_ASSERT(sv[0] == "abc");
     H_TEST_ASSERT(sv[1] == "xx");
     H_TEST_ASSERT(sv[2] == "yy");
 
     sv.clear();
-    wcpp::StringUtil::Explode(s, delim, sv, 3);
+    simcc::StringUtil::Explode(s, delim, sv, 3);
     H_TEST_ASSERT(sv.size() == 3);
     H_TEST_ASSERT(sv[0] == "abc");
     H_TEST_ASSERT(sv[1] == "xx");
@@ -850,7 +850,7 @@ TEST_UNIT(test_explode1) {
 
 
     sv.clear();
-    wcpp::StringUtil::Explode(s, delim, sv, 2);
+    simcc::StringUtil::Explode(s, delim, sv, 2);
     H_TEST_ASSERT(sv.size() == 2);
     H_TEST_ASSERT(sv[0] == "abc");
     H_TEST_ASSERT(sv[1] == "xx");
@@ -862,7 +862,7 @@ TEST_UNIT(test_explode2) {
     std::string delim = "||";
 
     std::vector<std::string> sv;
-    wcpp::StringUtil::Explode(s, delim, sv, -1);
+    simcc::StringUtil::Explode(s, delim, sv, -1);
     H_TEST_ASSERT(sv.size() == 3);
     H_TEST_ASSERT(sv[0] == "abc");
     H_TEST_ASSERT(sv[1] == "");
@@ -876,7 +876,7 @@ TEST_UNIT(test_explode3) {
     std::string delim = "||";
 
     std::vector<std::string> sv;
-    wcpp::StringUtil::Explode(s, delim, sv, -1);
+    simcc::StringUtil::Explode(s, delim, sv, -1);
     H_TEST_ASSERT(sv.size() == 1);
     H_TEST_ASSERT(sv[0] == "abc");
 }
@@ -891,10 +891,10 @@ TEST_UNIT(test_StringUtil_trim) {
 
     std::string s = l + m + r;
 
-    wcpp::StringUtil::TrimLeft(s);
+    simcc::StringUtil::TrimLeft(s);
     H_TEST_ASSERT(s == m + r);
 
-    wcpp::StringUtil::TrimRight(s);
+    simcc::StringUtil::TrimRight(s);
     H_TEST_ASSERT(s == m);
 }
 
@@ -919,22 +919,22 @@ static void toLowerCase_c(std::string& str) {
 TEST_UNIT(toLowerCase_test) {
     std::string s = "AadjowuerqxAcasdjfklj29384r10293;zxcknv aasodfu-bWQ1cz0zODgwNWQ1MGVmY2ZkNThhYjhkMDMyZmEzZGQ5Mjk5ZQk1MzkwNDg4CSV1c2VycHJvZmlsZSVcbG9jYWwgc2V0dGluZ3NcdGVtcFxrdXBpbmdfc18yMDE3MS5leGUJMQkKDQpwcm9kdWN0PWRlZXBzY2FuDQpjb21ibz1wcmltYXJ5DQp2az00YTE4ZWE0Ng0KbWlkPTEyZmVhYWE2Zjc3MzU4Y2MwODUxYjFkNzNlOTIzMmRmDQpsYW5naWQ9MjA1Mg0KZXh0PWV4dDphZGlkOjEwMDAxfHxtb2RlOjB8fGhpLklCUzo5Nnx8aGkuSURBOmgxS0U1Szh0dEhxcHZRNTQvWWljUWFHeUVlK3V2b29uRjFLRTVLOHR0SHFwdlE1NC9ZaWNRYUd5RWUrdXZvb2JAaGwwSVFRNVRpMkl1SGwwSVFRNVRpMkl1Q3x8aGkuRkJTOjQ5MTUyfHxoaS5GREE6L21LVU1QRHJnMXZWTzQyNG5ueHFMS2pRNkFrRnFhMllsRFVsdlJVVVNoM211aUBMcFhhY3RrRmMyWWxENXdVVVQzV3x8aGkuR0VOOuWuieijheeoi2930123khflasdhf;  7528723412 21s1afsdfasdf54q6238471*234132/4dasf        sdf asdf asdjf acB";
     std::string o = s;
-    wcpp::StringUtil::ToLower(s);
+    simcc::StringUtil::ToLower(s);
     H_TEST_ASSERT(s != o && stricmp(s.data(), o.data()) == 0);
     const int loop = 1;
-    unsigned long begin = wcpp::utcmicrosecond();
+    unsigned long begin = simcc::utcmicrosecond();
     for (int i = 0; i < loop; ++i) {
         toLowerCase_cpp(s);
     }
-    unsigned long end = wcpp::utcmicrosecond();
+    unsigned long end = simcc::utcmicrosecond();
 
     unsigned long cppcost = end - begin;
 
-    begin = wcpp::utcmicrosecond();
+    begin = simcc::utcmicrosecond();
     for (int i = 0; i < loop; ++i) {
         toLowerCase_c(s);
     }
-    end = wcpp::utcmicrosecond();
+    end = simcc::utcmicrosecond();
     unsigned long ccost = end - begin;
 
     (void)cppcost;
@@ -945,11 +945,11 @@ TEST_UNIT(toLowerCase_test) {
 
 TEST_UNIT(test_split_slice_errorbug) {
     std::string d = "18995e0972c953c232a886c494bce61c\t389464\t\\PROGRAM FILES\\360\\360safe\\softmgr\\somquickinst.dll\t1\t\nxxx";
-    wcpp::Slice m(d.data(), d.size() - 4);//"18995e0972c953c232a886c494bce61c\t389464\t\\PROGRAM FILES\\360\\360safe\\softmgr\\somquickinst.dll\t1\t" \nxxx
-    wcpp::Slice vv[6];
+    simcc::Slice m(d.data(), d.size() - 4);//"18995e0972c953c232a886c494bce61c\t389464\t\\PROGRAM FILES\\360\\360safe\\softmgr\\somquickinst.dll\t1\t" \nxxx
+    simcc::Slice vv[6];
     size_t slice_count = 6;
     static const std::string tab = "\t";
-    wcpp::StringUtil::Split(m, '\t', vv, slice_count);
+    simcc::StringUtil::Split(m, '\t', vv, slice_count);
     H_TEST_ASSERT(slice_count == 5);
     H_TEST_ASSERT(strncmp(vv[0].data(), "18995e0972c953c232a886c494bce61c", 32) == 0);
     H_TEST_ASSERT(strncmp(vv[1].data(), "389464", 6) == 0);

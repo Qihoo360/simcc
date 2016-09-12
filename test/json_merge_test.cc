@@ -1,14 +1,14 @@
 
 #include "test_common.h"
-#include "wcpp/json/json.h"
+#include "simcc/json/json.h"
 #include <iostream>
 
 TEST_UNIT(json_merge_test1) {
-    wcpp::json::JSONObject ja;
+    simcc::json::JSONObject ja;
     ja.Put("a", "a1-a");
     ja.Put("b", "a2-a");
 
-    wcpp::json::JSONObject jb;
+    simcc::json::JSONObject jb;
     jb.Put("a", "a1-b");
     jb.Put("c", "c1-b");
 
@@ -36,8 +36,8 @@ TEST_UNIT(json_merge_test1) {
 
 
 TEST_UNIT(json_merge_test2) {
-    wcpp::json::JSONObject j1;
-    wcpp::json::JSONObject j2;
+    simcc::json::JSONObject j1;
+    simcc::json::JSONObject j2;
     const char* key1 = "apple";
     const char* key2 = "orange";
     const char* value1 = "value1";
@@ -65,8 +65,8 @@ TEST_UNIT(json_merge_test2) {
 
 TEST_UNIT(json_merge_test3) {
 
-    wcpp::json::JSONObject j1;
-    wcpp::json::JSONObject j2;
+    simcc::json::JSONObject j1;
+    simcc::json::JSONObject j2;
     const char* key1 = "apple";
     const char* key2 = "orange";
     const char* key_obj = "key_obj";
@@ -81,8 +81,8 @@ TEST_UNIT(json_merge_test3) {
     j2.Put(key1, value1);
     j2.Put(key2, value2);
 
-    wcpp::json::JSONObject* subj1 = new wcpp::json::JSONObject;
-    wcpp::json::JSONObject* subj2 = new wcpp::json::JSONObject;
+    simcc::json::JSONObject* subj1 = new simcc::json::JSONObject;
+    simcc::json::JSONObject* subj2 = new simcc::json::JSONObject;
     subj1->Put(key1, value1_1);
     subj2->Put(key1, value2_1);
     subj2->Put(jkkey3, jkvalue3);
@@ -104,8 +104,8 @@ TEST_UNIT(json_merge_test3) {
 
 TEST_UNIT(json_merge_test4) {
 
-    wcpp::json::JSONObject j1;
-    wcpp::json::JSONObject j2;
+    simcc::json::JSONObject j1;
+    simcc::json::JSONObject j2;
     const char* key1 = "apple";
     const char* jkkey3 = "host";
     const char* jkvalue3 = "www.360.com";
@@ -113,7 +113,7 @@ TEST_UNIT(json_merge_test4) {
     bool value2_1 = true;
     j1.Put(key1, value2);
 
-    wcpp::json::JSONObject* subj2 = new wcpp::json::JSONObject;
+    simcc::json::JSONObject* subj2 = new simcc::json::JSONObject;
 
     subj2->Put(key1, value2_1);
     subj2->Put(jkkey3, jkvalue3);

@@ -1,9 +1,9 @@
 #include "test_common.h"
 
-#include "wcpp/misc/double_buffering.h"
+#include "simcc/misc/double_buffering.h"
 
 namespace {
-class UTTarget : public wcpp::DoubleBuffering::Target {
+class UTTarget : public simcc::DoubleBuffering::Target {
 public:
     UTTarget() {}
 
@@ -18,15 +18,15 @@ public:
 private:
     std::string conf_;
 };
-typedef wcpp::RefPtr<UTTarget> UTTargetPTr;
+typedef simcc::RefPtr<UTTarget> UTTargetPTr;
 
-wcpp::DoubleBuffering::TargetPtr Creator() {
-    return wcpp::DoubleBuffering::TargetPtr(new UTTarget);
+simcc::DoubleBuffering::TargetPtr Creator() {
+    return simcc::DoubleBuffering::TargetPtr(new UTTarget);
 }
 }
 
 TEST_UNIT(testDoubleBuffering) {
-    wcpp::DoubleBuffering db(&Creator);
+    simcc::DoubleBuffering db(&Creator);
     static const char* s[] = {
         "1",
         "12",
@@ -46,7 +46,7 @@ TEST_UNIT(testDoubleBuffering) {
         "12345678901234567" };
     for (size_t i = 0; i < H_ARRAYSIZE(s); ++i) {
         H_TEST_ASSERT(db.Reload(s[i]));
-        wcpp::DoubleBuffering::TargetPtr tt = db.Get();
+        simcc::DoubleBuffering::TargetPtr tt = db.Get();
         UTTarget* t = static_cast<UTTarget*>(tt.get());
         H_TEST_ASSERT(t->conf() == s[i]);
         H_TEST_ASSERT(tt->RefCount() == t->RefCount());
@@ -65,7 +65,7 @@ TEST_UNIT(testDoubleBuffering) {
 
 
 TEST_UNIT(testDoubleBufferingManager) {
-    wcpp::DoubleBufferingManager m;
+    simcc::DoubleBufferingManager m;
     static const char* s[] = {
         "1",
         "12",
