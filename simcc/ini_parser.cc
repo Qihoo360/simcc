@@ -6,13 +6,14 @@
 
 namespace simcc {
 
+static const std::string default_trim_chars = " \t\r\n";
 INIParser::INIParser(bool _case_sensitive /*= true*/, bool _compatible /*= false*/, bool keep_sequence /*= false*/)
     : case_sensitive_(_case_sensitive)
     , stop_parsing_(false)
     , keep_sequence_(keep_sequence)
     , error_code_(kNoError)
     , compatible_(_compatible)
-    , trim_chars_(" \t\r\n") {
+    , trim_chars_(default_trim_chars) {
     memset(trim_chars_table_, 0, sizeof(trim_chars_table_));
     InitTrimCharsTable();
 }
@@ -31,7 +32,7 @@ bool INIParser::Parse(const char* filename) {
         return false;
     }
 
-    return Parse((const char*)ds.GetCache(), ds.size(), "\n", "=");
+    return Parse(ds.data(), ds.size(), "\n", "=");
 }
 
 bool INIParser::Parse(const char* data, size_t datalen) {
@@ -54,15 +55,7 @@ public:
         if (it != parser_->section_list_.rend() && it->first == section) {
             keys = &(it->second);
         } else {
-#if _MSC_VER >= 1800
-            parser_->section_list_.push_back(std::make_pair<string, INIParser::StringList>((string)section, INIParser::StringList()));
-#else
-#if H_COMPILER_VERSION >= 472
-            parser_->section_list_.push_back(std::make_pair<string, INIParser::StringList>((string)section, INIParser::StringList()));
-#else
-            parser_->section_list_.push_back(std::make_pair<string, INIParser::StringList>(section, INIParser::StringList()));
-#endif
-#endif
+            parser_->section_list_.push_back(SectionPairEntry(section, StringList()));
             keys = &(parser_->section_list_.rbegin()->second);
         }
         keys->push_back(key);
@@ -74,19 +67,18 @@ private:
 };
 
 bool INIParser::Parse(const char* data, size_t datalen, const char* linesep, const char* kvsep) {
-    return Parse(data, datalen, string(linesep), string(kvsep));
+    return Parse(data, datalen, std::string(linesep), std::string(kvsep));
 }
 
-bool INIParser::Parse(const char* data, size_t data_len, const string& line_sep, const string& kv_sep) {
+bool INIParser::Parse(const char* data, size_t data_len, const std::string& line_sep, const std::string& kv_sep) {
     if (!data || 0 == data_len || line_sep.empty() || kv_sep.empty()) {
         return false;
     }
 
     // avoid string ending with many '\0'
-    while (data_len > 0 && data[data_len - 1] == 0) {
+    while (data_len > 0 && data[data_len - 1] == '\0') {
         data_len -= 1;
     }
-
     if (data_len == 0) {
         return true;
     }

@@ -147,25 +147,24 @@ public:
     bool Resize(size_t len);
 
     // Expand size of memory to the current stack.
-    // @return false if failed to allocate new memory.
+    // if it failed we SetStatus(kReadBad | kWriteBad) and return false.
     bool Expand(uint32 nSizeToAdd);
 
     static bool IsContentEquals(const DataStream& first, const DataStream& second);
 
     // The same interfaces for std::ostream/istream
 public:
-    bool put(char ch);
+    DataStream& put(char ch);
 
-    bool write(const void* buf, size_t buf_len);
+    DataStream& write(const void* buf, size_t buf_len);
 
     // Move the stream pointer for read
     // @remark   after seek, the read pointer' position is at the stream buffer' base address + start + offset,
     // or at the stream buffer' base address if the result is lesser than the base address
     // or at the end of stream buffer if the result exceeded the end
     //
-    // @param  start: the position where the pointer will moving
     // @param  offset: the offset to move
-    uint32 seekg(int32 offset);
+    DataStream& seekg(int32 offset);
 
     // get current read position
     uint32 tellg()const;
@@ -176,8 +175,8 @@ public:
     // or at the end of stream buffer if the result exceeded the end
     //
     // @param  offset: the offset to move
-    //      if offset < 0, this function doesn't case about m_nSize
-    uint32 seekp(int32 offset);
+    //      if offset < 0, this function doesn't case about write_index_
+    DataStream& seekp(int32 offset);
 
     // get current write position
     uint32 tellp()const;

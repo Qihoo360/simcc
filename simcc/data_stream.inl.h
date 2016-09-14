@@ -210,13 +210,11 @@ inline bool DataStream::Write(const void* buf, size_t buf_len) {
     }
 
     memcpy(buffer_ + write_index_, buf, buf_len);
-
     write_index_ += buf_len;
-
     return true;
 }
 
-inline uint32 DataStream::seekg(int32 offset) {
+inline DataStream& DataStream::seekg(int32 offset) {
     int32 nNewPos = read_index_ + offset;
 
     if (nNewPos > (int32)write_index_) {
@@ -231,31 +229,31 @@ inline uint32 DataStream::seekg(int32 offset) {
         read_index_ = nNewPos;
     }
 
-    return read_index_;
+    return *this;
 }
 
 inline uint32 DataStream::tellg() const {
     return read_index_;
 }
 
-inline uint32 DataStream::seekp(int32 offset) {
-    int64 nNewPos = (int32)write_index_ + offset;
+inline DataStream& DataStream::seekp(int32 offset) {
+    int64 new_pos = (int32)write_index_ + offset;
 
-    if (nNewPos < 0) {
+    if (new_pos < 0) {
         write_index_ = 0;
     } else {
         // pre-allocate size.
-        if (nNewPos > (simcc::int64)write_index_) {
-            if (!Expand((uint32)nNewPos - write_index_)) {
-                return 0;
+        if (new_pos > (simcc::int64)write_index_) {
+            if (!Expand((uint32)new_pos - write_index_)) {
+                return *this;
             }
         }
 
         // finished check, set the new size.
-        write_index_ = nNewPos;
+        write_index_ = new_pos;
     }
 
-    return write_index_;
+    return *this;
 }
 
 inline uint32 DataStream::tellp() const {
@@ -266,12 +264,14 @@ inline bool DataStream::reserve(size_t sz) {
     return Reserve(sz);
 }
 
-inline bool DataStream::put(char ch) {
-    return Write(ch);
+inline DataStream& DataStream::put(char ch) {
+    Write(ch);
+    return *this;
 }
 
-inline bool DataStream::write(const void* buf, size_t buf_len) {
-    return Write(buf, buf_len);
+inline DataStream& DataStream::write(const void* buf, size_t buf_len) {
+    Write(buf, buf_len);
+    return *this;
 }
 
 inline void* DataStream::GetCache() const {
