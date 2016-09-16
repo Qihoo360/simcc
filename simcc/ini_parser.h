@@ -101,7 +101,6 @@ public:
     // @return const string& - If find return the value, or return an empty string
     const std::string& Get(const std::string& key, bool* found = NULL) const;
 
-
     // @brief Get the value of specified key from a certain section
     // @param const string & section - The section name
     // @param const string & key - The key
@@ -171,7 +170,6 @@ public:
     void SetLineSeparator(const std::string& separator) {
         line_sep_  = separator;
     }
-
     const std::string& line_separator() const {
         return line_sep_;
     }
@@ -194,7 +192,6 @@ public:
 
     // Serialize
 public:
-
     // @brief Serialize the INI to output string
     // @param[in] - bool input_order - true if we want to
     //     serialize this INI object as the order of the input INI file
@@ -224,7 +221,6 @@ private:
     // @return const char* - The pointer to the next character
     const char* SkipSpaces(const char* szsrc);
 
-
     // @brief Skipping the characters within <code>trim_chars_</code>
     // @param const char * szsrc - The source string
     // @param const char * dataend - The end of the string, not include
@@ -242,7 +238,6 @@ private:
     };
 
     Status CheckStatus(const char* dataend, const char* kv_sep_pos, const char*& line_end/*in,out*/);
-
 
 private:
     bool case_sensitive_;// case sensitive flag

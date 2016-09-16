@@ -14,7 +14,6 @@ INIParser::INIParser(bool _case_sensitive /*= true*/, bool _compatible /*= false
     , error_code_(kNoError)
     , compatible_(_compatible)
     , trim_chars_(default_trim_chars) {
-    memset(trim_chars_table_, 0, sizeof(trim_chars_table_));
     InitTrimCharsTable();
 }
 
@@ -46,10 +45,7 @@ public:
         parser_->SetParseListener(listener_);
     }
 
-    ~SequenceParseListener() {
-    }
-
-    virtual void OnValue(::simcc::INIParser& /*parser*/, const std::string& section, const std::string& key, const std::string& /*value*/) {
+    void OnValue(INIParser& /*parser*/, const std::string& section, const std::string& key, const std::string& /*value*/) {
         INIParser::StringList* keys = NULL;
         auto it = parser_->section_list_.rbegin();
         if (it != parser_->section_list_.rend() && it->first == section) {
@@ -90,7 +86,7 @@ bool INIParser::Parse(const char* data, size_t data_len, const std::string& line
 
     const char* data_end = data + data_len;
 
-    kv_sep_ = kv_sep;
+    kv_sep_   = kv_sep;
     line_sep_ = line_sep;
 
     const char* line_begin = data;
@@ -113,16 +109,14 @@ bool INIParser::Parse(const char* data, size_t data_len, const std::string& line
             }
         }
 
-
         if (strncmp(line_begin, line_sep.data(), line_sep_len) == 0) {
-            // skip one empty
+            // skip one empty line
             // fix bug:
             //  "a:1||||c:3"
             //  ini.Parse(d.data(), d.size(), "||", ":");
             line_begin += line_sep_len;
             continue;
         }
-
 
         if (*line_begin == kSectionOpen) {
             line_end = strstr(line_begin, line_sep.data());
@@ -202,7 +196,7 @@ bool INIParser::Parse(const char* data, size_t data_len, const std::string& line
             break;
         }
 
-        string key   = string(line_begin, kv_sep_pos - line_begin);
+        string key = string(line_begin, kv_sep_pos - line_begin);
         string value;
         if (line_end) {
             value = string(kv_sep_pos + kv_sep_len, line_end - kv_sep_pos - kv_sep_len);
@@ -331,8 +325,7 @@ void INIParser::Set(const string& section, const string& key, const string& valu
 }
 
 void INIParser::Set(const string& key, const string& value) {
-    string section = "";
-    Set(section, key, value);
+    Set(StringUtil::kEmpty, key, value);
 }
 
 const char* INIParser::SkipCommits(const char* szsrc, size_t len) {
@@ -620,6 +613,8 @@ const char* INIParser::SkipTrimChars(const char* szsrc, const char* end) {
 }
 
 void INIParser::InitTrimCharsTable() {
+    memset(trim_chars_table_, 0, sizeof(trim_chars_table_));
+
     if (trim_chars_.empty()) {
         return;
     }
