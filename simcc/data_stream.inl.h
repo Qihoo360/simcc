@@ -322,22 +322,22 @@ inline bool DataStream::Resize(size_t nSize) {
 }
 
 
-inline bool DataStream::Expand(uint32 nSizeToAdd) {
-    uint32 nNewSize = write_index_ + nSizeToAdd + 1;
+inline bool DataStream::Expand(uint32 delta) {
+    uint32 new_size = write_index_ + delta + 1;
 
     // only if buffer is no sufficient, we reallocate it.
-    if (nNewSize > (uint32)capacity_) {
-        uint32 nNewBufferSize = nNewSize + (nNewSize >> 1);
+    if (new_size > (uint32)capacity_) {
+        new_size = new_size + (new_size >> 1);
 
-        uint8* pNewBuf = (uint8*)malloc(nNewBufferSize);
+        uint8* new_buffer = (uint8*)malloc(new_size);
 
-        if (!pNewBuf) {
+        if (!new_buffer) {
             SetStatus(kReadBad | kWriteBad);
             return false;
         }
 
         if (buffer_) {
-            memcpy(pNewBuf, buffer_, capacity_);
+            memcpy(new_buffer, buffer_, capacity_);
         }
 
 
@@ -345,8 +345,8 @@ inline bool DataStream::Expand(uint32 nSizeToAdd) {
             free(buffer_);
         }
 
-        buffer_ = pNewBuf;
-        capacity_ = nNewBufferSize;
+        buffer_ = new_buffer;
+        capacity_ = new_size;
         self_created_ = true;
     }
 
@@ -521,13 +521,11 @@ inline simcc::DataStream& DataStream::operator >> (DataStream& val) {
         return *this;
     }
 
+    val.Reset();
+
     // 1. read length
     uint32 nSize = 0;
     *this >> nSize;
-
-    //
-    val.Reset();
-
     if (nSize == 0) {
         return *this;
     }
@@ -555,20 +553,15 @@ DataStream& simcc::DataStream::operator >> (std::pair<_Kt, _Val>& val) {
 
 template< typename _Kt >
 inline DataStream& DataStream::operator<<(const std::vector< _Kt>& val) {
-    // 1. write length
-    //typedef  typename stdext::bool_type<stdext::is_pod<_Kt>::value>::type _Kt_type;
     typedef  typename std::is_pod<_Kt>::type _Kt_type;
     return InternalWriteVector(val, _Kt_type());
 }
 
 template< typename _Kt >
 inline DataStream& DataStream::operator<<(const std::list< _Kt>& val) {
-    // 1. write length
     *this << (uint32)val.size();
 
-    typedef typename std::list< _Kt>::const_iterator ConstIterator;
-    ConstIterator it(val.begin()), ite(val.end());
-
+    auto it(val.begin()), ite(val.end());
     for (; it != ite; ++it) {
         *this << (const _Kt&)*it;
     }
@@ -588,14 +581,9 @@ inline DataStream& DataStream::operator<<(const std::map< _Kt, _Val >& val) {
     *this << (uint32)val.size();
 
     // 2. elements.
-    typedef typename std::map<_Kt, _Val >::const_iterator ConstIterator;
-    ConstIterator it(val.begin()), ite(val.end());
-
+    auto it(val.begin()), ite(val.end());
     for (; it != ite; ++it) {
-        // get key
         *this << static_cast<const _Kt&>(it->first);
-
-        // get value
         *this << static_cast<const _Val&>(it->second);
     }
 
@@ -608,7 +596,6 @@ inline DataStream& DataStream::operator >> (std::map<_Kt, _Val>& val) {
     if (IsReadBad()) {
         return *this;
     }
-
 
     // 1. read length
     uint32 nSize = 0;
@@ -627,13 +614,8 @@ inline DataStream& DataStream::operator >> (std::map<_Kt, _Val>& val) {
             break;
         }
 
-        // key,  value,
-        _Kt key = _Kt();
-
-        // get key
+        _Kt key;
         *this >> (_Kt&)key;
-
-        // get value
         *this >> (_Val&)val[key];
     }
 
@@ -725,10 +707,7 @@ DataStream& DataStream::operator<<(const std::unordered_map<_Kt, _Val>& val) {
     auto it(val.begin()), ite(val.end());
 
     for (; it != ite; ++it) {
-        // get key
         *this << static_cast<const _Kt&>(it->first);
-
-        // get value
         *this << static_cast<const _Val&>(it->second);
     }
 
@@ -759,13 +738,8 @@ DataStream& DataStream::operator >> (std::unordered_map<_Kt, _Val>& val) {
             break;
         }
 
-        // key,  value,
-        _Kt key = _Kt();
-
-        // get key
+        _Kt key;
         *this >> (_Kt&)key;
-
-        // get value
         *this >> (_Val&)val[key];
     }
 
