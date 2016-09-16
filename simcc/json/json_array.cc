@@ -11,7 +11,7 @@ JSONArray::JSONArray(JSONTokener* token)
     Parse(token);
 }
 
-JSONArray::JSONArray(const std::string& source)
+JSONArray::JSONArray(const string& source)
     : Object(kJSONArray) {
     Parse(source);
 }
@@ -24,7 +24,7 @@ JSONArray::JSONArray(const char* source)
 JSONArray::~JSONArray() {
 }
 
-simcc::uint32 JSONArray::Parse(const std::string& source) {
+simcc::uint32 JSONArray::Parse(const string& source) {
     JSONTokener x(source);
     return Parse(&x);
 }
@@ -144,7 +144,7 @@ void JSONArray::ToStringBuf(simcc::DataStream& sb, size_t indent, bool utf8_to_u
         sb.Write('\n');
     }
 
-    std::string temp;
+    string temp;
     bool need_comma = false;
     for (; it != ite; it++) {
         if (need_comma) {
@@ -171,7 +171,7 @@ void JSONArray::ToStringBuf(simcc::DataStream& sb, size_t indent, bool utf8_to_u
     sb.Write(']');
 }
 
-void JSONArray::ToString(std::string& s, bool readable, bool utf8_to_unicode)const {
+void JSONArray::ToString(string& s, bool readable, bool utf8_to_unicode)const {
     buf_.Reset();
     size_t indent = 0;
 
@@ -287,7 +287,7 @@ JSONArray* JSONArray::Put(const char* value) {
     return this;
 }
 
-JSONArray* JSONArray::Put(const std::string& value) {
+JSONArray* JSONArray::Put(const string& value) {
     return Put(value.c_str());
 }
 
@@ -330,7 +330,7 @@ int64 JSONArray::GetInteger(int index, int64 default_value)const {
     return GetElement(index , default_value);
 }
 
-const std::string& JSONArray::GetString(int index, const std::string& default_value)const {
+const string& JSONArray::GetString(int index, const string& default_value)const {
     return GetElement(index , default_value);
 }
 
@@ -379,7 +379,7 @@ void JSONArray::GetFloat64Array(simcc::float64* array, simcc::uint32 count, simc
     GetElement(array , count , static_cast<simcc::float64>(default_value));
 }
 
-void JSONArray::GetStringArray(std::string* array, simcc::uint32 count, const std::string& default_value)const {
+void JSONArray::GetStringArray(string* array, simcc::uint32 count, const string& default_value)const {
     GetElement(array , count , default_value);
 }
 
@@ -422,7 +422,7 @@ void JSONArray::GetFloat64Array(std::vector<simcc::float64>& vArray, simcc::floa
     GetElement(vArray , static_cast<simcc::float64>(default_value));
 }
 
-void JSONArray::GetStringArray(std::vector<std::string>& vArray, const std::string& default_value)const {
+void JSONArray::GetStringArray(std::vector<string>& vArray, const string& default_value)const {
     GetElement(vArray , default_value);
 }
 

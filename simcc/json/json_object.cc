@@ -9,7 +9,7 @@
 namespace simcc {
 namespace json {
 
-JSONObject::JSONObject(const std::string& source)
+JSONObject::JSONObject(const string& source)
     : Object(kJSONObject) {
     Parse(source);
 }
@@ -39,7 +39,7 @@ simcc::uint32 JSONObject::Parse(JSONTokener* x) {
         return 0;
     }
 
-    std::string key;
+    string key;
     for (;;) {
         if (!x->SkipComment()) {
             set_error(kCommentFormatError, x);
@@ -131,13 +131,13 @@ simcc::uint32 JSONObject::Parse(const char* source, const simcc::int64 source_le
     return Parse(&x);
 }
 
-simcc::uint32 JSONObject::Parse(const std::string& source) {
+simcc::uint32 JSONObject::Parse(const string& source) {
     json::JSONTokener x(source);
 
     return Parse(&x);
 }
 
-bool JSONObject::Put(const std::string& key, Object* value) {
+bool JSONObject::Put(const string& key, Object* value) {
     if (!value) {
         map_.erase(key);
         return true;
@@ -147,30 +147,30 @@ bool JSONObject::Put(const std::string& key, Object* value) {
     return true;
 }
 
-bool JSONObject::Put(const std::string& key, const ObjectPtr& value) {
+bool JSONObject::Put(const string& key, const ObjectPtr& value) {
     return Put(key, value.get());
 }
 
-bool JSONObject::Put(const std::string& key, const simcc::int64 value) {
+bool JSONObject::Put(const string& key, const simcc::int64 value) {
     JSONInteger* jo = new JSONInteger(value);
     return Put(key, jo);
 }
 
-bool JSONObject::Put(const std::string& key, const simcc::float64 value) {
+bool JSONObject::Put(const string& key, const simcc::float64 value) {
     JSONDouble* jo = new JSONDouble(value);
     return Put(key, jo);
 }
 
-bool JSONObject::Put(const std::string& key, const bool value) {
+bool JSONObject::Put(const string& key, const bool value) {
     JSONBoolean* jo = new JSONBoolean(value);
     return Put(key, jo);
 }
 
-bool JSONObject::Put(const std::string& key, const std::string& value) {
+bool JSONObject::Put(const string& key, const string& value) {
     return Put(key, value.c_str());
 }
 
-bool JSONObject::Put(const std::string& key, const char* value) {
+bool JSONObject::Put(const string& key, const char* value) {
     JSONString* jo = new JSONString(value);
     return Put(key, jo);
 }
@@ -288,7 +288,7 @@ Object* JSONObject::ConvertToObject(const char* s, size_t len, JSONParser* parse
     }
 }
 
-void JSONObject::Quote(const std::string& source, bool utf8_to_unicode, simcc::DataStream& sb) {
+void JSONObject::Quote(const string& source, bool utf8_to_unicode, simcc::DataStream& sb) {
     sb.Expand(source.size() << 2);
 
     sb.Write('"');
@@ -365,7 +365,7 @@ void JSONObject::Quote(const std::string& source, bool utf8_to_unicode, simcc::D
     sb.Write('"');
 }
 
-Object* JSONObject::Get(const std::string& key)const {
+Object* JSONObject::Get(const string& key)const {
     const_iterator it = map_.find(key);
     if (it != map_.end()) {
         return (it->second);
@@ -374,7 +374,7 @@ Object* JSONObject::Get(const std::string& key)const {
     return NULL;
 }
 
-JSONBoolean* JSONObject::GetJSONBoolean(const std::string& key) const {
+JSONBoolean* JSONObject::GetJSONBoolean(const string& key) const {
     const_iterator it = map_.find(key);
     if (it != map_.end()) {
         return cast<JSONBoolean>(it->second.get());
@@ -383,7 +383,7 @@ JSONBoolean* JSONObject::GetJSONBoolean(const std::string& key) const {
     return NULL;
 }
 
-JSONDouble* JSONObject::GetJSONDouble(const std::string& key)const {
+JSONDouble* JSONObject::GetJSONDouble(const string& key)const {
     const_iterator it = map_.find(key);
     if (it != map_.end()) {
         return cast<JSONDouble>((it->second).get());
@@ -392,7 +392,7 @@ JSONDouble* JSONObject::GetJSONDouble(const std::string& key)const {
     return NULL;
 }
 
-JSONInteger* JSONObject::GetJSONInteger(const std::string& key)const {
+JSONInteger* JSONObject::GetJSONInteger(const string& key)const {
     const_iterator it = map_.find(key);
     if (it != map_.end()) {
         return cast<JSONInteger>((it->second).get());
@@ -401,7 +401,7 @@ JSONInteger* JSONObject::GetJSONInteger(const std::string& key)const {
     return NULL;
 }
 
-JSONArray* JSONObject::GetJSONArray(const std::string& key)const {
+JSONArray* JSONObject::GetJSONArray(const string& key)const {
     const_iterator it = map_.find(key);
     if (it != map_.end()) {
         return cast<JSONArray>((it->second).get());
@@ -410,7 +410,7 @@ JSONArray* JSONObject::GetJSONArray(const std::string& key)const {
     return NULL;
 }
 
-JSONObject* JSONObject::GetJSONObject(const std::string& key)const {
+JSONObject* JSONObject::GetJSONObject(const string& key)const {
     const_iterator it = map_.find(key);
     if (it != map_.end()) {
         return cast<JSONObject>((it->second).get());
@@ -419,7 +419,7 @@ JSONObject* JSONObject::GetJSONObject(const std::string& key)const {
     return NULL;
 }
 
-JSONString* JSONObject::GetJSONString(const std::string& key)const {
+JSONString* JSONObject::GetJSONString(const string& key)const {
     const_iterator it = map_.find(key);
     if (it != map_.end()) {
         return cast<JSONString>((it->second).get());
@@ -430,7 +430,7 @@ JSONString* JSONObject::GetJSONString(const std::string& key)const {
 
 
 
-void JSONObject::ToString(std::string& s, bool readable, bool utf8_to_unicode) const {
+void JSONObject::ToString(string& s, bool readable, bool utf8_to_unicode) const {
     size_t indent = 0;
     if (readable) {
         indent = 1;
@@ -506,7 +506,7 @@ void JSONObject::ToStringBuf(simcc::DataStream& sb, size_t indent, bool utf8_to_
 
 
 
-bool JSONObject::GetBool(const std::string& strKey, bool default_value)const {
+bool JSONObject::GetBool(const string& strKey, bool default_value)const {
     JSONBoolean* pVal = GetJSONBoolean(strKey);
 
     if (pVal) {
@@ -517,7 +517,7 @@ bool JSONObject::GetBool(const std::string& strKey, bool default_value)const {
 }
 
 
-simcc::float64 JSONObject::GetDouble(const std::string& strKey, simcc::float64 default_value)const {
+simcc::float64 JSONObject::GetDouble(const string& strKey, simcc::float64 default_value)const {
     JSONDouble* pVal =  GetJSONDouble(strKey);
 
     if (pVal) {
@@ -528,7 +528,7 @@ simcc::float64 JSONObject::GetDouble(const std::string& strKey, simcc::float64 d
 }
 
 
-simcc::float64 JSONObject::GetDecimal(const std::string& strKey, simcc::float64 default_value)const {
+simcc::float64 JSONObject::GetDecimal(const string& strKey, simcc::float64 default_value)const {
     Object* o = Get(strKey);
     if (o) {
         if (o->IsTypeOf(kJSONDouble)) {
@@ -542,7 +542,7 @@ simcc::float64 JSONObject::GetDecimal(const std::string& strKey, simcc::float64 
     return default_value;
 }
 
-simcc::int64 JSONObject::GetInteger(const std::string& strKey, simcc::int64 default_value)const {
+simcc::int64 JSONObject::GetInteger(const string& strKey, simcc::int64 default_value)const {
     JSONInteger* v = GetJSONInteger(strKey);
     if (v) {
         return v->value();
@@ -552,7 +552,7 @@ simcc::int64 JSONObject::GetInteger(const std::string& strKey, simcc::int64 defa
 }
 
 
-const std::string&  JSONObject::GetString(const std::string& strKey, const std::string& default_value)const {
+const string&  JSONObject::GetString(const string& strKey, const string& default_value)const {
     JSONString* v =  GetJSONString(strKey);
     if (v) {
         return v->value();
@@ -562,7 +562,7 @@ const std::string&  JSONObject::GetString(const std::string& strKey, const std::
 }
 
 template<class T>
-bool JSONObject::PutIntegerArray(const std::string& key, const T* value, simcc::uint32 count) {
+bool JSONObject::PutIntegerArray(const string& key, const T* value, simcc::uint32 count) {
     JSONArray* array = new JSONArray();
     for (simcc::uint32 i = 0; i < count; ++i) {
         array->Put(new JSONInteger(static_cast<simcc::int64>(value[i])));
@@ -570,19 +570,19 @@ bool JSONObject::PutIntegerArray(const std::string& key, const T* value, simcc::
     return Put(key, array);
 }
 
-bool JSONObject::PutByteArray(const std::string& key, const simcc::int8* value, simcc::uint32 count) {
+bool JSONObject::PutByteArray(const string& key, const simcc::int8* value, simcc::uint32 count) {
     return PutIntegerArray<simcc::int8>(key, value, count);
 }
 
-bool JSONObject::PutInt32Array(const std::string& key, const simcc::int32* value, simcc::uint32 count) {
+bool JSONObject::PutInt32Array(const string& key, const simcc::int32* value, simcc::uint32 count) {
     return PutIntegerArray<simcc::int32>(key, value, count);
 }
 
-bool JSONObject::PutInt64Array(const std::string& key, const simcc::int64* value, simcc::uint32 count) {
+bool JSONObject::PutInt64Array(const string& key, const simcc::int64* value, simcc::uint32 count) {
     return PutIntegerArray<simcc::int64>(key, value, count);
 }
 
-bool JSONObject::PutFloat32Array(const std::string& key, const simcc::float32* value, simcc::uint32 count) {
+bool JSONObject::PutFloat32Array(const string& key, const simcc::float32* value, simcc::uint32 count) {
     JSONArray* array = new JSONArray();
     for (simcc::uint32 i = 0; i < count; ++i) {
         array->Put(new JSONDouble(simcc::float64(value[i])));
@@ -591,7 +591,7 @@ bool JSONObject::PutFloat32Array(const std::string& key, const simcc::float32* v
     return Put(key, array);
 }
 
-bool JSONObject::PutFloat64Array(const std::string& key, const simcc::float64* value, simcc::uint32 count) {
+bool JSONObject::PutFloat64Array(const string& key, const simcc::float64* value, simcc::uint32 count) {
     JSONArray* array = new JSONArray();
     for (simcc::uint32 i = 0; i < count; ++i) {
         array->Put(new JSONDouble(simcc::float64(value[i])));
@@ -600,7 +600,7 @@ bool JSONObject::PutFloat64Array(const std::string& key, const simcc::float64* v
 }
 
 
-bool JSONObject::PutBoolArray(const std::string& key, const bool* value, simcc::uint32 count) {
+bool JSONObject::PutBoolArray(const string& key, const bool* value, simcc::uint32 count) {
     JSONArray* array = new JSONArray();
     for (simcc::uint32 i = 0; i < count; ++i) {
         array->Put(new JSONBoolean(value[i]));
@@ -609,7 +609,7 @@ bool JSONObject::PutBoolArray(const std::string& key, const bool* value, simcc::
 }
 
 
-bool JSONObject::PutStringArray(const std::string& key, const std::string* value, simcc::uint32 count) {
+bool JSONObject::PutStringArray(const string& key, const string* value, simcc::uint32 count) {
     JSONArray* array = new JSONArray();
     for (simcc::uint32 i = 0; i < count; ++i) {
         array->Put(new JSONString(value[i]));
@@ -646,7 +646,7 @@ void JSONObject::Merge(const JSONObject* rhs, bool override) {
 bool JSONObject::LoadFrom(simcc::DataStream& file) {
     uint32 sz = 0;
     file >> sz;
-    std::string key;
+    string key;
     for (uint32 i = 0; i < sz; i++) {
         file >> key;
         Object* o = NULL;
@@ -735,7 +735,7 @@ simcc::DataStream& operator >> (simcc::DataStream& file, JSONObject& val) {
 namespace {
 bool parseObject(JSONObject* rootjson, JSONTokener* x);
 Object* parseValue(JSONTokener* x);
-std::string parseKey(JSONTokener* x);
+string parseKey(JSONTokener* x);
 
 Object* parseValue(JSONTokener* x) {
     char c = x->NextClean();
@@ -799,13 +799,13 @@ Object* parseValue(JSONTokener* x) {
     if (!value) {
         JSONString* js = new JSONString;
         value = js;
-        std::string strv(startpos, x->GetCurrent() - startpos);
+        string strv(startpos, x->GetCurrent() - startpos);
         js->value() = strv;
     }
     return value;
 }
 
-std::string parseKey(JSONTokener* x) {
+string parseKey(JSONTokener* x) {
     x->SkipSpaces();
     const char* start = x->GetCurrent();
     for (;;) {
@@ -818,12 +818,12 @@ std::string parseKey(JSONTokener* x) {
     }
 
     x->Back();
-    std::string key(start, x->GetCurrent() - start);
+    string key(start, x->GetCurrent() - start);
     simcc::StringUtil::Trim(key);
     return key;
 }
 
-void putObject(const std::string& key, JSONObject* rootjson, Object* value) {
+void putObject(const string& key, JSONObject* rootjson, Object* value) {
     JSONArrayPtr original_arr = rootjson->GetJSONArray(key);
     if (original_arr) {
         original_arr->Put(value);
@@ -848,7 +848,7 @@ bool parseObject(JSONObject* rootjson, JSONTokener* x) {
             return true;
         }
         x->Back();
-        std::string key = parseKey(x);
+        string key = parseKey(x);
         if (key.empty()) {
             return true;
         }
@@ -879,7 +879,7 @@ bool parseObject(JSONObject* rootjson, JSONTokener* x) {
 }
 }//end of namespace
 
-simcc::uint32 JSONObject::ParseProtobuf(const std::string& protobuf_debug_string) {
+simcc::uint32 JSONObject::ParseProtobuf(const string& protobuf_debug_string) {
     JSONTokener x(protobuf_debug_string.data(), protobuf_debug_string.size());
     parseObject(const_cast<JSONObject*>(this), &x);
     return x.GetCurrentPosition();

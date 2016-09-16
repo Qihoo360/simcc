@@ -116,7 +116,7 @@ inline bool FileUtil::IsDir(const char* szFileName) {
 
 inline bool FileUtil::IsDir(const string& strFileName) {
     //for the 'stat' API, the parameter strFileName SHOULD not contain a trailing backslash
-    std::string strStandardisePath = NormalizePath(strFileName, false);
+    string strStandardisePath = NormalizePath(strFileName, false);
 
     struct stat st;
     if (0 != stat(strStandardisePath.c_str(), &st)) {
@@ -142,7 +142,7 @@ inline bool FileUtil::RemoveDirIfEmpty(const string& strDirName, bool bRecursive
 
     bool retval = true;
 
-    std::list<std::string> files;
+    std::list<string> files;
     GetFiles(strDirName, files, true);
 
     if (files.size() == 0) {

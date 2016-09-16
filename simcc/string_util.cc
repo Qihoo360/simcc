@@ -372,7 +372,7 @@ void stringUtil_Split(const StringType& src, StringType& left, StringType& right
 
 namespace simcc {
 
-const std::string StringUtil::kEmpty;
+const string StringUtil::kEmpty;
 
 void StringUtil::Trim(string& str, const char* delims, bool left, bool right) {
     stringUtil_trim_charptr(str , delims , left , right);
@@ -823,12 +823,12 @@ bool StringUtil::IsFloatNumber(string& s) {
 }
 
 
-string StringUtil::Rot13(const std::string& s) {
+string StringUtil::Rot13(const string& s) {
     return Rot13(s.data(), s.size());
 }
 
 string StringUtil::Rot13(const char* str, size_t len) {
-    std::string ret;
+    string ret;
     if (str == NULL || len == 0) {
         return ret;
     }

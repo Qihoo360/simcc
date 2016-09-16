@@ -14,7 +14,7 @@ public:
     class SIMCC_EXPORT Target : public RefObject {
     public:
         virtual bool Initialize(const string& conf) = 0;
-        virtual std::string MD5() const { return ""; }
+        virtual string MD5() const { return ""; }
         virtual ~Target() {}
     };
     typedef RefPtr<Target> TargetPtr;
@@ -24,7 +24,7 @@ public:
 
     bool Reload(const string& conf);
 
-    std::string MD5() const;
+    string MD5() const;
 
     Timestamp reload_time() const {
         return reload_time_;
@@ -45,15 +45,15 @@ class SIMCC_EXPORT DoubleBufferingManager {
 public:
     DoubleBufferingManager();
 
-    bool Add(const std::string& name,
-             const std::string& conf,
+    bool Add(const string& name,
+             const string& conf,
              DoubleBuffering::TargetCreator f);
 
-    DoubleBuffering::TargetPtr Get(const std::string& name) const;
-    bool Reload(const std::string& name, const std::string& conf);
+    DoubleBuffering::TargetPtr Get(const string& name) const;
+    bool Reload(const string& name, const string& conf);
 
 private:
-    std::map<std::string/*name*/, DoubleBufferingPtr> dbufs_;
+    std::map<string/*name*/, DoubleBufferingPtr> dbufs_;
     mutable std::mutex mutex_;
 };
 

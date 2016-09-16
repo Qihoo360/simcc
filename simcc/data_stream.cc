@@ -19,12 +19,12 @@ void DataStream::ToText() {
     seekp(-1);
 }
 
-bool DataStream::ReadFile(/*const std::string& strFileName*/ const std::string& strPathName) {
+bool DataStream::ReadFile(/*const string& strFileName*/ const string& strPathName) {
 // #ifdef H_OS_WINDOWS
-//      std::string strPathName = StringUtil::utf8ToMbs(strFileName);
+//      string strPathName = StringUtil::utf8ToMbs(strFileName);
 //         std::replace( strPathName.begin(), strPathName.end(), '\\', '/' );
 // #else
-//         std::string strPathName = strFileName;
+//         string strPathName = strFileName;
 // #endif
     // clear old data.
     if (self_created_ && buffer_) {
@@ -94,8 +94,8 @@ bool DataStream::ReadFile(/*const std::string& strFileName*/ const std::string& 
     return true;
 }
 
-static void createDir(const std::string& strFileName) {
-    std::string strPathName = strFileName;
+static void createDir(const string& strFileName) {
+    string strPathName = strFileName;
 
     std::replace(strPathName.begin(), strPathName.end(), '\\', '/');
 
@@ -104,9 +104,9 @@ static void createDir(const std::string& strFileName) {
     do {
         //  "/abc/ab/abc",   "e:/abac/adc"   "abcc/abc/a",   "abc"
         // get current dir name.
-        nCurSplit = strPathName.find_first_of((std::string::value_type)'/', nNextSplit);
+        nCurSplit = strPathName.find_first_of((string::value_type)'/', nNextSplit);
 
-        if (nCurSplit != 0 && nCurSplit != std::string::npos) {
+        if (nCurSplit != 0 && nCurSplit != string::npos) {
             // current dir
 #ifdef H_OS_WINDOWS
             _mkdir(strPathName.substr(0, nCurSplit).c_str());
@@ -117,10 +117,10 @@ static void createDir(const std::string& strFileName) {
 
         nNextSplit = nCurSplit + 1;
 
-    } while (nCurSplit != std::string::npos);
+    } while (nCurSplit != string::npos);
 }
 
-bool DataStream::WriteFile(const std::string& filepath) {
+bool DataStream::WriteFile(const string& filepath) {
     // create directory.
     createDir(filepath);
 

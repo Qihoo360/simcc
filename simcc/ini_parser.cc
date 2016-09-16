@@ -6,7 +6,7 @@
 
 namespace simcc {
 
-static const std::string default_trim_chars = " \t\r\n";
+static const string default_trim_chars = " \t\r\n";
 INIParser::INIParser(bool _case_sensitive /*= true*/, bool _compatible /*= false*/, bool keep_sequence /*= false*/)
     : case_sensitive_(_case_sensitive)
     , stop_parsing_(false)
@@ -45,7 +45,7 @@ public:
         parser_->SetParseListener(listener_);
     }
 
-    void OnValue(INIParser& /*parser*/, const std::string& section, const std::string& key, const std::string& /*value*/) {
+    void OnValue(INIParser& /*parser*/, const string& section, const string& key, const string& /*value*/) {
         INIParser::StringList* keys = NULL;
         auto it = parser_->section_list_.rbegin();
         if (it != parser_->section_list_.rend() && it->first == section) {
@@ -63,10 +63,10 @@ private:
 };
 
 bool INIParser::Parse(const char* data, size_t datalen, const char* linesep, const char* kvsep) {
-    return Parse(data, datalen, std::string(linesep), std::string(kvsep));
+    return Parse(data, datalen, string(linesep), string(kvsep));
 }
 
-bool INIParser::Parse(const char* data, size_t data_len, const std::string& line_sep, const std::string& kv_sep) {
+bool INIParser::Parse(const char* data, size_t data_len, const string& line_sep, const string& kv_sep) {
     if (!data || 0 == data_len || line_sep.empty() || kv_sep.empty()) {
         return false;
     }
@@ -402,7 +402,7 @@ public:
     SerializeVistor() : stream_(NULL) {}
 
 protected:
-    void Visit(const INIParser& parser, const std::string& section, const std::string& key, const std::string& value) {
+    void Visit(const INIParser& parser, const string& section, const string& key, const string& value) {
         assert(stream_);
         if (last_section_ != section) {
             last_section_ = section;
@@ -425,7 +425,7 @@ protected:
 
 protected:
     stream_t* stream_;
-    std::string last_section_;
+    string last_section_;
 };
 
 template< typename stream_t >
@@ -435,7 +435,7 @@ public:
         SerializeVistor<stream_t>::set_stream(stream);
     }
 
-    virtual void visit(const INIParser& parser, const std::string& section, const std::string& key, const std::string& value) {
+    virtual void visit(const INIParser& parser, const string& section, const string& key, const string& value) {
         SerializeVistor<stream_t>::Visit(parser, section, key, value);
     }
 };
@@ -447,7 +447,7 @@ public:
         SerializeVistor<stream_t>::set_stream(stream);
     }
 
-    virtual void visit(const INIParser& parser, const std::string& section, const std::string& key, const std::string& value) {
+    virtual void visit(const INIParser& parser, const string& section, const string& key, const string& value) {
         SerializeVistor<stream_t>::Visit(parser, section, key, value);
     }
 };
@@ -599,7 +599,7 @@ simcc::INIParser::Status INIParser::CheckStatus(const char* dataend, const char*
     return kFoundKeyAndValue;
 }
 
-void INIParser::set_trim_chars(const std::string& trimchars) {
+void INIParser::set_trim_chars(const string& trimchars) {
     trim_chars_ = trimchars;
     InitTrimCharsTable();
 }

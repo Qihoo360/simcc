@@ -57,8 +57,8 @@ public:
         return value_ == v;
     }
 
-    using Object::ToString; // std::string ToString(bool readable = false, bool utf8_to_unicode = true) const;
-    virtual void ToString(std::string& s, bool readable = false, bool utf8_to_unicode = true)const;
+    using Object::ToString; // string ToString(bool readable = false, bool utf8_to_unicode = true) const;
+    virtual void ToString(string& s, bool readable = false, bool utf8_to_unicode = true)const;
     virtual void ToStringBuf(simcc::DataStream& sb, size_t indent = 0, bool utf8_to_unicode = true)const;
 
     // @warning This method is quite not effective, so make sure why you need call this method
@@ -83,8 +83,8 @@ public:
     bool Equals(const JSONDouble& other, simcc::float64 tolarence = 0.00001);
     bool Equals(simcc::float64 value, simcc::float64 tolarence = 0.00001);
 
-    using Object::ToString; // std::string ToString(bool readable = false, bool utf8_to_unicode = true) const;
-    virtual void ToString(std::string& s, bool readable = false, bool utf8_to_unicode = true)const;
+    using Object::ToString; // string ToString(bool readable = false, bool utf8_to_unicode = true) const;
+    virtual void ToString(string& s, bool readable = false, bool utf8_to_unicode = true)const;
     virtual void ToStringBuf(simcc::DataStream& sb, size_t indent = 0, bool utf8_to_unicode = true)const;
 
     // @warning This method is quite not effective, so make sure why you need call this method
@@ -111,8 +111,8 @@ public:
         return value_ == v;
     }
 
-    using Object::ToString; // std::string ToString(bool readable = false, bool utf8_to_unicode = true) const;
-    virtual void ToString(std::string& s, bool readable = false, bool utf8_to_unicode = true) const;
+    using Object::ToString; // string ToString(bool readable = false, bool utf8_to_unicode = true) const;
+    virtual void ToString(string& s, bool readable = false, bool utf8_to_unicode = true) const;
     virtual void ToStringBuf(simcc::DataStream& sb, size_t indent = 0, bool utf8_to_unicode = true) const;
 
     // @warning This method is quite not effective, so make sure why you need call this method
@@ -126,30 +126,30 @@ private:
 };
 
 // The concrete object of JSON : JSONString
-class SIMCC_EXPORT JSONString : public JSONValue<std::string> {
-    typedef JSONValue<std::string> BaseClass;
+class SIMCC_EXPORT JSONString : public JSONValue<string> {
+    typedef JSONValue<string> BaseClass;
 public:
     enum { Type = kJSONString };
-    JSONString(const std::string& value);
+    JSONString(const string& value);
     JSONString(const char* value = "");
-    JSONString& operator=(const std::string& value);
+    JSONString& operator=(const string& value);
     bool operator==(const JSONString& rhs) {
         return value_ == rhs.value_;
     }
-    bool operator==(const std::string& v) {
+    bool operator==(const string& v) {
         return value_ == v;
     }
     bool operator==(const char* v) {
         return value_ == v;
     }
 
-    using JSONValue<std::string>::set_value;
+    using JSONValue<string>::set_value;
     void set_value(const char* v) {
         value_ = v;
     }
 
-    using Object::ToString; // std::string ToString(bool readable = false, bool utf8_to_unicode = true) const;
-    virtual void ToString(std::string& s, bool readable = false, bool utf8_to_unicode = true)const;
+    using Object::ToString; // string ToString(bool readable = false, bool utf8_to_unicode = true) const;
+    virtual void ToString(string& s, bool readable = false, bool utf8_to_unicode = true)const;
     virtual void ToStringBuf(simcc::DataStream& sb, size_t indent = 0, bool utf8_to_unicode = true)const;
 
     // @warning This method is quite not effective, so make sure why you need call this method
@@ -168,8 +168,8 @@ class SIMCC_EXPORT JSONNull : public Object {
 public:
     JSONNull() : Object(kJSONNull) {}
 
-    using Object::ToString; // std::string ToString(bool readable = false, bool utf8_to_unicode = true) const;
-    virtual void ToString(std::string& s, bool readable = false, bool utf8_to_unicode = true)const;
+    using Object::ToString; // string ToString(bool readable = false, bool utf8_to_unicode = true) const;
+    virtual void ToString(string& s, bool readable = false, bool utf8_to_unicode = true)const;
     virtual void ToStringBuf(simcc::DataStream& sb, size_t indent = 0, bool utf8_to_unicode = true)const;
 
     // @warning This method is quite not effective, so make sure why you need call this method

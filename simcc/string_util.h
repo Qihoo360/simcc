@@ -29,36 +29,36 @@ public:
     //  @param cutset[in], all leading and trailing characters contained in cutset will be removed.
     //  @param left, trim the beginning of the string
     //  @param right, trim the end of the string
-    static void Trim(std::string& str, bool left = true, bool right = true);
-    static void Trim(std::wstring& str, bool left = true, bool right = true);
-    static void Trim(std::string& str, const std::string& cutset, bool left = true, bool right = true);
-    static void Trim(std::wstring& str, const std::wstring& cutset, bool left = true, bool right = true);
-    static void Trim(std::string& str, const char* cutset, bool left = true, bool right = true);
-    static void Trim(std::wstring& str, const wchar_t* cutset, bool left = true, bool right = true);
+    static void Trim(string& str, bool left = true, bool right = true);
+    static void Trim(wstring& str, bool left = true, bool right = true);
+    static void Trim(string& str, const string& cutset, bool left = true, bool right = true);
+    static void Trim(wstring& str, const wstring& cutset, bool left = true, bool right = true);
+    static void Trim(string& str, const char* cutset, bool left = true, bool right = true);
+    static void Trim(wstring& str, const wchar_t* cutset, bool left = true, bool right = true);
 
-    static void TrimLeft(std::string& str) {
+    static void TrimLeft(string& str) {
         Trim(str, true, false);
     }
-    static void TrimLeft(std::wstring& str) {
+    static void TrimLeft(wstring& str) {
         Trim(str, true, false);
     }
-    static void TrimLeft(std::string& str, const std::string& delims) {
+    static void TrimLeft(string& str, const string& delims) {
         Trim(str, delims, true, false);
     }
-    static void TrimLeft(std::wstring& str, const std::wstring& delims) {
+    static void TrimLeft(wstring& str, const wstring& delims) {
         Trim(str, delims, true, false);
     }
-    static void TrimLeft(std::string& str, const char* delims) {
+    static void TrimLeft(string& str, const char* delims) {
         Trim(str, delims, true, false);
     }
-    static void TrimLeft(std::wstring& str, const wchar_t* delims) {
+    static void TrimLeft(wstring& str, const wchar_t* delims) {
         Trim(str, delims, true, false);
     }
 
-    static void TrimRight(std::string& str) {
+    static void TrimRight(string& str) {
         Trim(str, false, true);
     }
-    static void TrimRight(std::wstring& str) {
+    static void TrimRight(wstring& str) {
         Trim(str, false, true);
     }
     static void TrimRight(string& str, const string& delims) {
@@ -234,7 +234,7 @@ public:
     // query whether parameter string is a float number string or not.
     static bool IsFloatNumber(string& s);
 
-    static const std::string kEmpty;
+    static const string kEmpty;
 };
 
 // 字符串的一些常用操作(宽字符版本)

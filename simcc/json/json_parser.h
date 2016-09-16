@@ -65,7 +65,7 @@ public:
     //         use error() to get the error code
     static ObjectPtr Load(const char* source, const simcc::int64 source_len = -1);
 
-    static ObjectPtr LoadFile(const std::string& json_file_path);
+    static ObjectPtr LoadFile(const string& json_file_path);
 
 protected:
     void set_error(ErrorCode ec, JSONTokener* x = NULL);

@@ -40,7 +40,7 @@ inline void WriteInt64(simcc::int64 i64, simcc::DataStream& ds) {
 }
 }
 
-void JSONInteger::ToString(std::string& s, bool /*readable*/, bool /*utf8_to_unicode*/)const {
+void JSONInteger::ToString(string& s, bool /*readable*/, bool /*utf8_to_unicode*/)const {
     s = std::to_string(value_);
 }
 
@@ -52,7 +52,7 @@ void JSONInteger::ToStringBuf(simcc::DataStream& sb, size_t indent, bool /*utf8_
 #if 1
     WriteInt64(value_, sb);
 #else
-    std::string s;
+    string s;
     ToString(s);
     sb.Write(s.c_str(), s.length());
 #endif
@@ -94,9 +94,9 @@ bool JSONDouble::Equals(simcc::float64 v, simcc::float64 tolarence) {
     return simcc::Util::Equals(value_, v, tolarence);
 }
 
-void JSONDouble::ToString(std::string& s, bool /*readable*/, bool /*utf8_to_unicode*/)const {
+void JSONDouble::ToString(string& s, bool /*readable*/, bool /*utf8_to_unicode*/)const {
     s = std::to_string(value_);
-    if (s.find('.') != std::string::npos) {
+    if (s.find('.') != string::npos) {
         simcc::StringUtil::Trim(s, '0', false);
         if (*s.rbegin() == '.') {
             s.append(1, '0');
@@ -136,7 +136,7 @@ void JSONDouble::ToStringBuf(simcc::DataStream& sb, size_t indent, bool /*utf8_t
 #if 1
     WriteDouble(value_, sb);
 #else
-    std::string s;
+    string s;
     ToString(s);
     sb.Write(s.c_str(), s.length());
 #endif
@@ -172,9 +172,9 @@ JSONBoolean& JSONBoolean::operator=(bool v) {
 }
 
 
-void JSONBoolean::ToString(std::string& s, bool /*v*/, bool /*utf8_to_unicode*/)const {
-    static const std::string t = "true";
-    static const std::string f = "false";
+void JSONBoolean::ToString(string& s, bool /*v*/, bool /*utf8_to_unicode*/)const {
+    static const string t = "true";
+    static const string f = "false";
     s = value_ ? t : f;
 }
 
@@ -212,18 +212,18 @@ bool JSONBoolean::LoadFrom(simcc::DataStream& file) {
 //------------------------------------------------------------------
 
 
-JSONString::JSONString(const std::string& v)
+JSONString::JSONString(const string& v)
     : BaseClass(v) {}
 
 JSONString::JSONString(const char* v)
     : BaseClass(v) {}
 
-JSONString& JSONString::operator=(const std::string& v) {
+JSONString& JSONString::operator=(const string& v) {
     value_ = v;
     return *this;
 }
 
-void JSONString::ToString(std::string& s, bool /*readable*/, bool utf8_to_unicode)const {
+void JSONString::ToString(string& s, bool /*readable*/, bool utf8_to_unicode)const {
     simcc::DataStream buf(512);
     JSONObject::Quote(value_, utf8_to_unicode, buf);
     s.assign(buf.data(), buf.size());
@@ -258,8 +258,8 @@ bool JSONString::LoadFrom(simcc::DataStream& file) {
 //------------------------------------------------------------------
 
 
-void JSONNull::ToString(std::string& s, bool /*readable*/, bool /*utf8_to_unicode*/)const {
-    static const std::string n = "null";
+void JSONNull::ToString(string& s, bool /*readable*/, bool /*utf8_to_unicode*/)const {
+    static const string n = "null";
     s = n;
 }
 

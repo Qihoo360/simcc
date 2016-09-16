@@ -22,9 +22,9 @@ public:
     //     这个json文件一般是一个配置文件。该配置文件中如果有"inherited_from"这个key，
     // 表明该配置文件的某些配置项是继承自inherited_from指向的文件，我们称之为默认配置。
     // 当前这个配置文件中的配置项会覆盖默认配置中同名key。
-    // @param[in] - const std::string & json_file_path
+    // @param[in] - const string & json_file_path
     // @return - json::JSONObjectPtr
-    static json::JSONObjectPtr Parse(const std::string& json_file_path);
+    static json::JSONObjectPtr Parse(const string& json_file_path);
 };
 
 }

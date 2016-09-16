@@ -15,7 +15,7 @@ namespace simcc {
 string FileUtil::Clean(const string& path) {
     // Not Tested yet.
 
-    std::vector<std::string> v;
+    std::vector<string> v;
     StringUtil::Split(v, path, "/\\", 0);
 
     std::ostringstream newpath;
@@ -26,7 +26,7 @@ string FileUtil::Clean(const string& path) {
     }
 
     // erase null.
-    std::list<std::string> vv;
+    std::list<string> vv;
     for (auto it = v.rbegin(), ite = v.rend(); it != ite; ++it) {
         if (*it == ".") {
             continue;
@@ -59,9 +59,9 @@ string FileUtil::Clean(const string& path) {
     return newpath.str();
 }
 
-string FileUtil::Join(const std::string& prefix, const std::string& postfix) {
-    std::string pre = prefix;
-    std::string post = postfix;
+string FileUtil::Join(const string& prefix, const string& postfix) {
+    string pre = prefix;
+    string post = postfix;
     pre = NormalizePath(pre, false);
     post = NormalizePath(post, false);
     StringUtil::Trim(post, "/", true, false);
@@ -71,8 +71,8 @@ string FileUtil::Join(const std::string& prefix, const std::string& postfix) {
     return pre + "/" + post;
 }
 
-std::wstring FileUtil::Join(const std::wstring& prefix, const std::wstring& postfix) {
-    typedef std::wstring MyString;
+wstring FileUtil::Join(const wstring& prefix, const wstring& postfix) {
+    typedef wstring MyString;
     MyString pre = prefix;
     MyString post = postfix;
     pre = NormalizePath(pre, false);
@@ -107,12 +107,12 @@ string FileUtil::NormalizePath(const string& init, bool with_trailing_slash /*= 
 }
 
 
-std::wstring FileUtil::NormalizePath(const std::wstring& init, bool with_trailing_slash /*= true*/) {
+wstring FileUtil::NormalizePath(const wstring& init, bool with_trailing_slash /*= true*/) {
     if (init.length() < 1) {
         return init;
     }
 
-    std::wstring path = init;
+    wstring path = init;
     std::replace(path.begin(), path.end(), L'\\', L'/');
     if (path[path.length() - 1] != L'/' && with_trailing_slash) {
         path += L"/";
@@ -151,15 +151,15 @@ void FileUtil::SplitFileName(const string& filepath,
 #endif
 }
 
-void FileUtil::SplitFileName(const std::wstring& filepath,
-                             std::wstring& base, std::wstring& dir_path, bool with_trailing_slash /*= false */) {
-    std::wstring path = filepath;
+void FileUtil::SplitFileName(const wstring& filepath,
+                             wstring& base, wstring& dir_path, bool with_trailing_slash /*= false */) {
+    wstring path = filepath;
     // Replace \ with / first
     std::replace(path.begin(), path.end(), L'\\', L'/');
     // split based on final /
     size_t i = path.find_last_of(L'/');
 
-    if (i == std::wstring::npos) {
+    if (i == wstring::npos) {
         dir_path = L"";
         base = filepath;
     } else {
@@ -244,35 +244,35 @@ bool FileUtil::Mkdir(const string& dirpath) {
 #define X_OK  1
 #endif
 
-bool FileUtil::IsFileExist(const std::string& strFileName) {
+bool FileUtil::IsFileExist(const string& strFileName) {
     if (access(strFileName.c_str(), F_OK) != 0) {
         return false;
     }
     return true;
 }
 
-bool FileUtil::IsReadable(const std::string& strFileNmae) {
+bool FileUtil::IsReadable(const string& strFileNmae) {
     if (access(strFileNmae.c_str(), R_OK) != 0) {
         return false;
     }
     return true;
 }
 
-bool FileUtil::IsWriteable(const std::string& strFileNmae) {
+bool FileUtil::IsWriteable(const string& strFileNmae) {
     if (access(strFileNmae.c_str(), W_OK) != 0) {
         return false;
     }
     return true;
 }
 
-bool FileUtil::IsExecutable(const std::string& strFileNmae) {
+bool FileUtil::IsExecutable(const string& strFileNmae) {
     if (access(strFileNmae.c_str(), X_OK) != 0) {
         return false;
     }
     return true;
 }
 
-bool FileUtil::CopyFile(const std::string& strSrcFile, const std::string& strDestFile, bool bOverride/* = true */) {
+bool FileUtil::CopyFile(const string& strSrcFile, const string& strDestFile, bool bOverride/* = true */) {
     if (IsDir(strSrcFile)) {
         return false;
     }
@@ -293,7 +293,7 @@ bool FileUtil::CopyFile(const std::string& strSrcFile, const std::string& strDes
     return true;
 }
 
-bool FileUtil::ReadFile(const char* szFileName, std::list<std::string>& lines) {
+bool FileUtil::ReadFile(const char* szFileName, std::list<string>& lines) {
     if (!szFileName) {
         return false;
     }
@@ -332,11 +332,11 @@ bool FileUtil::WriteFile(const char* filepath, const void* content, const size_t
     return true;
 }
 
-void FileUtil::GetFiles(const string& strDirName, std::list<std::string>& files, bool recursively/* = true*/, const string& filter/* = "*.*"*/) {
+void FileUtil::GetFiles(const string& strDirName, std::list<string>& files, bool recursively/* = true*/, const string& filter/* = "*.*"*/) {
 #ifdef H_OS_WINDOWS
     struct _finddata_t finfo; //file info
 
-    std::string p;
+    string p;
     intptr_t hFile = _findfirst(FileUtil::Join(strDirName, "*").c_str(), &finfo);
     if (-1 == hFile) {
         return;
@@ -383,7 +383,7 @@ void FileUtil::GetFiles(const string& strDirName, std::list<std::string>& files,
 #endif
 }
 
-void FileUtil::GetFiles(const string& strDirName, std::list<std::string>& files, int depth /*= 0*/, const string& filter/* = "*"*/) {
+void FileUtil::GetFiles(const string& strDirName, std::list<string>& files, int depth /*= 0*/, const string& filter/* = "*"*/) {
     if (depth < 0) {
         return;
     }
@@ -391,7 +391,7 @@ void FileUtil::GetFiles(const string& strDirName, std::list<std::string>& files,
 #ifdef H_OS_WINDOWS
     struct _finddata_t finfo; //file info
 
-    std::string p;
+    string p;
 
     //if ( ( hFile = _findfirst( p.assign( strDirName ).append( "/*" ).append( "*" ).c_str(), &fileinfo ) ) != -1 )
     intptr_t hFile = _findfirst(FileUtil::Join(strDirName, "*").c_str(), &finfo);

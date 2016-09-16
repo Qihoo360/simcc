@@ -55,8 +55,8 @@ public:
     // @param strFileName[out]
     // @param strBasePathDir[out]
     // @param with_trailing_slash[in] true, End of the string With a SLASH "/".
-    static void SplitFileName(const std::wstring& qualifiedName,
-                              std::wstring& strFileName, std::wstring& strBasePathDir, bool with_trailing_slash = false);
+    static void SplitFileName(const wstring& qualifiedName,
+                              wstring& strFileName, wstring& strBasePathDir, bool with_trailing_slash = false);
     static void SplitFileName(const string& qualifiedName,
                               string& strFileName, string& strBasePathDir, bool with_trailing_slash = false);
 
@@ -64,7 +64,7 @@ public:
 
     // Concatenate tow path into one, and return it.
     static string Join(const string& prefix, const string& postfix);
-    static std::wstring Join(const std::wstring& prefix, const std::wstring& postfix);
+    static wstring Join(const wstring& prefix, const wstring& postfix);
 
 
     // @brief Method for standardizing paths - use forward slashes "/" only
@@ -72,9 +72,9 @@ public:
     // @param with_trailing_slash
     //         true, End of the string With a SLASH "/".
     //         false, without a SLASH "/" at the end of the string
-    // @return std::string
+    // @return string
     static string NormalizePath(const string& strOrignal, bool with_trailing_slash = true);
-    static std::wstring NormalizePath(const std::wstring& strOrignal, bool with_trailing_slash = true);
+    static wstring NormalizePath(const wstring& strOrignal, bool with_trailing_slash = true);
 
     // @brief Gets path's parent directory name. The path can be a normal file or a directory
     // e.g. "D:\test\aab.jpg" ==> "D:/test/" or "D:/test"
@@ -140,11 +140,11 @@ public:
     // @note The file CAN be a directory
     // @param filename is the string identifying the file which should be tested for existence.
     // @return Returns true if file exists, and false if it does not exist or an error occurred.
-    static bool IsFileExist(const std::string& strFileName);
+    static bool IsFileExist(const string& strFileName);
 
-    static bool IsReadable(const std::string& strFileName);
-    static bool IsWriteable(const std::string& strFileName);
-    static bool IsExecutable(const std::string& strFileName);
+    static bool IsReadable(const string& strFileName);
+    static bool IsWriteable(const string& strFileName);
+    static bool IsExecutable(const string& strFileName);
 
     // @brief copy a file to another place. This function has the same feature like DOS Command 'copy' or Linux Command 'cp'
     // @warning If the destination file is exist, it will be replaced.
@@ -153,30 +153,30 @@ public:
     // @param strDestFile The target file
     // @param bOverride True, this will override the old existent file.
     // @return bool True if successfully
-    static bool CopyFile(const std::string& strSrcFile, const std::string& strDestFile, bool bOverride = true) ;
+    static bool CopyFile(const string& strSrcFile, const string& strDestFile, bool bOverride = true) ;
 
     // @brief Query whether the given path is a directory.
     static bool IsDir(const char* strFileName);
-    static bool IsDir(const std::string& strFileName);
+    static bool IsDir(const string& strFileName);
 
     // @brief Walk the directory and get a list of files, excluded directory.
     // @param strDirName The directory name
     // @param files[out] The list of files are stored here. The file name is with the full path name(include the directory name)
     // @param recursively Whether walk the subdirectories.
     // @param filter Pattern to match against; which can include simple '*' wildcards
-    static void GetFiles(const std::string& strDirName, std::list<std::string>& files, bool recursively = true, const std::string& filter = "*");
+    static void GetFiles(const string& strDirName, std::list<string>& files, bool recursively = true, const string& filter = "*");
 
     // @brief Walk the directory and get a list of files, not include directory.
     // @param strDirName The directory name
     // @param files[out] The list of files are stored here. The file name is with the full path name(include the directory name)
     // @param depth The depth to walk the subdirectories. 0 means only walk the top dir strDirName
     // @param filter Pattern to match against; which can include simple '*' wildcards
-    static void GetFiles(const std::string& strDirName, std::list<std::string>& files, int depth, const std::string& filter = "*");
+    static void GetFiles(const string& strDirName, std::list<string>& files, int depth, const string& filter = "*");
 
 
     // Extract strings from the a file line-by-line,
     // every line content as a list element will be inserted to a list.
-    static bool ReadFile(const char* szFileName, std::list<std::string>& lines);
+    static bool ReadFile(const char* szFileName, std::list<string>& lines);
 
     // @brief Write the data into a file.
     //  The file is created if it does not exist, otherwise it is truncated
@@ -185,7 +185,7 @@ public:
     // @param const size_t len - The length of the content
     // @return true if successfully
     static bool WriteFile(const char* filepath, const void* content, const size_t len);
-    static bool WriteFile(const std::string& filepath, const void* content, const size_t len);
+    static bool WriteFile(const string& filepath, const void* content, const size_t len);
 };
 
 }

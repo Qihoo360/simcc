@@ -53,7 +53,7 @@ struct ToJSONType<simcc::float64> {
 };
 
 template<>
-struct ToJSONType<std::string> {
+struct ToJSONType<string> {
     typedef JSONString JSONClass;
     enum { Type = kJSONString };
 };
@@ -93,7 +93,7 @@ public:
     //           false, to make a compact JSON text, no whitespace is added.
     // @param[in] utf8_to_unicode - true to guaranteed to consist only of ASCII characters. This is archived by escaping all Unicode characters outside the ASCII range
     // @return the json text string
-    std::string ToString(bool readable = false, bool utf8_to_unicode = true) const;
+    string ToString(bool readable = false, bool utf8_to_unicode = true) const;
 
     // Make a JSON text of an Object value. the result is stored in outs
     //   e.g. string "abc" => "\"abc\""
@@ -104,7 +104,7 @@ public:
     //           false, to make a compact JSON text, no whitespace is added.
     // @param[in] utf8_to_unicode - true to guaranteed to consist only of ASCII characters. This is achieved by escaping all Unicode characters outside the ASCII range
     // @return true, if success, or false
-    virtual void ToString(std::string& outs, bool readable = false, bool utf8_to_unicode = true) const = 0;
+    virtual void ToString(string& outs, bool readable = false, bool utf8_to_unicode = true) const = 0;
     virtual void ToStringBuf(simcc::DataStream& sb, size_t indent = 0, bool utf8_to_unicode = true) const = 0;
 
     // @warning This method is quite not effective, so make sure why you need call this method

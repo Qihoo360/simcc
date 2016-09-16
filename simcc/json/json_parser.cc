@@ -50,7 +50,7 @@ const char* JSONParser::strerror() const {
     H_CASE_STRING_END();
 }
 
-ObjectPtr JSONParser::LoadFile(const std::string& json_file_path) {
+ObjectPtr JSONParser::LoadFile(const string& json_file_path) {
     simcc::DataStream ds;
     if (!ds.ReadFile(json_file_path)) {
         return NULL;

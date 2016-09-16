@@ -1,6 +1,6 @@
 #pragma once
 
-#include "simcc/simcc_export.h"
+#include "simcc/inner_pre.h"
 #include "simcc/gcc_list.h"
 
 #include <string>
@@ -16,15 +16,15 @@ class DataStream;
 // The INI file can contains comments lines which start with '#' or '//' or ';'
 class SIMCC_EXPORT INIParser {
 public:
-    typedef std::map<std::string, std::string> ssmap;
-    typedef std::map<std::string, ssmap> SectionMap;
+    typedef std::map<string, string> ssmap;
+    typedef std::map<string, ssmap> SectionMap;
 
-    typedef list<std::string> StringList;
-    typedef std::pair<std::string, StringList> SectionPairEntry;
+    typedef list<string> StringList;
+    typedef std::pair<string, StringList> SectionPairEntry;
     typedef list<SectionPairEntry> SectionList;
 
-    typedef std::function<void(INIParser& parser, const std::string& section, const std::string& key, const std::string& value)> ParseListener;
-    typedef std::function<void(const INIParser& parser, const std::string& section, const std::string& key, const std::string& value)> Visitor;
+    typedef std::function<void(INIParser& parser, const string& section, const string& key, const string& value)> ParseListener;
+    typedef std::function<void(const INIParser& parser, const string& section, const string& key, const string& value)> Visitor;
 
     enum ErrorCode {
         kNoError = 0,
@@ -50,7 +50,7 @@ public:
     // @param const string & filename - The INI file name
     // @return bool - return true if parse successfully
     //     in the compatible mode of parsing, even this function return true, there is change the INI file contents is wrong, at this time we check the <code>error()</code> to get the error code
-    bool Parse(const std::string& filename);
+    bool Parse(const string& filename);
     bool Parse(const char* filename);
 
     // @brief Parse the raw data.
@@ -71,7 +71,7 @@ public:
     // @param const char * keyvaluesep - the key/value separator
     // @return bool -
     bool Parse(const char* data, size_t datalen, const char* linesep, const char* keyvaluesep);
-    bool Parse(const char* data, size_t datalen, const std::string& linesep, const std::string& keyvaluesep);
+    bool Parse(const char* data, size_t datalen, const string& linesep, const string& keyvaluesep);
 
     // @brief When parsing the INI file, you can call this function to stop the parsing
     // @return void -
@@ -99,7 +99,7 @@ public:
     // @param[out] size_t * data_len - If it is provided, the value length will stored here
     // @return const char* - If find return the value, or return NULL
     // @return const string& - If find return the value, or return an empty string
-    const std::string& Get(const std::string& key, bool* found = NULL) const;
+    const string& Get(const string& key, bool* found = NULL) const;
 
     // @brief Get the value of specified key from a certain section
     // @param const string & section - The section name
@@ -107,23 +107,23 @@ public:
     // @param[out] size_t * data_len - If it is provided, the value length will stored here
     // @return const char* - If find return the value, or return NULL
     // @return const string& - If find return the value, or return an empty string
-    const std::string& Get(const std::string& section, const std::string& key, bool* found = NULL) const;
+    const string& Get(const string& section, const string& key, bool* found = NULL) const;
 
-    int64_t GetInteger(const std::string& key, int64_t default_value = 0) const;
-    int64_t GetInteger(const std::string& section, const std::string& key, int64_t default_value = 0) const;
+    int64_t GetInteger(const string& key, int64_t default_value = 0) const;
+    int64_t GetInteger(const string& section, const string& key, int64_t default_value = 0) const;
 
-    bool GetBool(const std::string& key, bool default_value = false) const;
-    bool GetBool(const std::string& section, const std::string& key, bool default_value = false) const;
+    bool GetBool(const string& key, bool default_value = false) const;
+    bool GetBool(const string& section, const string& key, bool default_value = false) const;
 
-    double GetDouble(const std::string& key, double default_value = 0.0) const;
-    double GetDouble(const std::string& section, const std::string& key, double default_value = 0.0) const;
+    double GetDouble(const string& key, double default_value = 0.0) const;
+    double GetDouble(const string& section, const string& key, double default_value = 0.0) const;
 
     // @brief Set the value of specified key into a certain section
     // @param const string & section - The section name
     // @param const string & key - The key
     // @param const string & key - The value
-    void Set(const std::string& section, const std::string& key, const std::string& value);
-    void Set(const std::string& key, const std::string& value);
+    void Set(const string& section, const string& key, const string& value);
+    void Set(const string& key, const string& value);
 
     // @brief Get the default key/value Map
     //     which equals to call <code>getKeyValueMap("")</code>
@@ -133,7 +133,7 @@ public:
     // @brief Get the key/value Map of a certain section
     // @param const string & section - The section name
     // @return const ssmap& -
-    const ssmap& GetKeyValueMap(const std::string& section) const;
+    const ssmap& GetKeyValueMap(const string& section) const;
 
     // @brief Get the section full map
     // @return - const SectionMap&
@@ -157,23 +157,23 @@ public:
     void set_case_sensitive(bool b) {
         case_sensitive_ = b;
     }
-    void set_trim_chars(const std::string& trimchars);
+    void set_trim_chars(const string& trimchars);
     void set_keep_sequence(bool b) {
         keep_sequence_ = b;
     }
 
     //Separator
 public:
-    void SetKVSeparator(const std::string& separator) {
+    void SetKVSeparator(const string& separator) {
         kv_sep_  = separator;
     }
-    void SetLineSeparator(const std::string& separator) {
+    void SetLineSeparator(const string& separator) {
         line_sep_  = separator;
     }
-    const std::string& line_separator() const {
+    const string& line_separator() const {
         return line_sep_;
     }
-    const std::string& kv_separator() const {
+    const string& kv_separator() const {
         return kv_sep_;
     }
 
@@ -188,22 +188,22 @@ public:
     // @param[in] - FastVisitor & visitor
     // @return - void
     void Visit(const Visitor& visitor, bool sequential = false) const;
-    void Visit(const std::string& section, const Visitor& visitor, bool sequential = false) const;
+    void Visit(const string& section, const Visitor& visitor, bool sequential = false) const;
 
     // Serialize
 public:
     // @brief Serialize the INI to output string
     // @param[in] - bool input_order - true if we want to
     //     serialize this INI object as the order of the input INI file
-    // @return - std::string
-    std::string Serialize(bool input_order = false) const;
+    // @return - string
+    string Serialize(bool input_order = false) const;
 
     // @brief Serialize the INI to output string
     // @param[in] - string & output
     // @param[in] - MemoryDataStream & buf
     // @param[in] - std::ostream & os
     // @return - void
-    void Serialize(std::string& output, bool input_order = false) const;
+    void Serialize(string& output, bool input_order = false) const;
     void Serialize(DataStream& buf, bool input_order = false) const;
     void Serialize(std::ostream& os, bool input_order = false) const;
 
@@ -244,14 +244,14 @@ private:
     bool stop_parsing_;  // stop the parsing
     bool keep_sequence_;
     SectionMap  section_map_; // pair<section string, key/value map>
-    std::string kv_sep_;// The key/value separator
-    std::string line_sep_;// The key/value separator
+    string kv_sep_;// The key/value separator
+    string line_sep_;// The key/value separator
     SectionList section_list_; // pair<section string, keys list>
 
     ErrorCode error_code_;
     bool compatible_;
 
-    std::string trim_chars_;  // the trimming characters when parsing
+    string trim_chars_;  // the trimming characters when parsing
     char trim_chars_table_[256];
 
     typedef std::list<ParseListener> ListenerList;

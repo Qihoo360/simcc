@@ -51,12 +51,12 @@ public:
 
     // Open the raw file and read all the file data to this memory data stream
     // @note It is only a helper method.
-    bool ReadFile(const std::string& filename);
+    bool ReadFile(const string& filename);
 
     // @brief: Helper method to save data to a disk file.
-    // @param[in]: const std::string& filename, the path name of the file, it can include dir path
+    // @param[in]: const string& filename, the path name of the file, it can include dir path
     // @return: bool
-    bool WriteFile(const std::string& filename);
+    bool WriteFile(const string& filename);
 
     // Read data form data stream, the result is stored in buf
     // @remark The read count is in len,it may be lesser than the buf_len,
@@ -207,8 +207,8 @@ public:
     template< typename T> DataStream& operator<<(const T& val);
     template< typename T> DataStream& operator>> (T& val);
 
-    DataStream& operator<<(const std::string& val);
-    DataStream& operator>>(std::string& val);
+    DataStream& operator<<(const string& val);
+    DataStream& operator>>(string& val);
 
     DataStream& operator<<(const char* szVal);
 

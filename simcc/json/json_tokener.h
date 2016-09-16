@@ -22,7 +22,7 @@ public:
     // @param ps     A source string.
     // @param ps_len The length of the source string
     //   if it equals -1, we will use strlen(ps) to calculate the length.
-    JSONTokener(const std::string& s);
+    JSONTokener(const string& s);
 
     JSONTokener(const char* ps, const simcc::int32 ps_len = -1);
 
@@ -38,12 +38,12 @@ public:
     // @param rs the string we needed
     // @return true, if no error happened
     //   false, if Unterminated string.
-    bool NextString(char quote, std::string& rs);
+    bool NextString(char quote, string& rs);
 
-    bool NextString(char quote, bool parse_protobuf, std::string& rs);
+    bool NextString(char quote, bool parse_protobuf, string& rs);
 
     // Get the next value. The value can be a Boolean, Double, Integer,
-    // JSONArray, JSONObject, Long, or std::string, or the JSONObject.NULL object.
+    // JSONArray, JSONObject, Long, or string, or the JSONObject.NULL object.
     // @return An object. or NULL if something wrong
     Object* NextValue(JSONParser* parser);
 
@@ -63,7 +63,7 @@ public:
     bool DecodeUnicodeEscapeSequence(simcc::uint32& unicode);
 
     // Convert an unicode number to UTF8 string
-    static std::string ConvertUnicodeToUTF8(simcc::uint32 unicode);
+    static string ConvertUnicodeToUTF8(simcc::uint32 unicode);
 
     // Convert an unicode number to an unicode escape string sequence. e.g: 0x8912 --> "\\u8912"
     static void EncodeUnicodeNumber(simcc::uint32 codepoint, simcc::DataStream& stream);
@@ -81,7 +81,7 @@ private:
 };
 
 
-inline JSONTokener::JSONTokener(const std::string& s)
+inline JSONTokener::JSONTokener(const string& s)
     : Tokener(s)
     , buf_(kDefaultBufferSize) {
 }
@@ -94,7 +94,7 @@ inline JSONTokener::JSONTokener(const char* ps, const simcc::int32 len)
 inline JSONTokener::~JSONTokener() {
 }
 
-inline bool JSONTokener::NextString(char quote, bool parse_protobuf, std::string& rs) {
+inline bool JSONTokener::NextString(char quote, bool parse_protobuf, string& rs) {
     buf_.Reset();
 
 #define Z16 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -202,7 +202,7 @@ inline bool JSONTokener::NextString(char quote, bool parse_protobuf, std::string
     } // end of for ( ;; )
 }
 
-inline bool JSONTokener::NextString(char quote, std::string& rs) {
+inline bool JSONTokener::NextString(char quote, string& rs) {
     return NextString(quote, false, rs);
 }
 
@@ -352,8 +352,8 @@ inline bool JSONTokener::SkipCppStyleComment() {
 }
 
 
-inline std::string JSONTokener::ConvertUnicodeToUTF8(simcc::uint32 unicode) {
-    std::string result;
+inline string JSONTokener::ConvertUnicodeToUTF8(simcc::uint32 unicode) {
+    string result;
 
     // based on description from http://en.wikipedia.org/wiki/UTF-8
 

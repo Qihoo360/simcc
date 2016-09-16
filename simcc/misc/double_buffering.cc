@@ -22,7 +22,7 @@ DoubleBuffering::TargetPtr DoubleBuffering::Get() const {
     return t;
 }
 
-std::string DoubleBuffering::MD5() const {
+string DoubleBuffering::MD5() const {
     auto t = Get();
     return t->MD5();
 }
@@ -30,7 +30,7 @@ std::string DoubleBuffering::MD5() const {
 
 DoubleBufferingManager::DoubleBufferingManager() {}
 
-DoubleBuffering::TargetPtr DoubleBufferingManager::Get(const std::string& name) const {
+DoubleBuffering::TargetPtr DoubleBufferingManager::Get(const string& name) const {
     std::lock_guard<std::mutex> g(mutex_);
     auto it = dbufs_.find(name);
     if (it != dbufs_.end()) {
@@ -41,8 +41,8 @@ DoubleBuffering::TargetPtr DoubleBufferingManager::Get(const std::string& name) 
     return DoubleBuffering::TargetPtr();
 }
 
-bool DoubleBufferingManager::Add(const std::string& name,
-                                 const std::string& conf,
+bool DoubleBufferingManager::Add(const string& name,
+                                 const string& conf,
                                  DoubleBuffering::TargetCreator f) {
     std::lock_guard<std::mutex> g(mutex_);
     DoubleBufferingPtr& db = dbufs_[name];
@@ -50,7 +50,7 @@ bool DoubleBufferingManager::Add(const std::string& name,
     return db->Reload(conf);
 }
 
-bool DoubleBufferingManager::Reload(const std::string& name, const std::string& conf) {
+bool DoubleBufferingManager::Reload(const string& name, const string& conf) {
     DoubleBufferingPtr& db = dbufs_[name];
     assert(db.get());
     return db->Reload(conf);

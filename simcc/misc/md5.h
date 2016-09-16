@@ -37,14 +37,14 @@ public:
 
     void Finalizeh(char hex33[33]);
 
-    std::string Finalize() {
-        std::string m(kBinDigestLength, '\0');
+    string Finalize() {
+        string m(kBinDigestLength, '\0');
         Finalize((unsigned char*)&m[0]);
         return m;
     }
 
-    std::string Finalizeh() {
-        std::string m(kHexDigestLength, '\0');
+    string Finalizeh() {
+        string m(kHexDigestLength, '\0');
         Finalize((unsigned char*)&m[0]);
         //m.resize(kHexDigestLength);
         return m;
@@ -54,20 +54,20 @@ public:
 public:
     // Calculate the MD5 checksum of the data.
     static void Sum(const void* data, size_t data_len, unsigned char binary16_digest[16]);
-    static std::string Sum(const void* data, size_t data_len);
-    static std::string Sum(const std::string& d);
+    static string Sum(const void* data, size_t data_len);
+    static string Sum(const string& d);
 
     // Calculate the MD5 checksum of the data. The checksum is human readable with 32 bytes hex code.
     static void Sumh(const void* data, size_t data_len, char hex33[/*33*/]);
-    static std::string Sumh(const void* data, size_t data_len);
-    static std::string Sumh(const std::string& d);
+    static string Sumh(const void* data, size_t data_len);
+    static string Sumh(const string& d);
 
     // Generate a random md5
     // @return a random hex md5, 32 bytes
-    static std::string GenHexMD5(const size_t random_data_len = 8);
+    static string GenHexMD5(const size_t random_data_len = 8);
 
     // @return a random binary md5, 16 bytes
-    static std::string GenBinMD5(const size_t random_data_len = 8);
+    static string GenBinMD5(const size_t random_data_len = 8);
 
     // @brief Convert a binary buffer to a hex format
     // @param[in] binary - 
@@ -75,7 +75,7 @@ public:
     // @param[in] hex - At least with length of binary_len*2
     // @return void - 
     static void Bin2Hex(const void* binary, size_t binary_len, char* hex);
-    static std::string Bin2Hex(const void* binary, size_t binary_len);
+    static string Bin2Hex(const void* binary, size_t binary_len);
 
     // @brief Convert a hex format buffer to binary
     // @param[in] hex - 
@@ -83,11 +83,11 @@ public:
     // @param[in] binary - At least with length of hex_len/2
     // @return bool - 
     static bool Hex2Bin(const char* hex, const size_t hex_len, void* binary);
-    static std::string Hex2Bin(const char* hex, const size_t hex_len);
+    static string Hex2Bin(const char* hex, const size_t hex_len);
 
     static int DehexChar(char c);
     static bool IsValid(const char* hexmd5, size_t hexmd5_length);
-    static bool IsValid(const std::string& hexmd5);
+    static bool IsValid(const string& hexmd5);
 private:
     PHP_MD5_CTX   md5_ctx;
 };
@@ -106,7 +106,7 @@ inline void MD5::Sum(const void* data, size_t data_len, unsigned char binary16_d
     PHP_MD5Final(binary16_digest, &ctx);
 }
 
-inline std::string MD5::Sum(const std::string& d) {
+inline string MD5::Sum(const string& d) {
     return Sum(d.data(), d.size());
 }
 
@@ -119,19 +119,19 @@ inline void MD5::Sumh(const void* data, size_t data_len, char hex33[/*33*/]) {
     Bin2Hex(binary, kBinDigestLength, hex33);
 }
 
-inline std::string MD5::Sumh(const std::string& d) {
+inline string MD5::Sumh(const string& d) {
     return Sumh(d.data(), d.size());
 }
 
-inline std::string MD5::Sum(const void* data, size_t data_len) {
-    std::string binary16_digest;
+inline string MD5::Sum(const void* data, size_t data_len) {
+    string binary16_digest;
     binary16_digest.resize(16);
     Sum(data, data_len, reinterpret_cast<unsigned char*>(&binary16_digest[0]));
     return binary16_digest;
 }
 
-inline std::string MD5::Sumh(const void* data, size_t data_len) {
-    std::string hex33;
+inline string MD5::Sumh(const void* data, size_t data_len) {
+    string hex33;
     hex33.resize(kHexDigestLength + 1);
     Sumh(data, data_len, &hex33[0]);
     hex33.resize(kHexDigestLength);
@@ -163,8 +163,8 @@ inline void MD5::Bin2Hex(const void* binary, size_t binary_len, char* hex) {
     hex[binary_len << 1] = '\0';
 }
 
-inline std::string MD5::Bin2Hex(const void* binary, size_t binary_len) {
-    std::string r;
+inline string MD5::Bin2Hex(const void* binary, size_t binary_len) {
+    string r;
     r.resize(binary_len << 1);
     Bin2Hex(binary, binary_len, &r[0]);
     return r;
@@ -199,8 +199,8 @@ inline bool MD5::Hex2Bin(const char* hex, const size_t hex_len, void* binary) {
     return true;
 }
 
-inline std::string MD5::Hex2Bin(const char* hex, const size_t hex_len) {
-    std::string r;
+inline string MD5::Hex2Bin(const char* hex, const size_t hex_len) {
+    string r;
     r.resize(hex_len >> 1);
     Hex2Bin(hex, hex_len, &r[0]);
     return r;
@@ -265,7 +265,7 @@ inline bool MD5::IsValid(const char* hexmd5, size_t hexmd5_length) {
     return true;
 }
 
-inline bool MD5::IsValid(const std::string& hexmd5) {
+inline bool MD5::IsValid(const string& hexmd5) {
     return IsValid(hexmd5.c_str(), hexmd5.length());
 }
 

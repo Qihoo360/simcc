@@ -447,7 +447,7 @@ DataStream& simcc::DataStream::operator >> (T& val) {
     //return *this;
 }
 
-inline simcc::DataStream& DataStream::operator<<(const std::string& val) {
+inline simcc::DataStream& DataStream::operator<<(const string& val) {
     uint32_t nStrLen = (uint32)val.length();
 
     // 1. write string length
@@ -475,7 +475,7 @@ inline simcc::DataStream& DataStream::operator<<(const char* szVal) {
     return *this;
 }
 
-inline simcc::DataStream& DataStream::operator >> (std::string& val) {
+inline simcc::DataStream& DataStream::operator >> (string& val) {
     // check whether the file is bad.
     if (IsReadBad()) {
         return *this;

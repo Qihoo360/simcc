@@ -37,7 +37,7 @@ public:
     //  <code>[</code>&nbsp;<small>(left bracket)</small>
     //   and ends with <code>]</code>&nbsp;<small>(right bracket)</small>.
     //  @return number of characters parsed. Return 0 if failed to parse.
-    uint32 Parse(const std::string& source);
+    uint32 Parse(const string& source);
 
     // Construct a JSONArray from a source JSON text.
     // @param source     A string that begins with
@@ -72,7 +72,7 @@ public:
     bool GetBool(int index, bool default_value = false) const;
     float64 GetDouble(int index, float64 default_value = 0) const;
     int64 GetInteger(int index, int64 default_value = 0) const;
-    const std::string& GetString(int index, const std::string& default_value = StringUtil::kEmpty) const;
+    const string& GetString(int index, const string& default_value = StringUtil::kEmpty) const;
 
     // Get a decimal number whether it is a JSONDouble or a JSONInteger
     float64 GetDecimal(int index, float64 default_value = 0.0)const;
@@ -90,7 +90,7 @@ public:
     void GetInt64Array(simcc::int64* array, simcc::uint32 count, simcc::int64 default_value = 0)const;
     void GetFloat32Array(simcc::float32* array, simcc::uint32 count, simcc::float32 default_value = 0.0f)const;
     void GetFloat64Array(simcc::float64* array, simcc::uint32 count, simcc::float64 default_value = 0.0)const;
-    void GetStringArray(std::string* array, simcc::uint32 count, const std::string& default_value = StringUtil::kEmpty)const;
+    void GetStringArray(string* array, simcc::uint32 count, const string& default_value = StringUtil::kEmpty)const;
 
     // Gets an array.
     // @remark  Try to find typed value, of can not find,set default value.
@@ -102,7 +102,7 @@ public:
     void GetInt64Array(std::vector<simcc::int64>& vArray, simcc::int64 default_value = 0)const;
     void GetFloat32Array(std::vector<simcc::float32>& vArray, simcc::float32 default_value = 0.0f)const;
     void GetFloat64Array(std::vector<simcc::float64>& vArray, simcc::float64 default_value = 0.0)const;
-    void GetStringArray(std::vector<std::string>& vArray, const std::string& default_value = StringUtil::kEmpty)const;
+    void GetStringArray(std::vector<string>& vArray, const string& default_value = StringUtil::kEmpty)const;
 
     // Append a value. This increases the array's length by one.
     //
@@ -111,7 +111,7 @@ public:
     JSONArray* Put(const bool value);
     JSONArray* Put(const simcc::float64 value);
     JSONArray* Put(const simcc::int64 value);
-    JSONArray* Put(const std::string& s);
+    JSONArray* Put(const string& s);
     JSONArray* Put(const char* s);
     JSONArray* Put(Object* value); // Do not delete this pointer, it will be managed by this JSONArray
     JSONArray* Put(const ObjectPtr& value);
@@ -152,8 +152,8 @@ public:
     // @override override method from base class json::Object
     // @return a printable, displayable, transmittable
     //  representation of the array.
-    using Object::ToString; // std::string ToString(bool readable = false, bool utf8_to_unicode = true) const;
-    virtual void ToString(std::string& s, bool readable = false, bool utf8_to_unicode = true)const;
+    using Object::ToString; // string ToString(bool readable = false, bool utf8_to_unicode = true) const;
+    virtual void ToString(string& s, bool readable = false, bool utf8_to_unicode = true)const;
     virtual void ToStringBuf(simcc::DataStream& sb, size_t indent = 0, bool utf8_to_unicode = true)const;
 
     // @warning This method is quite not effective, so make sure why you need call this method
@@ -216,7 +216,7 @@ protected:
     //   instead, and use Parse(...) method to build a JSON object
     //   from a json text string.
     // @param source    A source json text string
-    JSONArray(const std::string& source);
+    JSONArray(const string& source);
     JSONArray(const char* source);
 
     template<class T>

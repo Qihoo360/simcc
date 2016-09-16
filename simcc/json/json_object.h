@@ -13,7 +13,7 @@ class JSONArray;
 class JSONTokener;
 class SIMCC_EXPORT JSONObject : public Object, public JSONParser {
 public:
-    typedef std::map<std::string, ObjectPtr> ObjectPtrMap;
+    typedef std::map<string, ObjectPtr> ObjectPtrMap;
     typedef ObjectPtrMap Map;
     typedef ObjectPtrMap::iterator                  Iterator;
     typedef ObjectPtrMap::const_iterator            ConstIterator;
@@ -36,7 +36,7 @@ public:
     //  with <code>}</code>&nbsp;<small>(right brace)</small>.
     // @param source_len The length of the source string
     //   if it Equals -1, we will use strlen(source) to calculate the length.
-    JSONObject(const std::string& source);
+    JSONObject(const string& source);
     JSONObject(const char* source, const simcc::int32 source_len = -1);
 
     virtual ~JSONObject();
@@ -47,7 +47,7 @@ public:
     // <code>[</code>&nbsp;<small>(left bracket)</small>
     //  and ends with <code>]</code>&nbsp;<small>(right bracket)</small>.
     // @return number of characters parsed. Return 0 if failed to parse.
-    simcc::uint32 Parse(const std::string& source);
+    simcc::uint32 Parse(const string& source);
 
     // Construct a JSONArray from a source JSON text.
     // @param source     A string that begins with
@@ -59,8 +59,8 @@ public:
     // @return number of characters parsed. Return 0 if failed to parse.
     simcc::uint32 Parse(const char* source, const simcc::int64 source_len = -1);
 
-    using Object::ToString; // std::string ToString(bool readable = false, bool utf8_to_unicode = true) const;
-    virtual void ToString(std::string& s, bool readable = false, bool utf8_to_unicode = true) const;
+    using Object::ToString; // string ToString(bool readable = false, bool utf8_to_unicode = true) const;
+    virtual void ToString(string& s, bool readable = false, bool utf8_to_unicode = true) const;
     virtual void ToStringBuf(simcc::DataStream& sb, size_t indent = 0, bool utf8_to_unicode = true) const;
 
     // @warning This method is quite not effective, so make sure why you need call this method
@@ -75,7 +75,7 @@ public:
     SIMCC_EXPORT friend simcc::DataStream& operator << (simcc::DataStream& file, const JSONObject& val);
 
 #ifdef H_PROVIDE_PROTOBUF_DEBUGSTRING_2_JSON
-    simcc::uint32 ParseProtobuf(const std::string& protobuf_debug_string);
+    simcc::uint32 ParseProtobuf(const string& protobuf_debug_string);
 #endif
 
 public:
@@ -91,26 +91,26 @@ public:
     // @param key  the key value
     // @return An object value.
     //   NULL, If there is no value for the index.
-    Object*      Get(const std::string& key) const;
-    JSONBoolean* GetJSONBoolean(const std::string& key) const;
-    JSONDouble*  GetJSONDouble(const std::string& key) const;
-    JSONInteger* GetJSONInteger(const std::string& key) const;
-    JSONString*  GetJSONString(const std::string& key) const;
-    JSONArray*   GetJSONArray(const std::string& key) const;
-    JSONObject*  GetJSONObject(const std::string& key) const;
+    Object*      Get(const string& key) const;
+    JSONBoolean* GetJSONBoolean(const string& key) const;
+    JSONDouble*  GetJSONDouble(const string& key) const;
+    JSONInteger* GetJSONInteger(const string& key) const;
+    JSONString*  GetJSONString(const string& key) const;
+    JSONArray*   GetJSONArray(const string& key) const;
+    JSONObject*  GetJSONObject(const string& key) const;
 
     // Gets a value
     // @param strKey, the key
     // @param default_value, the default value.
     // @return the bool value.
     //   or default_value, If there is no value for the key strKey
-    bool GetBool(const std::string& strKey, bool default_value = false) const;
-    float64 GetDouble(const std::string& strKey, float64 default_value = 0.0) const;
-    int64 GetInteger(const std::string& strKey, int64 default_value = 0) const;
-    const std::string& GetString(const std::string& strKey, const std::string& default_value = StringUtil::kEmpty) const;
+    bool GetBool(const string& strKey, bool default_value = false) const;
+    float64 GetDouble(const string& strKey, float64 default_value = 0.0) const;
+    int64 GetInteger(const string& strKey, int64 default_value = 0) const;
+    const string& GetString(const string& strKey, const string& default_value = StringUtil::kEmpty) const;
 
     // Get a decimal number whether it is a JSONDouble or a JSONInteger
-    simcc::float64 GetDecimal(const std::string& strKey, float64 default_value = 0.0) const;
+    simcc::float64 GetDecimal(const string& strKey, float64 default_value = 0.0) const;
 
     //   Put a key/value pair into the JSONObject.
     //   If a item which is associated with key is exist,
@@ -121,13 +121,13 @@ public:
     // @param value An object which is the value.
     // @return true, if successfully.
     //       false, if failed.
-    bool Put(const std::string& key, Object* value);//Do not delete this pointer, it will be managed by the JSONObject
-    bool Put(const std::string& key, const ObjectPtr& value);
-    bool Put(const std::string& key, const int64 value);
-    bool Put(const std::string& key, const float64 value);
-    bool Put(const std::string& key, const bool value);
-    bool Put(const std::string& key, const std::string& value);
-    bool Put(const std::string& key, const char* value);
+    bool Put(const string& key, Object* value);//Do not delete this pointer, it will be managed by the JSONObject
+    bool Put(const string& key, const ObjectPtr& value);
+    bool Put(const string& key, const int64 value);
+    bool Put(const string& key, const float64 value);
+    bool Put(const string& key, const bool value);
+    bool Put(const string& key, const string& value);
+    bool Put(const string& key, const char* value);
 
     // Put an array to this JSONObject
     // @param key, the key
@@ -135,24 +135,24 @@ public:
     // @param count Size of array
     // @return true, if successfully
     //   or false, if failed
-    bool PutByteArray(const std::string& key, const simcc::int8* value, simcc::uint32 count);
-    bool PutInt32Array(const std::string& key, const simcc::int32* value, simcc::uint32 count);
-    bool PutInt64Array(const std::string& key, const simcc::int64* value, simcc::uint32 count);
-    bool PutFloat32Array(const std::string& key, const simcc::float32* value, simcc::uint32 count);
-    bool PutFloat64Array(const std::string& key, const simcc::float64* value, simcc::uint32 count);
-    bool PutBoolArray(const std::string& key, const bool* value, simcc::uint32 count);
-    bool PutStringArray(const std::string& key, const std::string* value, simcc::uint32 count);
+    bool PutByteArray(const string& key, const simcc::int8* value, simcc::uint32 count);
+    bool PutInt32Array(const string& key, const simcc::int32* value, simcc::uint32 count);
+    bool PutInt64Array(const string& key, const simcc::int64* value, simcc::uint32 count);
+    bool PutFloat32Array(const string& key, const simcc::float32* value, simcc::uint32 count);
+    bool PutFloat64Array(const string& key, const simcc::float64* value, simcc::uint32 count);
+    bool PutBoolArray(const string& key, const bool* value, simcc::uint32 count);
+    bool PutStringArray(const string& key, const string* value, simcc::uint32 count);
 
     // Remove a key/value pair from this JSONObject.
-    void Remove(const std::string& key) { erase(key); }
-    void Erase(const std::string& key) { erase(key); }
+    void Remove(const string& key) { erase(key); }
+    void Erase(const string& key) { erase(key); }
     void Remove(const Object* value);
 
     void erase(iterator it) {
         map_.erase(it);
     }
 
-    void erase(const std::string& key) {
+    void erase(const string& key) {
         map_.erase(key);
     }
 
@@ -238,10 +238,10 @@ protected:
     // @param source  A the source String
     // @param rs the produced string by this function
     // @return  true, if success, or false
-    static void Quote(const std::string& source, bool utf8_to_unicode, simcc::DataStream& sb);
+    static void Quote(const string& source, bool utf8_to_unicode, simcc::DataStream& sb);
 
     template<class T>
-    bool PutIntegerArray(const std::string& key, const T* value, simcc::uint32 count);
+    bool PutIntegerArray(const string& key, const T* value, simcc::uint32 count);
 
     friend class JSONTokener;
     friend class JSONArray;

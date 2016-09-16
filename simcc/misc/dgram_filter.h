@@ -46,11 +46,11 @@ class DgramFilter {
 
     struct Sizeof : std::unary_function<Stat*, size_t> {
         size_t operator()(const Stat* v) const {
-            return sizeof(std::string) + simcc::MD5::kBinDigestLength + sizeof(v) + sizeof(*v);
+            return sizeof(string) + simcc::MD5::kBinDigestLength + sizeof(v) + sizeof(*v);
         }
     };
 
-    typedef LRUCacheH4< std::string, Stat*, Sizeof, Deletor > LRUCache;
+    typedef LRUCacheH4< string, Stat*, Sizeof, Deletor > LRUCache;
     typedef std::shared_ptr<LRUCache> LRUCachePtr;
 
 public:
@@ -96,13 +96,13 @@ public:
     // @param[in] len -
     // @param[in] ip -
     // @return bool -
-    bool IsNeedFilter(const void* data, size_t len, const std::string& ip) {
+    bool IsNeedFilter(const void* data, size_t len, const string& ip) {
         if (!enable_ || len == 0) {
             return false;
         }
 
         Stat* stat = NULL;
-        std::string md5 = CheckSum(data, len, ip);
+        string md5 = CheckSum(data, len, ip);
         assert(!md5.empty());
         time_t now  = time(NULL);
 
@@ -214,7 +214,7 @@ private:
         stat->total++;
     }
 
-    std::string CheckSum(const void* data, size_t len, const std::string& ip) const {
+    string CheckSum(const void* data, size_t len, const string& ip) const {
         simcc::MD5 md5;
         md5.Update(data, len);
 

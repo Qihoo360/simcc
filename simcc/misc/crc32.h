@@ -1,6 +1,6 @@
 #pragma once
 
-#include "simcc/simcc_export.h"
+#include "simcc/inner_pre.h"
 #include <stdint.h>
 #include <string>
 
@@ -13,7 +13,7 @@ public:
     // @param len The size of d.
     // @return crc value.
     static uint32_t Sum(const void* d, size_t len);
-    static uint32_t Sum(const std::string& s) {
+    static uint32_t Sum(const string& s) {
         return Sum(s.data(), s.size());
     }
 
