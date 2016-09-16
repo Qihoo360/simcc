@@ -16,6 +16,7 @@ public:
         : Object(static_cast<JSONType>(ToJSONType<ValueType>::Type))
         , value_(ValueType()) {
     }
+
     JSONValue(const ValueType& v)
         : Object(static_cast<JSONType>(ToJSONType<ValueType>::Type))
         , value_(v) {

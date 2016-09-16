@@ -19,7 +19,7 @@ inline bool FileUtil::IsValidDirName(const char* szName) {
 }
 
 // Query whether strFileName is a absolute path.
-inline bool FileUtil::IsAbsolutePathName(const string& path) {
+inline bool FileUtil::IsAbsolutePath(const string& path) {
     if (path.size() == 0) {
         return false;
     }
@@ -40,7 +40,7 @@ inline bool FileUtil::IsAbsolutePathName(const string& path) {
 inline string FileUtil::GetAbsolutePathName(const string& strPathName) {
     string strTmp = strPathName;
 
-    if (!IsAbsolutePathName(strTmp)) {
+    if (!IsAbsolutePath(strTmp)) {
         //
         char szDir[_MAX_PATH];
 #ifdef H_OS_WINDOWS
@@ -152,7 +152,7 @@ inline bool FileUtil::RemoveDirIfEmpty(const string& strDirName, bool bRecursive
     }
 
     if (bRecursivelyDeleteEmptyParentDir) {
-        string strParentDir = getParentDirName(strDirName);
+        string strParentDir = GetParentDir(strDirName);
 
         if (!RemoveDirIfEmpty(strParentDir, bRecursivelyDeleteEmptyParentDir)) {
             retval = false;
@@ -162,10 +162,10 @@ inline bool FileUtil::RemoveDirIfEmpty(const string& strDirName, bool bRecursive
     return retval;
 }
 
-inline string FileUtil::getParentDirName(const string& strFileName, bool with_trailing_slash /*= true*/) {
+inline string FileUtil::GetParentDir(const string& strFileName, bool with_trailing_slash /*= true*/) {
     string path = NormalizePath(strFileName, false);
 
-    if (!IsAbsolutePathName(strFileName)) {
+    if (!IsAbsolutePath(strFileName)) {
         path = GetAbsolutePathName(path);
     }
 

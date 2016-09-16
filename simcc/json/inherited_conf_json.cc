@@ -1,4 +1,3 @@
-
 #include "simcc/inner_pre.h"
 #include "inherited_conf_json.h"
 #include "simcc/file_util.h"
@@ -12,7 +11,7 @@ static const string kInheritedFrom = "inherited_from";
 // @param[in] - const string & inherited_from_file_path
 // @return - string
 static string GetRealPath(const string& parent_file_path, const string& inherited_from_file_path) {
-    if (simcc::FileUtil::IsAbsolutePathName(inherited_from_file_path)) {
+    if (simcc::FileUtil::IsAbsolutePath(inherited_from_file_path)) {
         return inherited_from_file_path;
     }
 
@@ -20,7 +19,6 @@ static string GetRealPath(const string& parent_file_path, const string& inherite
     simcc::FileUtil::SplitFileName(parent_file_path, filename, dir);
     return simcc::FileUtil::Join(dir, inherited_from_file_path);
 }
-
 
 json::JSONObjectPtr InheritedConfJSONObject::Parse(const string& json_file_path) {
     json::ObjectPtr jbase = json::JSONParser::LoadFile(json_file_path);
