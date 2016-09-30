@@ -445,7 +445,7 @@ public:
     *  This constructor fills the %list with @a n copies of @a value.
     */
     list(size_type _Count, const _Tp& _Val, const allocator_type& _Al = allocator_type())
-        : BaseClass(_count, _Val , _Al)
+        : BaseClass(_Count, _Val , _Al)
         , m_list_size(_Count) {
     }
 
