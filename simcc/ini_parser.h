@@ -48,8 +48,10 @@ public:
 
     // @brief Parse the INI file
     // @param const string & filename - The INI file name
-    // @return bool - return true if parse successfully
-    //     in the compatible mode of parsing, even this function return true, there is change the INI file contents is wrong, at this time we check the <code>error()</code> to get the error code
+    // @return bool - return true if parse successfully.
+    //     In the compatible mode of parsing, even this function return true, 
+    // there is a chance that the INI file contents is wrong, 
+    // at this time we can use <code>error()</code> function to get the actual error code
     bool Parse(const string& filename);
     bool Parse(const char* filename);
 
@@ -63,8 +65,8 @@ public:
 
     // @brief Parse the raw data
     //     We will parse the data line by line.
-    //   Lines are separated by <code>linesep</code>
-    //   key-value is separated by <code>keyvaluesep</code>
+    // Lines are separated by <code>linesep</code>
+    // key-value is separated by <code>keyvaluesep</code>
     // @param const char * data -
     // @param size_t datalen -
     // @param const char * linesep - the line separator
@@ -91,9 +93,8 @@ public:
     // @return void -
     void SetParseListener(ParseListener pl);
 
-    //Query
+    // Query
 public:
-
     // @brief Get the value of specified key from the default section
     // @param const string & key -
     // @param[out] size_t * data_len - If it is provided, the value length will stored here
@@ -126,7 +127,7 @@ public:
     void Set(const string& key, const string& value);
 
     // @brief Get the default key/value Map
-    //     which equals to call <code>getKeyValueMap("")</code>
+    //     which equals to call <code>GetKeyValueMap("")</code>
     // @return const StringAStringAMap& -
     const ssmap& GetDefaultKeyValueMap();
 
@@ -157,12 +158,12 @@ public:
     void set_case_sensitive(bool b) {
         case_sensitive_ = b;
     }
-    void set_trim_chars(const string& trimchars);
+    void set_trim_chars(const string& trim_chars);
     void set_keep_sequence(bool b) {
         keep_sequence_ = b;
     }
 
-    //Separator
+    // Separator
 public:
     void SetKVSeparator(const string& separator) {
         kv_sep_  = separator;
@@ -177,7 +178,7 @@ public:
         return kv_sep_;
     }
 
-    //Visit
+    // Visit
 public:
 
     // @brief Visit all the section/key/value in this INI.
@@ -243,7 +244,7 @@ private:
     bool case_sensitive_;// case sensitive flag
     bool stop_parsing_;  // stop the parsing
     bool keep_sequence_;
-    SectionMap  section_map_; // pair<section string, key/value map>
+    SectionMap section_map_; // pair<section string, key/value map>
     string kv_sep_;// The key/value separator
     string line_sep_;// The key/value separator
     SectionList section_list_; // pair<section string, keys list>

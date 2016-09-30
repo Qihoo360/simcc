@@ -95,14 +95,14 @@ public:
     // Gets an array.
     // @remark  Try to find typed value, of can not find,set default value.
     // @param strKey, the key
-    // @param vArray[out] the result is stored
-    void GetBoolArray(std::vector<bool>& vArray, bool default_value = false)const;
-    void GetByteArray(std::vector<simcc::uint8>& vArray, simcc::uint8 default_value = 0)const;
-    void GetInt32Array(std::vector<simcc::int32>& vArray, simcc::int32 default_value = 0)const;
-    void GetInt64Array(std::vector<simcc::int64>& vArray, simcc::int64 default_value = 0)const;
-    void GetFloat32Array(std::vector<simcc::float32>& vArray, simcc::float32 default_value = 0.0f)const;
-    void GetFloat64Array(std::vector<simcc::float64>& vArray, simcc::float64 default_value = 0.0)const;
-    void GetStringArray(std::vector<string>& vArray, const string& default_value = StringUtil::kEmpty)const;
+    // @param vec[out] the result is stored
+    void GetBoolArray(std::vector<bool>& vec, bool default_value = false)const;
+    void GetByteArray(std::vector<simcc::uint8>& vec, simcc::uint8 default_value = 0)const;
+    void GetInt32Array(std::vector<simcc::int32>& vec, simcc::int32 default_value = 0)const;
+    void GetInt64Array(std::vector<simcc::int64>& vec, simcc::int64 default_value = 0)const;
+    void GetFloat32Array(std::vector<simcc::float32>& vec, simcc::float32 default_value = 0.0f)const;
+    void GetFloat64Array(std::vector<simcc::float64>& vec, simcc::float64 default_value = 0.0)const;
+    void GetStringArray(std::vector<string>& vec, const string& default_value = StringUtil::kEmpty)const;
 
     // Append a value. This increases the array's length by one.
     //
@@ -225,7 +225,7 @@ protected:
     void GetElement(T*, uint32 count, const U& default_value)const;
 
     template<class T, class U>
-    void GetElement(std::vector<T>& vArray, const U& default_value)const;
+    void GetElement(std::vector<T>& vec, const U& default_value)const;
 
 private:
     // override method from base class json::Object

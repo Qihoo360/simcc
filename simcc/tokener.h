@@ -46,7 +46,6 @@ public:
     // @return  A character, or 0 if there are no more characters.
     char NextClean();
 
-
     // Get the characters up to the next character <code>quote</code>.
     // Backslash processing is done.
     // If <code>quote</code> is not found, we do nothing and just
@@ -64,7 +63,6 @@ public:
     // @return the string
     string NextString();
 
-
     Slice NextSlice();
 
     // Skip characters until the next character is the requested character.
@@ -73,7 +71,6 @@ public:
     // @return The requested character, or zero if the requested character
     // is not found.
     char SkipTo(char to);
-
 
     // Skip characters until come to a new line.
     // @remark If there is no new line, this function will do nothing.
@@ -90,7 +87,6 @@ public:
     // Skip all whitespace, tab, \n
     // @return false if arrived end of string.
     bool SkipSpaces();
-
 
     // Get the hex value of a character (base16).
     // @param c A character between '0' and '9' or between 'A' and 'F' or
@@ -135,8 +131,8 @@ protected:
     }
 
 private:
-    const char* data_;  // the source text string to be parsed
-    const char* current_;  // At first, set it the very beginning or data_
+    const char* data_; // the source text string to be parsed
+    const char* current_; // At first, set it the very beginning or data_
     const char* end_; // Not include the byte which is pointed by end_
 };
 
@@ -157,6 +153,7 @@ inline void Tokener::Reset(const char* ps, const int32 len) {
     data_   = const_cast<const char*>(ps);
     current_ = data_;
 }
+
 inline Tokener::~Tokener() {
 }
 
@@ -213,7 +210,6 @@ inline char Tokener::Current() {
 
     return *current_;
 }
-
 
 inline char Tokener::NextClean() {
     for (char c = 0; current_ < end_;) {

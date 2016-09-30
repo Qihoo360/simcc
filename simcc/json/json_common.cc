@@ -44,7 +44,6 @@ bool Object::DeserializeOneObject(simcc::DataStream& file, Object*& o) {
     return false;
 }
 
-
 string Object::ToString(bool readable, bool utf8_to_unicode) const {
     string  retVal;
     this->ToString(retVal, readable, utf8_to_unicode);
