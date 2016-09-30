@@ -5,16 +5,18 @@
 
 namespace simcc {
 
-#ifdef H_OS_WINDOWS
-    #define DYNLIB_HANDLE HMODULE
-#else
-    #define DYNLIB_HANDLE void*
-#endif
+
 
 // Dynamic library. It is used load and find symbol in the library.
 // @remark You should keep the object alive before unload the loaded library.
 class SIMCC_EXPORT DynLib : public RefObject {
 public:
+#ifdef H_OS_WINDOWS
+    typedef HMODULE Handler;
+#else
+    typedef void* Handler;
+#endif
+
     // @param dll_path The full path for a library. e.g. "e:/project/hph/bin/test.dll", "/root/bin/test.so"
     DynLib(const string& dll_path);
     ~DynLib();
@@ -39,7 +41,6 @@ public:
     // @return NULL if find nothing.
     void* GetSymbol(const string& func_name);
 
-
     // Gets the last loading error. It is used get the error message
     // when failed to load or unload library.
     const string& GetLastError() const {
@@ -47,14 +48,13 @@ public:
     }
 
 private:
+    Handler handler_;
     string dll_path_;
-    DYNLIB_HANDLE handler_;
     string error_;
 
 private:
     // Generate library load error. It generated from system.
     string GetError();
-
 };
 
 typedef RefPtr<DynLib> DynLibPtr;

@@ -1,6 +1,8 @@
 #include "simcc/inner_pre.h"
-#include "inherited_conf_json.h"
 #include "simcc/file_util.h"
+
+#include "inherited_conf_json.h"
+#include "json_cast.h"
 
 namespace simcc {
 namespace json {
@@ -20,19 +22,19 @@ static string GetRealPath(const string& parent_file_path, const string& inherite
     return simcc::FileUtil::Join(dir, inherited_from_file_path);
 }
 
-json::JSONObjectPtr InheritedConfJSONObject::Parse(const string& json_file_path) {
-    json::ObjectPtr jbase = json::JSONParser::LoadFile(json_file_path);
-    if (!jbase || !jbase->IsTypeOf(json::kJSONObject)) {
-        return json::JSONObjectPtr();
+JSONObjectPtr InheritedConfJSONObject::Parse(const string& json_file_path) {
+    ObjectPtr jbase = JSONParser::LoadFile(json_file_path);
+    if (!jbase || !jbase->IsTypeOf(kJSONObject)) {
+        return JSONObjectPtr();
     }
-    assert(jbase && jbase->IsTypeOf(json::kJSONObject));
-    json::JSONObjectPtr jconf = static_cast<json::JSONObject*>(jbase.get());
+    assert(jbase && jbase->IsTypeOf(kJSONObject));
+    JSONObject* jconf = cast<JSONObject>(jbase);
     string inherited_from_file = jconf->GetString(kInheritedFrom);
     if (inherited_from_file.empty()) {
         return jconf;
     }
-    inherited_from_file = json::GetRealPath(json_file_path, inherited_from_file);
-    json::JSONObjectPtr jconf_inherited = Parse(inherited_from_file); // recursively
+    inherited_from_file = GetRealPath(json_file_path, inherited_from_file);
+    JSONObjectPtr jconf_inherited = Parse(inherited_from_file); // recursively
     jconf->Merge(jconf_inherited.get(), false);
     return jconf;
 }

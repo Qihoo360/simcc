@@ -10,7 +10,7 @@
 
 namespace simcc {
 
-// kIntervalSeconds 时间段内，同一个IP过来的同一个数据包，最多只接收 max_threshold 个，其他都是过滤掉。
+// kIntervalSeconds 时间段内，同一个IP过来的同一个数据包，最多只接收 max_threshold 个，其他都会被过滤丢弃掉。
 //
 // 底层实现是线程安全的，采用LRU队列来保存数据包（dgram）。
 //
@@ -107,8 +107,7 @@ public:
         time_t now  = time(NULL);
 
         std::lock_guard<std::mutex> mutex_guard(mutex_);
-        typename LRUCache::const_iterator it = lru_->Find(md5);
-
+        auto it = lru_->Find(md5);
         if (it == lru_->end()) {
             stat = new Stat();
             lru_->insert(md5, stat);
@@ -138,7 +137,7 @@ public:
            << " memory:(" << lru_->memory_size() << "/" << lru_->max_memory_size() <<  "):"
            << " LRU --> MRU: " << std::endl;
 
-        for (typename LRUCache::const_iterator it = lru_->lru_begin();  it != lru_->end();  ++it) {
+        for (auto it = lru_->lru_begin(); it != lru_->end(); ++it) {
             Stat* stat = it.value();
             string key = it.key();
             os <<  "key=" << key << " update_time=" << stat->update_time << " total=" << stat->total << std::endl;

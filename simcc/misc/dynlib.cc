@@ -9,7 +9,7 @@
 namespace simcc {
 
 DynLib::DynLib(const string& dll_path)
-    : dll_path_(dll_path), handler_(NULL) {
+    : handler_(NULL), dll_path_(dll_path) {
 }
 
 DynLib::~DynLib() {
@@ -22,9 +22,9 @@ bool DynLib::IsLoaded() {
 bool DynLib::Load() {
     string name = dll_path_;
 #ifdef H_OS_WINDOWS
-    handler_ = (DYNLIB_HANDLE)::LoadLibraryA(name.c_str());
+    handler_ = (Handler)::LoadLibraryA(name.c_str());
 #else
-    handler_ = (DYNLIB_HANDLE)::dlopen(name.c_str(), RTLD_LAZY | RTLD_LOCAL);
+    handler_ = (Handler)::dlopen(name.c_str(), RTLD_LAZY | RTLD_LOCAL);
 #endif
 
     if (handler_) {

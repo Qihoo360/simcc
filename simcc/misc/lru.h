@@ -37,7 +37,7 @@ struct LRUCacheH4Value {
     V value;
     const K* key;
     LRUCacheH4Value<K, V>* older; // The older element. It is the same as a previous node for a link list.
-    LRUCacheH4Value<K, V>* newer; // The older element. It is the same as a next node for a link list.
+    LRUCacheH4Value<K, V>* newer; // The newer element. It is the same as a next node for a link list.
 };
 
 

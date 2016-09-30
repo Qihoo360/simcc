@@ -5,7 +5,6 @@
 #include <iostream>
 
 TEST_UNIT(inherited_conf_json_test1) {
-
     std::string concrete_conf = "../test/test_data/json/inherited_conf.json";
     simcc::json::JSONObjectPtr jconf = simcc::json::InheritedConfJSONObject::Parse(concrete_conf);
     H_TEST_ASSERT(jconf.get());
@@ -26,6 +25,19 @@ TEST_UNIT(inherited_conf_json_test1) {
     //std::cout << jconf->getJSONObject("type")->ToString(true,true);
     //std::cout << subj1->ToString(true,true);
     H_TEST_ASSERT(jconf->GetJSONObject("type")->Equals(*subj1));
+}
+
+
+TEST_UNIT(inherited_conf_json_test2) {
+    std::string concrete_conf = "../test/test_data/json/inherited_conf-2.json";
+    simcc::json::JSONObjectPtr jconf = simcc::json::InheritedConfJSONObject::Parse(concrete_conf);
+    H_TEST_ASSERT(jconf.get());
+    H_TEST_ASSERT(jconf->GetString("memcached_hostname") == "hpre3.ccc.xxx.com");
+    H_TEST_ASSERT(jconf->GetString("log4cxx_category") == "Cloud.BrowserRelative.Newvalue-2");
+    H_TEST_ASSERT(jconf->GetBool("verbose_log") == true);
+    simcc::json::JSONObject* jtype = jconf->GetJSONObject("type");
+    H_TEST_ASSERT(jtype->GetString("98") == "98_newvalue2");
+    H_TEST_ASSERT(jtype->GetString("99") == "99_newvalue2");
 }
 
 TEST_UNIT(inherited_conf_json_test_failed) {
