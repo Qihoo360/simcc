@@ -27,6 +27,7 @@ public:
     // a absolute path name with current path.
     static string GetAbsolutePathName(const string& path);
 
+    // This method is copied from Golang project
     // Clean returns the shortest path name equivalent to path
     // by purely lexical processing.  It applies the following rules
     // iteratively until no further processing can be done:

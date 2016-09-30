@@ -13,8 +13,8 @@ class JSONArray;
 class JSONTokener;
 class SIMCC_EXPORT JSONObject : public Object, public JSONParser {
 public:
-    typedef std::map<string, ObjectPtr> ObjectPtrMap;
-    typedef ObjectPtrMap Map;
+    typedef std::map<string, ObjectPtr>             ObjectPtrMap;
+    typedef ObjectPtrMap                            Map;
     typedef ObjectPtrMap::iterator                  Iterator;
     typedef ObjectPtrMap::const_iterator            ConstIterator;
     typedef Iterator                                iterator;
@@ -121,7 +121,7 @@ public:
     // @param value An object which is the value.
     // @return true, if successfully.
     //       false, if failed.
-    bool Put(const string& key, Object* value);//Do not delete this pointer, it will be managed by the JSONObject
+    bool Put(const string& key, Object* value); // Do not delete this pointer, it will be managed by this JSONObject
     bool Put(const string& key, const ObjectPtr& value);
     bool Put(const string& key, const int64 value);
     bool Put(const string& key, const float64 value);

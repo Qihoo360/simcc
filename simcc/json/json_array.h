@@ -20,7 +20,7 @@ class JSONObject;
 class JSONTokener;
 class SIMCC_EXPORT JSONArray : public Object, public JSONParser {
 public:
-    typedef simcc::list<ObjectPtr>                 ObjectPtrList;
+    typedef simcc::list<ObjectPtr>                ObjectPtrList;
     typedef ObjectPtrList::iterator               iterator;
     typedef ObjectPtrList::const_iterator         const_iterator;
     typedef ObjectPtrList::reverse_iterator       reverse_iterator;
@@ -33,14 +33,14 @@ public:
     virtual ~JSONArray();
 
     //  Construct a JSONArray from a source JSON text.
-    //  @param source     A string that begins with
+    //  @param source A string that begins with
     //  <code>[</code>&nbsp;<small>(left bracket)</small>
     //   and ends with <code>]</code>&nbsp;<small>(right bracket)</small>.
     //  @return number of characters parsed. Return 0 if failed to parse.
     uint32 Parse(const string& source);
 
     // Construct a JSONArray from a source JSON text.
-    // @param source     A string that begins with
+    // @param source A string that begins with
     // <code>[</code>&nbsp;<small>(left bracket)</small>
     //  and ends with <code>]</code>&nbsp;<small>(right bracket)</small>.
     // @param source_len, the length of the source string.
@@ -121,7 +121,6 @@ public:
     // @return true if remove the element success
     bool Remove(int index);
 
-
     // Returns whether the JSON object is empty, i.e. whether its size is 0.
     bool empty() const {
         return list_.empty();
@@ -165,7 +164,7 @@ public:
 public:
     // Gets objects in the array.
     // @remark Caller is responsible for identify the concrete type of object element.
-    const ObjectPtrList&  GetObjects()const {
+    const ObjectPtrList& GetObjects()const {
         return list_;
     }
 
@@ -234,9 +233,7 @@ private:
     virtual void SaveTo(simcc::DataStream& file) const;
 
 private:
-
     ObjectPtrList list_; // The list where the JSONArray's properties are kept.
-    enum { DEFAULT_BUFFER_SIZE = 512 };
 
     template<class T>
     T* GetObject(int index) const;
