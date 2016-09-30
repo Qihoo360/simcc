@@ -11,7 +11,6 @@ inline void DataStream::Swap(DataStream& r) {
     std::swap(status_ , r.status_);
 }
 
-//
 #pragma pack(push,1)
 template<typename TE1, typename TE2 >
 struct Struct2Element {
@@ -91,13 +90,10 @@ inline simcc::DataStream& operator>> (simcc::DataStream& file,  Struct4Element<T
 }
 
 
+// DataStream Implementation
 
-
-
-
-// MemoryDataStream Implementation
-
-inline DataStream::DataStream() : buffer_(NULL)
+inline DataStream::DataStream()
+    : buffer_(NULL)
     , self_created_(false)
     , capacity_(0)
     , write_index_(0)
@@ -118,7 +114,7 @@ inline DataStream::DataStream(size_t nBufferSize)
         capacity_ = 0;
     }
 }
-// Construct with outside memory and size.
+
 inline DataStream::DataStream(void* pData, size_t nBufferSize, bool bDestroy)
     : buffer_((uint8_t*)pData)
     , self_created_(bDestroy)
@@ -624,6 +620,50 @@ inline DataStream& DataStream::operator >> (std::map<_Kt, _Val>& val) {
 
 template< typename _Kt >
 inline DataStream& DataStream::operator >> (std::list< _Kt>& val) {
+    // check whether the file is bad.
+    if (IsReadBad()) {
+        return *this;
+    }
+
+    // 1. read length
+    uint32 nSize = 0;
+    *this >> (uint32&)nSize;
+
+    if (GetReadableSize() < nSize) {
+        SetStatus(kReadBad);
+        return *this;
+    }
+
+    val.clear();
+
+    for (uint32 i = 0; i < nSize; ++i) {
+        if (GetReadableSize() == 0) {
+            SetStatus(kReadBad);
+            break;
+        }
+
+        val.push_back(_Kt());
+        *this >> (_Kt&)val.back();
+    }
+
+    return *this;
+}
+
+template< typename _Kt >
+inline DataStream& DataStream::operator<<(const list< _Kt>& val) {
+    *this << (uint32)val.size();
+
+    auto it(val.begin()), ite(val.end());
+    for (; it != ite; ++it) {
+        *this << (const _Kt&)*it;
+    }
+
+    return *this;
+}
+
+
+template< typename _Kt >
+inline DataStream& DataStream::operator >> (list< _Kt>& val) {
     // check whether the file is bad.
     if (IsReadBad()) {
         return *this;

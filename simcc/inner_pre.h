@@ -1,7 +1,6 @@
 #pragma once
 
 #include "platform_config.h"
-#include "simcc_export.h"
 
 #ifndef H_CASE_STRING_BIGIN
 #define H_CASE_STRING_BIGIN(state) switch(state) {

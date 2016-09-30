@@ -1,7 +1,6 @@
 #pragma once
 
 #include <typeinfo>
-#include <algorithm>
 
 namespace simcc {
 // Variant type that can hold Any other type
@@ -16,13 +15,13 @@ public:
     explicit Any(const ValueType& value)
         : content_(new Holder<ValueType>(value)) {}
 
-    Any(const Any& other)
-        : content_(other.content_ ? other.content_->clone() : NULL) {}
+    Any(const Any& rhs)
+        : content_(rhs.content_ ? rhs.content_->Clone() : NULL) {}
 
 public:
     Any& swap(Any& rhs) {
         std::swap(content_, rhs.content_);
-        return*this;
+        return *this;
     }
 
     template<typename ValueType>
@@ -58,7 +57,7 @@ protected:
         virtual ~PlaceHolder() {}
     public:
         virtual const std::type_info& GetType() const = 0;
-        virtual PlaceHolder* clone() const = 0;
+        virtual PlaceHolder* Clone() const = 0;
     };
 
     template<typename ValueType>
@@ -71,7 +70,7 @@ protected:
             return typeid(ValueType);
         }
 
-        virtual PlaceHolder* clone() const {
+        virtual PlaceHolder* Clone() const {
             return new Holder(held_);
         }
 
@@ -80,6 +79,7 @@ protected:
 
 protected:
     PlaceHolder* content_;
+
     template<typename ValueType>
     friend ValueType* any_cast(Any*);
 };

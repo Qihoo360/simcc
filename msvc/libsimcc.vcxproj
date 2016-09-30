@@ -69,7 +69,7 @@
     <ClInclude Include="..\simcc\singleton.h" />
     <ClInclude Include="..\simcc\string_util.h" />
     <ClInclude Include="..\simcc\tokener.h" />
-    <ClInclude Include="..\simcc\type_traits_ext.h" />
+    <ClInclude Include="..\simcc\type_traits.h" />
     <ClInclude Include="..\simcc\simcc_export.h" />
     <ClInclude Include="..\simcc\exp.h" />
     <ClInclude Include="..\simcc\gettimeofday.h" />

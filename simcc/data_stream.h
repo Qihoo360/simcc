@@ -1,7 +1,8 @@
 #pragma once
 
 #include "simcc/inner_pre.h"
-#include "simcc/type_traits_ext.h"
+#include "simcc/type_traits.h"
+#include "simcc/gcc_list.h"
 #include <string.h>
 
 #include <string>
@@ -196,8 +197,9 @@ private:
     template< typename _Kt >
     DataStream& InternalReadVector(std::vector< _Kt >& val, std::true_type);
 
-
-    // @brief 不要给这些函数增加具体的实现代码。如果一个结构体没有实现序列化函数，在编译链接阶段，会报错。
+private:
+    // @brief 不要给这些函数增加具体的实现代码。
+    // 如果一个结构体没有实现具体的序列化函数，在编译链接阶段会利用这两个函数来报错。
     template< typename T>
     DataStream& InternalWriteType(const T& val, std::false_type);
     template< typename T>
@@ -230,6 +232,10 @@ public:
     template< typename _Kt >
     DataStream& operator>>(std::list< _Kt>& val);
 
+    template< typename _Kt >
+    DataStream& operator<<(const list< _Kt>& val);
+    template< typename _Kt >
+    DataStream& operator >> (list< _Kt>& val);
 
     template<  typename _Kt, typename _Val >
     DataStream& operator<<(const std::map< _Kt, _Val >& val);

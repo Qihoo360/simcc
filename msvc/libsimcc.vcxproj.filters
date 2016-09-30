@@ -99,9 +99,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\simcc\exp.h">
-      <Filter>inner</Filter>
-    </ClInclude>
     <ClInclude Include="..\simcc\inner_pre.h">
       <Filter>inner</Filter>
     </ClInclude>
@@ -134,9 +131,6 @@
     </ClInclude>
     <ClInclude Include="..\simcc\any.h">
       <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\simcc\type_traits_ext.h">
-      <Filter>inner</Filter>
     </ClInclude>
     <ClInclude Include="..\simcc\data_stream.h">
       <Filter>io</Filter>
@@ -236,6 +230,12 @@
     </ClInclude>
     <ClInclude Include="..\simcc\singleton.h">
       <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\exp.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\type_traits.h">
+      <Filter>inner</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,14 +1,6 @@
 #pragma once
 
-// Define Operation System.
-#if ( defined(WIN32) || defined(WIN64) )
-#   ifndef H_OS_WINDOWS
-#       define H_OS_WINDOWS
-#   endif
-#   ifndef H_WINDOWS_API
-#       define H_WINDOWS_API
-#   endif
-#endif
+#include "simcc_export.h"
 
 #ifdef _DEBUG
 #ifndef H_DEBUG_MODE
@@ -23,7 +15,6 @@
 #include <iostream>
 
 #ifdef __cplusplus
-
 
 #include "gettimeofday.h"
 
