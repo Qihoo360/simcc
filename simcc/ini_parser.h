@@ -28,10 +28,10 @@ public:
 
     enum ErrorCode {
         kNoError = 0,
-        kErrorCannotFindKVSeperator,
-        kErrorCannotFindLineSeperator,
-        kErrorCannotFindKVSeperatorAndLineSeperator,
-        kErrorSectionFormatWrong,
+        kErrorCannotFindKVSeperator = 1,
+        kErrorCannotFindLineSeperator = 2,
+        kErrorCannotFindKVSeperatorAndLineSeperator = 3,
+        kErrorSectionFormatWrong = 4,
     };
 public:
     // @brief

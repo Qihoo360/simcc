@@ -24,13 +24,13 @@ public:
     }
 
 protected:
-    Singleton(void) {
-        assert(0 == instance_);
+    Singleton() {
+        assert(!instance_);
         instance_ = static_cast<T*>(this);
     }
 
-    ~Singleton(void) {
-        instance_ = 0;
+    ~Singleton() {
+        instance_ = NULL;
     }
 
 protected:
