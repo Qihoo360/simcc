@@ -19,6 +19,8 @@ namespace simcc {
 template<int kIntervalSeconds = 60>
 class DgramFilter {
     struct Stat {
+        std::mutex mutex; // the lock for Stat member fields
+
         time_t   update_time; // 最新的更新 Stat 状态的时间，秒
         uint32_t total; // 总的请求个数
         uint16_t count[kIntervalSeconds]; // 存储每一秒的请求个数
@@ -34,6 +36,25 @@ class DgramFilter {
             update_time = time(NULL);
             total = 0;
             memset(count, 0, sizeof(count));
+        }
+
+        void ClearOneBucket(int index) {
+            index = index % kIntervalSeconds;
+            assert(this->total >= this->count[index]);
+
+            if (this->total < this->count[index]) {
+                fprintf(stderr, "%s Logic ERROR : total < this->count[%d]", __FUNCTION__, index);
+                return;
+            }
+
+            this->total -= this->count[index];
+            this->count[index] = 0;
+        }
+
+
+        void Inc() {
+            this->count[this->update_time % kIntervalSeconds]++;
+            this->total++;
         }
     };
 
@@ -172,12 +193,12 @@ private:
         if (now >= stat->update_time + kIntervalSeconds) {
             // one more round trip, clear the expired data
             stat->Reset();
-            Inc(stat);
+            stat->Inc();
             return;
         }
 
         if (now == stat->update_time) {
-            Inc(stat);
+            stat->Inc();
             return;
         }
 
@@ -186,31 +207,11 @@ private:
         assert(last_index != current_index);
 
         for (int i = last_index + 1; i <= current_index; ++i) {
-            ClearOneBucket(stat, i);
+            stat->ClearOneBucket(i);
         }
 
         stat->update_time = now;
-        Inc(stat);
-    }
-
-
-    void ClearOneBucket(Stat* stat, int index) const {
-        index = index % kIntervalSeconds;
-        assert(stat->total >= stat->count[index]);
-
-        if (stat->total < stat->count[index]) {
-            fprintf(stderr, "%s Logic ERROR : total < stat->count[%d]", __FUNCTION__, index);
-            return;
-        }
-
-        stat->total -= stat->count[index];
-        stat->count[index] = 0;
-    }
-
-
-    void Inc(Stat* stat) const {
-        stat->count[stat->update_time % kIntervalSeconds]++;
-        stat->total++;
+        stat->Inc();
     }
 
     string CheckSum(const void* data, size_t len, const string& ip) const {
@@ -229,17 +230,17 @@ private:
     }
 
 private:
+    std::mutex mutex_; // the lock for lru_
     LRUCachePtr lru_;
-    std::mutex mutex_;
 
-    bool     enable_;
+    bool enable_;
     uint32_t max_threshold_;
     uint32_t block_second_;
 
     size_t lru_max_item_count_;
     size_t lru_max_memery_size_bytes_;
 
-    bool     debug_;
+    bool debug_;
 };
 
 }

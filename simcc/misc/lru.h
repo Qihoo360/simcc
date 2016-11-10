@@ -88,7 +88,6 @@ LRUCacheH4ConstIterator<K, V>& LRUCacheH4ConstIterator<K, V>::operator++() {
     return *this;
 }
 
-
 template<class K, class V>
 LRUCacheH4ConstIterator<K, V> LRUCacheH4ConstIterator<K, V>::operator++(int) {
     const_iterator ret = *this;
@@ -96,18 +95,15 @@ LRUCacheH4ConstIterator<K, V> LRUCacheH4ConstIterator<K, V>::operator++(int) {
     return ret;
 }
 
-
 template<class K, class V>
 bool LRUCacheH4ConstIterator<K, V>::operator==(const const_iterator& other) {
     return ptr_ == other.ptr_;
 }
 
-
 template<class K, class V>
 bool LRUCacheH4ConstIterator<K, V>::operator!=(const const_iterator& other) {
     return ptr_ != other.ptr_;
 }
-
 
 template<class K, class V>
 const K& LRUCacheH4ConstIterator<K, V>::key() const {
