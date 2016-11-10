@@ -32,6 +32,31 @@ class DgramFilter {
         ~Stat() {
         }
 
+        void Update(time_t now) {
+            if (now >= this->update_time + kIntervalSeconds) {
+                // one more round trip, clear the expired data
+                this->Reset();
+                this->Inc();
+                return;
+            }
+
+            if (now == this->update_time) {
+                this->Inc();
+                return;
+            }
+
+            int last_index = this->update_time % kIntervalSeconds + kIntervalSeconds;
+            int current_index = now % kIntervalSeconds + kIntervalSeconds;
+            assert(last_index != current_index);
+
+            for (int i = last_index + 1; i <= current_index; ++i) {
+                this->ClearOneBucket(i);
+            }
+
+            this->update_time = now;
+            this->Inc();
+        }
+
         void Reset() {
             update_time = time(NULL);
             total = 0;
@@ -50,7 +75,6 @@ class DgramFilter {
             this->total -= this->count[index];
             this->count[index] = 0;
         }
-
 
         void Inc() {
             this->count[this->update_time % kIntervalSeconds]++;
@@ -144,7 +168,7 @@ public:
             }
         }
 
-        Update(now, stat);
+        stat->Update(now);
         return false;
     }
 
@@ -188,32 +212,6 @@ public:
     }
 
 private:
-
-    void Update(time_t now, Stat* stat) const {
-        if (now >= stat->update_time + kIntervalSeconds) {
-            // one more round trip, clear the expired data
-            stat->Reset();
-            stat->Inc();
-            return;
-        }
-
-        if (now == stat->update_time) {
-            stat->Inc();
-            return;
-        }
-
-        int last_index = stat->update_time % kIntervalSeconds + kIntervalSeconds;
-        int current_index = now % kIntervalSeconds + kIntervalSeconds;
-        assert(last_index != current_index);
-
-        for (int i = last_index + 1; i <= current_index; ++i) {
-            stat->ClearOneBucket(i);
-        }
-
-        stat->update_time = now;
-        stat->Inc();
-    }
-
     string CheckSum(const void* data, size_t len, const string& ip) const {
         simcc::MD5 md5;
         md5.Update(data, len);
