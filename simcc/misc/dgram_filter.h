@@ -29,18 +29,17 @@ class DgramFilter {
             memset(count, 0, sizeof(count));
         }
 
-        ~Stat() {
-        }
-
         void Update(time_t now) {
             if (now >= this->update_time + kIntervalSeconds) {
                 // one more round trip, clear the expired data
                 this->Reset();
+                std::lock_guard<std::mutex> guard(mutex);
                 this->Inc();
                 return;
             }
 
             if (now == this->update_time) {
+                std::lock_guard<std::mutex> guard(mutex);
                 this->Inc();
                 return;
             }
@@ -49,6 +48,7 @@ class DgramFilter {
             int current_index = now % kIntervalSeconds + kIntervalSeconds;
             assert(last_index != current_index);
 
+            std::lock_guard<std::mutex> guard(mutex);
             for (int i = last_index + 1; i <= current_index; ++i) {
                 this->ClearOneBucket(i);
             }
@@ -58,11 +58,12 @@ class DgramFilter {
         }
 
         void Reset() {
+            std::lock_guard<std::mutex> guard(mutex);
             update_time = time(NULL);
             total = 0;
             memset(count, 0, sizeof(count));
         }
-
+    private:
         void ClearOneBucket(int index) {
             index = index % kIntervalSeconds;
             assert(this->total >= this->count[index]);
@@ -151,10 +152,12 @@ public:
         assert(!md5.empty());
         time_t now  = time(NULL);
 
-        std::lock_guard<std::mutex> mutex_guard(mutex_);
+        mutex_.lock();
         auto it = lru_->Find(md5);
+        mutex_.unlock();
         if (it == lru_->end()) {
             stat = new Stat();
+            std::lock_guard<std::mutex> mutex_guard(mutex_);
             lru_->insert(md5, stat);
         } else {
             stat = const_cast<Stat*>(it.value());
