@@ -1,4 +1,4 @@
-
+include ../rpm/build.mk
 CC=gcc
 CXX=g++
 AR=ar
@@ -35,7 +35,12 @@ $(TARGET_A) : $(OBJS)
 	ranlib $@			   
 
 $(TARGET_SO) : $(OBJS)
-	$(CXX) $(LDFLAGS)  $(OBJS) -shared -o $@
+	$(CXX) $(LDFLAGS) $(OBJS) -shared -o $@.$(FULL)
+	@rm -fr $(@)
+	@rm -fr $(@).$(MAJOR)
+	ln -s $(@).$(FULL) $(@).$(MAJOR)
+	ln -s $(@).$(MAJOR) $(@)
+	
 	
 %.o : %.cc 
 	$(CXX) $(CPPFLAGS) $< -o $@
