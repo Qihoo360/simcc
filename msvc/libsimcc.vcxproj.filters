@@ -237,5 +237,8 @@
     <ClInclude Include="..\simcc\type_traits.h">
       <Filter>inner</Filter>
     </ClInclude>
+    <ClInclude Include="..\simcc\handler_guard.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

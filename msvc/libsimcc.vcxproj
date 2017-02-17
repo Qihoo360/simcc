@@ -43,6 +43,7 @@
     <ClInclude Include="..\simcc\file_util.h" />
     <ClInclude Include="..\simcc\file_util.inl.h" />
     <ClInclude Include="..\simcc\gcc_list.h" />
+    <ClInclude Include="..\simcc\handler_guard.h" />
     <ClInclude Include="..\simcc\ini_parser.h" />
     <ClInclude Include="..\simcc\json\inherited_conf_json.h" />
     <ClInclude Include="..\simcc\json\json.h" />
