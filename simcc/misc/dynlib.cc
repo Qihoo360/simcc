@@ -52,11 +52,13 @@ bool DynLib::Unload() {
 #ifdef H_OS_WINDOWS
     // If the function FreeLibrary() succeeds, the return value is nonzero.
     if (::FreeLibrary(handler_)) {
+        handler_ = NULL;
         return true;
     }
 #else
     //The function dlclose() returns 0 on success, and non-zero on error.
     if (dlclose(handler_) == 0) {
+        handler_ = NULL;
         return true;
     }
 #endif
