@@ -1,10 +1,7 @@
 #include "test_common.h"
 
 #include <simcc/exp.h>
-#include <simcc/utility.h>
 #include <simcc/handler_guard.h>
-
-
 
 namespace {
     static void handler_guard_test(int *guard) {
