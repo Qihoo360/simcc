@@ -49,7 +49,7 @@ public:
              const string& conf,
              DoubleBuffering::TargetCreator f);
 
-    DoubleBuffering::TargetPtr Get(const string& name) const;
+    DoubleBuffering* Get(const string& name) const;
     bool Reload(const string& name, const string& conf);
 
 private:

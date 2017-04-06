@@ -30,15 +30,15 @@ string DoubleBuffering::MD5() const {
 
 DoubleBufferingManager::DoubleBufferingManager() {}
 
-DoubleBuffering::TargetPtr DoubleBufferingManager::Get(const string& name) const {
+DoubleBuffering* DoubleBufferingManager::Get(const string& name) const {
     std::lock_guard<std::mutex> g(mutex_);
     auto it = dbufs_.find(name);
     if (it != dbufs_.end()) {
-        return it->second->Get();
+        return it->second.get();
     }
 
     assert(false && "cannot find this kind of DoubleBuffering");
-    return DoubleBuffering::TargetPtr();
+    return NULL;
 }
 
 bool DoubleBufferingManager::Add(const string& name,
