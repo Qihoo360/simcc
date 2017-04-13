@@ -57,9 +57,6 @@ simcc::uint32 JSONObject::Parse(JSONTokener* x) {
             if (!x->NextString('"', key)) {
                 set_error(kJSONObjectKeyNotString, x);
                 return 0;
-            } else if (key.size() == 0) {
-                set_error(kJSONObjectKeyIsEmpty, x);
-                return 0;
             }
             break;
         default:
