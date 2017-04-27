@@ -2,6 +2,7 @@
 
 #include <simcc/exp.h>
 #include <simcc/any.h>
+#include <memory>
 
 TEST_UNIT(testAny1) {
     std::string* buf(new std::string());

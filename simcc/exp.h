@@ -1,10 +1,7 @@
 #pragma once
 
-#include "platform_config.h"
-
-
-#ifdef H_OS_WINDOWS
-H_LINK_LIB("libsimcc")
+#ifdef _WIN32
+#pragma comment(lib, "libsimcc.lib")
 #endif
 
 

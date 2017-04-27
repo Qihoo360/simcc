@@ -1,7 +1,6 @@
 #pragma once
 
 #include "simcc/inner_pre.h"
-#include "simcc/ref_object.h"
 
 namespace simcc {
 
@@ -9,7 +8,7 @@ namespace simcc {
 
 // Dynamic library. It is used load and find symbol in the library.
 // @remark You should keep the object alive before unload the loaded library.
-class SIMCC_EXPORT DynLib : public RefObject {
+class SIMCC_EXPORT DynLib {
 public:
 #ifdef H_OS_WINDOWS
     typedef HMODULE Handler;
@@ -56,7 +55,5 @@ private:
     // Generate library load error. It generated from system.
     string GetError();
 };
-
-typedef RefPtr<DynLib> DynLibPtr;
 
 }

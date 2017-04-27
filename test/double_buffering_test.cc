@@ -89,17 +89,17 @@ TEST_UNIT(testDoubleBufferingManager) {
             auto conf = s[i];
             H_TEST_ASSERT(m.Add(name, conf, &Creator));
             H_TEST_ASSERT(m.Reload(name, conf));
-            auto tt = m.Get(name);
-            UTTarget* t = static_cast<UTTarget*>(tt.get());
+            simcc::DoubleBuffering* tt = m.Get(name);
+            H_TEST_ASSERT(tt);
+            UTTarget* t = static_cast<UTTarget*>(tt->Get().get());
             H_TEST_ASSERT(t->conf() == conf);
-            H_TEST_ASSERT(tt->RefCount() == t->RefCount());
-            H_TEST_ASSERT(t->RefCount() == 2);
+            H_TEST_ASSERT(t->RefCount() == 1);
 
             UTTargetPTr ut = t;
-            H_TEST_ASSERT(ut->RefCount() == 3);
+            H_TEST_ASSERT(ut->RefCount() == 2);
 
             ut = NULL;
-            H_TEST_ASSERT(t->RefCount() == 2);
+            H_TEST_ASSERT(t->RefCount() == 1);
 
             tt = NULL;
             H_TEST_ASSERT(t->RefCount() == 1);
