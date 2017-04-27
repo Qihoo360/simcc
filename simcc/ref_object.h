@@ -100,7 +100,7 @@ public:
     // assigner
     template< class U >
     RefPtr& operator=(const RefPtr<U>& r) {
-        Bind(dynamic_cast<object_type*>(r.getPointer()));
+        Bind(dynamic_cast<object_type*>(r.get()));
         return *this;
     }
 
