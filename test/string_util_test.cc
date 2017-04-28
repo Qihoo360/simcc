@@ -515,19 +515,6 @@ TEST_UNIT(string_util_test_1) {
     test_string_replace_1();
 }
 
-
-//TODO change 360 string
-TEST_UNIT(test_SpliteCommand) {
-    std::string data1 = "dfbc22a2ba2fbff94d4557a707fb9c15\twd\turlproc\t2.1.0.1001\t2d7d233ef132096f2f5ba843972e4fad\t255\taHR0cDovL3d3dy5iYWlkdS5jb20vcz93b3JkPSVDNiVCRCVCQSVGRSVDNiVGQiVCMyVCNSVENSVCRSVCNSVFNyVCQiVCMCZ0bj1zaXRlaGFvMTIzJmY9Mw==\t1331165275$";
-    simcc::Slice slice = SpliteCommand(data1.data(), data1.size());
-    H_TEST_ASSERT(slice.ToString() == "2d7d233ef132096f2f5ba843972e4fad");
-
-    std::string data2 = "dfbc22a2ba2fbff94d4557a707fb9c15\twd\turlproc";
-    slice = SpliteCommand(data2.data(), data2.size());
-    H_TEST_ASSERT(slice.ToString() == "");
-}
-
-
 TEST_UNIT(test_slice) {
     test_slice();
 }
