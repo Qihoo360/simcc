@@ -31,6 +31,7 @@
     <ClCompile Include="..\simcc\misc\modp_b64.cc" />
     <ClCompile Include="..\simcc\misc\php_md5.cc" />
     <ClCompile Include="..\simcc\pch.cc" />
+    <ClCompile Include="..\simcc\qh_palloc.cc" />
     <ClCompile Include="..\simcc\string_util.cc" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +67,7 @@
     <ClInclude Include="..\simcc\misc\modp_b64.h" />
     <ClInclude Include="..\simcc\misc\modp_b64_data.h" />
     <ClInclude Include="..\simcc\misc\php_md5.h" />
+    <ClInclude Include="..\simcc\qh_palloc.h" />
     <ClInclude Include="..\simcc\ref_object.h" />
     <ClInclude Include="..\simcc\random.h" />
     <ClInclude Include="..\simcc\singleton.h" />
@@ -88,16 +90,17 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>libevent</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>simcc_static</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>

@@ -32,6 +32,9 @@
     <Filter Include="string\modp_b64">
       <UniqueIdentifier>{f7bcd88b-f932-42ac-ba65-270267b5b99a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="memalloc">
+      <UniqueIdentifier>{c73452ef-fca7-46e4-9d7e-cd3d17d60980}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\simcc\inner_pre.cc">
@@ -96,6 +99,9 @@
     </ClCompile>
     <ClCompile Include="..\simcc\misc\dynlib.cc">
       <Filter>misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\simcc\qh_palloc.cc">
+      <Filter>memalloc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -242,6 +248,9 @@
     </ClInclude>
     <ClInclude Include="..\simcc\http_data_parser.h">
       <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\simcc\qh_palloc.h">
+      <Filter>memalloc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

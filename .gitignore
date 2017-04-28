@@ -48,8 +48,8 @@ apps/evnsq/evnsqtail/evnsqtail
 ConsoleApplication1/
 vsprojects/.vs/
 vsprojects/bin/
-vsprojects/libsimcc-test.vcxproj.user
 vsprojects/libsimcc.VC.VC.opendb
 vsprojects/libsimcc.VC.db
+*.vcxproj.user
 res
 
