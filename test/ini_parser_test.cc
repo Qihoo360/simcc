@@ -1183,9 +1183,9 @@ TEST_UNIT(test_ini_parser_bug_find_1) {
     if (!ds.ReadFile(path)) {
         return;
     }
-    simcc::INIParser parser;
-    bool parse_ok = parser.Parse(ds.data(), ds.size(), "\r\n", "=");
-    H_TEST_ASSERT(parse_ok);
+    simcc::INIParser ini;
+    bool parse_ok = ini.Parse(ds.data(), ds.size(), "\n", "=");
+    H_TEST_ASSERT(!parse_ok);
 }
 
 

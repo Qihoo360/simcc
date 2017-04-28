@@ -47,19 +47,19 @@ TEST_UNIT(testDoubleBuffering) {
     for (size_t i = 0; i < H_ARRAYSIZE(s); ++i) {
         H_TEST_ASSERT(db.Reload(s[i]));
         simcc::DoubleBuffering::TargetPtr tt = db.Get();
-        UTTarget* t = static_cast<UTTarget*>(tt.get());
+        UTTargetPTr t = tt;
         H_TEST_ASSERT(t->conf() == s[i]);
         H_TEST_ASSERT(tt->RefCount() == t->RefCount());
-        H_TEST_ASSERT(t->RefCount() == 2);
+        H_TEST_ASSERT(t->RefCount() == 3);
 
         UTTargetPTr ut = t;
-        H_TEST_ASSERT(ut->RefCount() == 3);
+        H_TEST_ASSERT(ut->RefCount() == 4);
 
         ut = NULL;
-        H_TEST_ASSERT(t->RefCount() == 2);
+        H_TEST_ASSERT(t->RefCount() == 3);
 
         tt = NULL;
-        H_TEST_ASSERT(t->RefCount() == 1);
+        H_TEST_ASSERT(t->RefCount() == 2);
     }
 }
 
@@ -91,18 +91,18 @@ TEST_UNIT(testDoubleBufferingManager) {
             H_TEST_ASSERT(m.Reload(name, conf));
             simcc::DoubleBuffering* tt = m.Get(name);
             H_TEST_ASSERT(tt);
-            UTTarget* t = static_cast<UTTarget*>(tt->Get().get());
+            UTTargetPTr t = tt->Get();
             H_TEST_ASSERT(t->conf() == conf);
-            H_TEST_ASSERT(t->RefCount() == 1);
+            H_TEST_ASSERT(t->RefCount() == 2);
 
             UTTargetPTr ut = t;
-            H_TEST_ASSERT(ut->RefCount() == 2);
+            H_TEST_ASSERT(ut->RefCount() == 3);
 
             ut = NULL;
-            H_TEST_ASSERT(t->RefCount() == 1);
+            H_TEST_ASSERT(t->RefCount() == 2);
 
             tt = NULL;
-            H_TEST_ASSERT(t->RefCount() == 1);
+            H_TEST_ASSERT(t->RefCount() == 2);
         }
     }
 }
