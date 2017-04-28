@@ -3,22 +3,27 @@
 #include <functional>
 
 namespace simcc {
+
 class HandlerGuard {
 public:
-    typedef std::function<void()> ExcuteHandler;
+    typedef std::function<void()> Handler;
+
 public:
-    HandlerGuard(ExcuteHandler h)
-        : callback_(h), execute_(true) {}
+    HandlerGuard(Handler h)
+        : cb_(h), execute_(true) {}
 
     ~HandlerGuard() {
         if (execute_) {
-            callback_();
+            cb_();
         }
     }
 
     void set_execute(bool v) { execute_ = v; }
 private:
-    ExcuteHandler callback_;
+    Handler cb_;
     bool execute_;
 };
+
 }
+
+
