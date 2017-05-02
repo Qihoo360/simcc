@@ -5,8 +5,8 @@
 
 namespace simcc {
 
-// A Tokener takes a source string and extracts characters and tokens from
-// it. It is used help to parse strings.
+// A Tokener takes a source string and extracts characters and tokens from it.
+// It is used to help to parse strings.
 
 class Tokener {
 public:
@@ -117,6 +117,7 @@ public:
     const char* data() const {
         return data_;
     }
+
     size_t size() const {
         return end_ - data_;
     }
@@ -132,7 +133,7 @@ protected:
 
 private:
     const char* data_; // the source text string to be parsed
-    const char* current_; // At first, set it the very beginning or data_
+    const char* current_; // At first, set it the very beginning of data_
     const char* end_; // Not include the byte which is pointed by end_
 };
 
@@ -321,7 +322,7 @@ inline bool Tokener::SkipToNextLine() {
     /**
      *  Windows line ending char is 0x0D0A
      *  Linux/Unix line ending char is 0x0A
-     *  So, we just skipTo( 0x)0A )
+     *  So, we just SkipTo(0x0A)
      */
 
     char c = SkipTo((char)0x0a);

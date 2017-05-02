@@ -8,6 +8,7 @@ namespace {
 void test_token_0() {
     const char* text = "0";
     simcc::Tokener token(text);
+    H_TEST_ASSERT(token.size() == strlen(text));
     std::string s = token.NextSlice().ToString();
     H_TEST_ASSERT(s == "0");
 
@@ -20,6 +21,7 @@ void test_token_0() {
 void test_token_1() {
     const char* text = "a\t\nb\t c\td";
     simcc::Tokener token(text);
+    H_TEST_ASSERT(token.size() == strlen(text));
     std::string s = token.NextString();
     H_TEST_ASSERT(s == "a");
     token.SkipSpaces();
@@ -50,6 +52,7 @@ void test_token_1() {
 void test_token_2() {
     const char* text = "a\t\nb\t c\td";
     simcc::Tokener token(text);
+    H_TEST_ASSERT(token.size() == strlen(text));
     H_TEST_ASSERT(token.GetCurrent() == text);
     token.SkipSpaces();
     H_TEST_ASSERT(token.GetCurrent() == text);
@@ -72,6 +75,7 @@ void test_token_2() {
 void test_token_3() {
     const char* text = "abcd";
     simcc::Tokener token(text);
+    H_TEST_ASSERT(token.size() == strlen(text));
     H_TEST_ASSERT(token.Next() == 'a');
     H_TEST_ASSERT(token.Next() == 'b');
     H_TEST_ASSERT(token.Next() == 'c');
@@ -88,7 +92,7 @@ void test_token_3() {
 }
 }
 
-TEST_UNIT(test_tokener) {
+TEST_UNIT(TestTokener) {
     test_token_0();
     test_token_1();
     test_token_2();
