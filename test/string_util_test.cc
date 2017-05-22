@@ -958,6 +958,50 @@ TEST_UNIT(std_stringstream_test) {
     H_TEST_ASSERT(b == "world");
 }
 
+TEST_UNIT(TestParseDuration) {
+    struct {
+        std::string s;
+        int64_t ns;
+    } test_cases[] = {
+        {"4ns", 4},
+        {"5us", 5000},
+        {"5ms", 5000 * int64_t(1000)},
+        {"6s", 6000 * 1000 * int64_t(1000)},
+        {"7m", int64_t(7) * 60 * 1000 * 1000 * int64_t(1000)},
+        {"8h", int64_t(8) * 60 * 60 * 1000 * 1000 * int64_t(1000)},
+        {"9", 9 * 1000 * 1000 * int64_t(1000)} };
+
+    for (size_t i = 0; i < H_ARRAYSIZE(test_cases); i++) {
+        auto &t = test_cases[i];
+        auto d = simcc::StringUtil::ParseDuration(t.s);
+        H_TEST_ASSERT(d.Nanoseconds() == t.ns);
+    }
+}
+
+TEST_UNIT(TestParseSize) {
+    struct {
+        std::string s;
+        uint64_t size;
+    } test_cases[] = {
+        {"3", 3},
+        {"4kb", 4 * 1024},
+        {"5KB", 5 * 1024},
+        {"5mb", 5 * 1024 * int64_t(1024)},
+        {"5MB", 5 * 1024 * int64_t(1024)},
+        {"6GB", 6 * 1024 * 1024 * int64_t(1024)},
+        {"7TB", int64_t(7) * 1024 * 1024 * 1024 * int64_t(1024)},
+        {"7tb", int64_t(7) * 1024 * 1024 * 1024 * int64_t(1024)},
+        {"8pb", int64_t(8) * 1024 * 1024 * 1024 * 1024 * int64_t(1024)},
+        {"8PB", int64_t(8) * 1024 * 1024 * 1024 * 1024 * int64_t(1024)}
+    };
+
+    for (size_t i = 0; i < H_ARRAYSIZE(test_cases); i++) {
+        auto &t = test_cases[i];
+        auto d = simcc::StringUtil::ParseSize(t.s);
+        H_TEST_ASSERT(d == t.size);
+    }
+}
+
 
 
 

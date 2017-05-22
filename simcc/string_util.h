@@ -8,6 +8,7 @@
 #include "simcc/inner_pre.h"
 #include "simcc/slice.h"
 #include "simcc/memmem.h"
+#include "simcc/duration.h"
 
 
 namespace simcc {
@@ -233,6 +234,67 @@ public:
 
     // query whether parameter string is a float number string or not.
     static bool IsFloatNumber(string& s);
+
+
+
+    static Duration ParseDuration(const std::string& s) {
+        // Default unit is second
+        // 
+        // Support unit
+        //    ns : nanosecond
+        //    ms : millisecond
+        //    us : microsecond
+        //     s : second
+        //     m : minute
+        //     h : hour
+
+        int64_t unit = Duration::kSecond;
+        if (simcc::StringUtil::EndsWith(s, "ns", false)) {
+            unit = 1;
+        } else if (simcc::StringUtil::EndsWith(s, "ms", false)) {
+            unit = Duration::kMillisecond;
+        } else if (simcc::StringUtil::EndsWith(s, "us", false)) {
+            unit = Duration::kMicrosecond;
+        } else if (simcc::StringUtil::EndsWith(s, "s", false)) {
+            unit = Duration::kSecond;
+        } else if (simcc::StringUtil::EndsWith(s, "m", false)) {
+            unit = Duration::kMinute;
+        } else if (simcc::StringUtil::EndsWith(s, "h", false)) {
+            unit = Duration::kHour;
+        }
+
+        int64_t t = std::atoll(s.data());
+        return Duration(t * unit);
+    }
+
+    static uint64_t ParseSize(const std::string& s) {
+        // Default size unit is 1
+        //
+        // Support unit
+        const uint64_t K = 1 * 1024; // kb/KB/k/K
+        const uint64_t M = K * 1024; // mb/MB/m/M
+        const uint64_t G = M * 1024; // gb/GB/g/G
+        const uint64_t T = G * 1024; // tb/TB/t/T
+        const uint64_t P = T * 1024; // pb/PB/p/P
+
+        uint64_t unit = 1;
+        if (simcc::StringUtil::EndsWith(s, "kb", false) || simcc::StringUtil::EndsWith(s, "k", false)) {
+            unit = K;
+        } else if (simcc::StringUtil::EndsWith(s, "mb", false) || simcc::StringUtil::EndsWith(s, "m", false)) {
+            unit = M;
+        } else if (simcc::StringUtil::EndsWith(s, "gb", false) || simcc::StringUtil::EndsWith(s, "g", false)) {
+            unit = G;
+        } else if (simcc::StringUtil::EndsWith(s, "tb", false) || simcc::StringUtil::EndsWith(s, "t", false)) {
+            unit = T;
+        } else if (simcc::StringUtil::EndsWith(s, "pb", false) || simcc::StringUtil::EndsWith(s, "P", false)) {
+            unit = P;
+        }
+
+        uint64_t t = std::atoll(s.data());
+        return t*unit;
+    }
+
+
 
     static const string kEmpty;
 };
