@@ -1,7 +1,5 @@
 #include "test_common.h"
 
-#include "simcc/exp.h"
-
 namespace {
 #ifdef _WIN32
 struct OnApp {

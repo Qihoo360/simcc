@@ -1,5 +1,4 @@
 
-#include "simcc/exp.h"
 #include "./test_common.h"
 #include "simcc/duration.h"
 #include "simcc/timestamp.h"

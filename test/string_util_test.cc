@@ -1,5 +1,4 @@
 #include "test_common.h"
-#include "simcc/exp.h"
 #include "simcc/string_util.h"
 
 #include <map>

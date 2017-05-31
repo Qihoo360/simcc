@@ -1,6 +1,5 @@
 #include "test_common.h"
 
-#include <simcc/exp.h>
 #include <simcc/handler_guard.h>
 
 namespace {

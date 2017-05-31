@@ -48,8 +48,6 @@
    documentation and/or software.
  */
 
-#include "simcc/simcc_export.h"
-
 typedef unsigned int php_uint32;
 
 #ifdef __cplusplus

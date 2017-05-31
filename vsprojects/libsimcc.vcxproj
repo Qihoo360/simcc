@@ -16,7 +16,6 @@
     <ClCompile Include="..\simcc\duration.cc" />
     <ClCompile Include="..\simcc\file_util.cc" />
     <ClCompile Include="..\simcc\ini_parser.cc" />
-    <ClCompile Include="..\simcc\inner_pre.cc" />
     <ClCompile Include="..\simcc\json\inherited_conf_json.cc" />
     <ClCompile Include="..\simcc\json\json_array.cc" />
     <ClCompile Include="..\simcc\json\json_common.cc" />
@@ -30,7 +29,6 @@
     <ClCompile Include="..\simcc\misc\md5.cc" />
     <ClCompile Include="..\simcc\misc\modp_b64.cc" />
     <ClCompile Include="..\simcc\misc\php_md5.cc" />
-    <ClCompile Include="..\simcc\pch.cc" />
     <ClCompile Include="..\simcc\qh_palloc.cc" />
     <ClCompile Include="..\simcc\string_util.cc" />
   </ItemGroup>
@@ -74,8 +72,6 @@
     <ClInclude Include="..\simcc\string_util.h" />
     <ClInclude Include="..\simcc\tokener.h" />
     <ClInclude Include="..\simcc\type_traits.h" />
-    <ClInclude Include="..\simcc\simcc_export.h" />
-    <ClInclude Include="..\simcc\exp.h" />
     <ClInclude Include="..\simcc\gettimeofday.h" />
     <ClInclude Include="..\simcc\inner_pre.h" />
     <ClInclude Include="..\simcc\memmem.h" />
@@ -84,6 +80,7 @@
     <ClInclude Include="..\simcc\timestamp.h" />
     <ClInclude Include="..\simcc\timestamp.inl.h" />
     <ClInclude Include="..\simcc\utility.h" />
+    <ClInclude Include="..\simcc\windows_port.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4877AA94-AD55-407F-9ED3-D4503FAB2A7F}</ProjectGuid>

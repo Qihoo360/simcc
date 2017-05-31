@@ -1,6 +1,5 @@
 
 #include "test_common.h"
-#include "simcc/exp.h"
 #include "simcc/data_stream.h"
 #include "simcc/file_util.h"
 
