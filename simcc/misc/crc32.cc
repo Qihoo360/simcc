@@ -1,5 +1,7 @@
 #include "crc32.h"
 
+#include <mutex>
+
 namespace simcc {
 
 uint32_t CRC32::Reflect(uint32_t ref, char ch) {
@@ -50,8 +52,12 @@ unsigned int CRC32::Sum(const void* d, size_t len) {
     static uint32_t table[256];
 
     if (init_table) {
-        InitTable(table);
-        init_table = false;
+        std::once_flag flag;
+        auto f = []() {
+            InitTable(table);
+            init_table = false;
+        };
+        std::call_once(flag, f);
     }
 
     if (len == 0) {
