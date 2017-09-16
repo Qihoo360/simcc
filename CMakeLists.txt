@@ -77,7 +77,7 @@ message (STATUS "THRIFT_LIBRARY " ${THRIFT_LIBRARY})
 
 add_subdirectory (simcc)
 
-if (NOT EVPP_VCPKG_BUILD)
+if (NOT SIMCC_VCPKG_BUILD)
     add_subdirectory (test)
 endif ()
 
