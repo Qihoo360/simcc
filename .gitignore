@@ -16,20 +16,18 @@
 # vim swp file
 *.swp
 
-msvc/Debug/
-msvc/Release/
-msvc/bin/
-msvc/*.opensdf
-msvc/*.sdf
-msvc/*.suo
-msvc/.vs/
-msvc/libevpp.VC.VC.opendb
-msvc/libevpp.VC.db
+vsprojects/Debug/
+vsprojects/Release/
+vsprojects/bin/
+vsprojects/*.opensdf
+vsprojects/*.sdf
+vsprojects/*.suo
+vsprojects/.vs/
 
-test/evpp
-examples/echo/simple_echo
-examples/pingpong/client/pingpong_client
-examples/pingpong/server/pingpong_server
+abuild/*
+build/*
+win32/*
+
 core.*
 *.out
 
@@ -37,15 +35,7 @@ core.*
 
 apps/evnsq/evnsqtail/evnsqtail
 
-3rdparty/libevent-2.1.5-beta/.vs/
-3rdparty/libevent-2.1.5-beta/Win32/
-3rdparty/libevent-2.1.5-beta/event.dir/
-3rdparty/libevent-2.1.5-beta/event_core.dir/
-3rdparty/libevent-2.1.5-beta/event_extra.dir/
-3rdparty/libevent-2.1.5-beta/libevent.VC.db
 
-3rdparty/libevent-2.1.5-beta/
-ConsoleApplication1/
 vsprojects/.vs/
 vsprojects/bin/
 vsprojects/libsimcc.VC.VC.opendb
