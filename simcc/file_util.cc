@@ -298,7 +298,7 @@ bool FileUtil::ReadFile(const char* szFileName, std::list<string>& lines) {
         return false;
     }
 
-    std::ifstream ifs(szFileName);
+    std::ifstream ifs(szFileName, std::ios::binary);
     if (! ifs) {
         return false;
     }
@@ -318,7 +318,12 @@ bool FileUtil::WriteFile(const string& filepath, const void* content, const size
 }
 
 bool FileUtil::WriteFile(const char* filepath, const void* content, const size_t len) {
-    FILE* fp = ::fopen(filepath, "w+");
+#ifdef H_OS_WINDOWS
+    const char* mode = "wb+";
+#else
+    const char* mode = "w+";
+#endif
+    FILE* fp = ::fopen(filepath, mode);
 
     if (fp == NULL) {
         fprintf(stderr, "%s : could not open file \"%s\" for write\n", __func__, filepath);
