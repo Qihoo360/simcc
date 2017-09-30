@@ -271,7 +271,7 @@ inline Slice Tokener::NextSlice(char quote) {
 }
 
 inline char Tokener::SkipTo(char to) {
-    register char c = 0;
+    char c = 0;
     const char* startIndex = this->current_;
 
     do {

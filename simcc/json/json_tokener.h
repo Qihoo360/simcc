@@ -106,7 +106,7 @@ inline bool JSONTokener::NextString(char quote, bool parse_protobuf, string& rs)
         Z16, Z16, Z16, Z16, Z16, Z16, Z16, Z16
     };
 #undef Z16
-    register char c = 0;
+    char c = 0;
     for (;;) {
         c = Next();
 

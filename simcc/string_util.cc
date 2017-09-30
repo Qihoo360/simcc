@@ -638,7 +638,7 @@ void StringUtil::URLEncode(const char* url, size_t url_len, string& strDest) {
     //copy from php source code : ext/standard/url.c: PHPAPI char *php_url_encode(char const *s, int len, int *new_length)
     strDest.resize(url_len * 3);
 
-    register unsigned char c;
+    unsigned char c;
     unsigned char* to, *start;
     unsigned char const* from, *end;
 
@@ -673,7 +673,7 @@ void StringUtil::URLEncode(const char* url, size_t url_len, string& strDest) {
 bool StringUtil::URLEncode(const char* url, size_t url_len, char* edcoded_url, size_t& edcoded_url_len) {
     //copy from php source code : ext/standard/url.c: PHPAPI char *php_url_encode(char const *s, int len, int *new_length)
 
-    register unsigned char c;
+    unsigned char c;
     unsigned char* to, *start, *to_end;
     unsigned char const* from, *end;
 
