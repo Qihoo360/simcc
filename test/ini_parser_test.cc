@@ -700,7 +700,7 @@ void test_ini_parser_11() {
 
 class MyParseListener {
 public:
-    void OnValue(simcc::INIParser& parser, const std::string& section, const std::string& key, const std::string& value) {
+    void OnValue(simcc::INIParser& parser, const std::string& /*section*/, const std::string& /*key*/, const std::string& /*value*/) {
         parser.StopParsing(true);
     }
 };
@@ -738,7 +738,7 @@ void test_ini_parser_stop_parse_11() {
 
     size_t rawdatalen = strlen(rawdata);
     simcc::INIParser parser(false);
-    auto f = [](simcc::INIParser & p, const std::string & section, const std::string & key, const std::string & value) {
+    auto f = [](simcc::INIParser & p, const std::string & /*section*/, const std::string & /*key*/, const std::string & /*value*/) {
         p.StopParsing(true);
     };
     parser.SetParseListener(f);
@@ -812,7 +812,7 @@ public:
         init(ini_string);
     }
 
-    virtual void visit(const simcc::INIParser& parser, const std::string& section, const std::string& key, const std::string& value) {
+    virtual void visit(const simcc::INIParser& /*parser*/, const std::string& section, const std::string& key, const std::string& value) {
         H_TEST_ASSERT(value == parser_.Get(section, key));
     }
 
@@ -863,7 +863,7 @@ public:
         a_index_ = 0;
     }
 
-    virtual void visit(const simcc::INIParser& parser, const std::string& section, const std::string& key, const std::string& value) {
+    virtual void visit(const simcc::INIParser& /*parser*/, const std::string& section, const std::string& key, const std::string& value) {
         H_TEST_ASSERT(value == parser_.Get(section, key));
 
         if (section == "") {

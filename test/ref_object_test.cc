@@ -16,8 +16,6 @@ public:
     ~MyRefCounted() {
         release_count++;
     }
-private:
-    char c;
 };
 
 }

@@ -101,7 +101,6 @@ void serialize_vector_3() {
     intvector::iterator it(iv.begin());
     intvector::iterator ite(iv.end());
     intvector::iterator it1(iv1.begin());
-    intvector::iterator ite1(iv1.end());
     for (; it != ite; ++it, ++it1) {
         H_TEST_ASSERT((*it) == (*it1));
     }
@@ -139,7 +138,6 @@ void serialize_list_4() {
     intlist::iterator it(iv.begin());
     intlist::iterator ite(iv.end());
     intlist::iterator it1(iv1.begin());
-    intlist::iterator ite1(iv1.end());
     for (; it != ite; ++it, ++it1) {
         H_TEST_ASSERT((*it) == (*it1));
     }
@@ -177,7 +175,6 @@ void serialize_set_5() {
     intset::iterator it(iv.begin());
     intset::iterator ite(iv.end());
     intset::iterator it1(iv1.begin());
-    intset::iterator ite1(iv1.end());
     for (; it != ite; ++it, ++it1) {
         H_TEST_ASSERT((*it) == (*it1));
     }
@@ -221,7 +218,6 @@ void serialize_map_6() {
         intset::iterator it(iv.begin());
         intset::iterator ite(iv.end());
         intset::iterator it1(iv1.begin());
-        intset::iterator ite1(iv1.end());
         for (; it != ite; ++it, ++it1) {
             H_TEST_ASSERT((*it) == (*it1));
         }
@@ -231,7 +227,6 @@ void serialize_map_6() {
         intdoublemap::iterator it(idm.begin());
         intdoublemap::iterator ite(idm.end());
         intdoublemap::iterator it1(idm1.begin());
-        intdoublemap::iterator ite1(idm1.end());
         for (; it != ite; ++it, ++it1) {
             H_TEST_ASSERT((it->first) == (it1->first));
             H_TEST_ASSERT((it->second) == (it1->second));
