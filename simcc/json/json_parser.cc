@@ -53,7 +53,7 @@ const char* JSONParser::strerror() const {
 ObjectPtr JSONParser::LoadFile(const string& json_file_path) {
     simcc::DataStream ds;
     if (!ds.ReadFile(json_file_path)) {
-        return NULL;
+        return nullptr;
     }
 
     return Load(ds.data(), ds.size());
@@ -61,12 +61,12 @@ ObjectPtr JSONParser::LoadFile(const string& json_file_path) {
 
 ObjectPtr JSONParser::Load(const char* source, const simcc::int64 source_len /*= -1 */) {
     if (source_len == 0 || !source) {
-        return NULL;
+        return nullptr;
     }
 
     json::JSONTokener x(source, source_len);
     if (!x.SkipComment()) {
-        return 0;
+        return nullptr;
     }
 
     char c = x.NextClean();
@@ -76,17 +76,17 @@ ObjectPtr JSONParser::Load(const char* source, const simcc::int64 source_len /*=
         if (jo->Parse(&x) && jo->error() == kNoError) {
             return jo.get();
         }
-        return NULL;
+        return nullptr;
     } else if (c == '[') {
         JSONArrayPtr ja = new JSONArray();
         x.Back();
         if (ja->Parse(&x) && ja->error() == kNoError) {
             return ja.get();
         }
-        return NULL;
+        return nullptr;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 }
