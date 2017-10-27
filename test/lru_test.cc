@@ -35,7 +35,7 @@ TEST_UNIT(testLRUCacheH4) {
 
 
 struct Sizeof : std::unary_function<int64_t, size_t> {
-    size_t operator()(const int64_t& v) {
+    size_t operator()(const int64_t&) {
         return sizeof(std::string) + sizeof(int64_t);
     }
 };

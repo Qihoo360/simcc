@@ -215,8 +215,8 @@ void test_ini_parser_case_senstive_7() {
         "appext1=c1\r\n"
         "             \r\n"
         "             \r\n"
-        "[hold×¡]\r\n"
-        "ÓĞÄ¾ÓĞ=²»ÏëÉÏ°àµÄÓĞÄ¾ÓĞ!!!!\r\n";
+        "[holdä½]\r\n"
+        "æœ‰æœ¨æœ‰=ä¸æƒ³ä¸Šç­çš„æœ‰æœ¨æœ‰!!!!\r\n";
 
     size_t rawdatalen = strlen(rawdata);
     simcc::INIParser parser(false);
@@ -295,17 +295,17 @@ void test_ini_parser_case_senstive_7() {
     {
 
         if (parser.case_sensitive()) {
-            std::string section = "hold×¡";
-            std::string key = "ÓĞÄ¾ÓĞ";
-            std::string value = "²»ÏëÉÏ°àµÄÓĞÄ¾ÓĞ!!!!";
+            std::string section = "holdä½";
+            std::string key = "æœ‰æœ¨æœ‰";
+            std::string value = "ä¸æƒ³ä¸Šç­çš„æœ‰æœ¨æœ‰!!!!";
             H_TEST_ASSERT(value == parser.Get(section, key));
         } else {
             simcc::INIParser parser_case_senstive(true);
             parser_case_senstive.Parse(rawdata, rawdatalen, "\r\n", "=");
             H_TEST_ASSERT(parser_case_senstive.case_sensitive());
-            std::string section = "hold×¡";
-            std::string key = "ÓĞÄ¾ÓĞ";
-            std::string value = "²»ÏëÉÏ°àµÄÓĞÄ¾ÓĞ!!!!";
+            std::string section = "holdä½";
+            std::string key = "æœ‰æœ¨æœ‰";
+            std::string value = "ä¸æƒ³ä¸Šç­çš„æœ‰æœ¨æœ‰!!!!";
             H_TEST_ASSERT(value == parser_case_senstive.Get(section, key));
         }
     }
@@ -395,15 +395,15 @@ void test_ini_parser_set_8() {
         parser.Set(section, key, value);
         H_TEST_ASSERT(value == parser.Get(section, key));
 
-        value = "Äã¶®µÄcccccc";
+        value = "ä½ æ‡‚çš„cccccc";
         parser.Set(section, key, value);
         H_TEST_ASSERT(value == parser.Get(section, key));
 
-        value = "²»¹ÜÄãĞÅ²»ĞÅ£¬·´ÕıÎÒĞÅÁËaaaa";
+        value = "ä¸ç®¡ä½ ä¿¡ä¸ä¿¡ï¼Œåæ­£æˆ‘ä¿¡äº†aaaa";
         parser.Set(section, key, value);
         H_TEST_ASSERT(value == parser.Get(section, key));
 
-        value = "¸¡ÔÆbbb";
+        value = "æµ®äº‘bbb";
         parser.Set(section, key, value);
         H_TEST_ASSERT(value == parser.Get(section, key));
     }
@@ -422,9 +422,9 @@ void test_ini_parser_set_8() {
     }
 
     {
-        std::string section = "²»ÒªÑöÊÓ¸ç";
-        std::string key = "¸çÊÇÒ»¸öÉñ»°";
-        std::string value = "hold×¡";
+        std::string section = "ä¸è¦ä»°è§†å“¥";
+        std::string key = "å“¥æ˜¯ä¸€ä¸ªç¥è¯";
+        std::string value = "holdä½";
         parser.Set(section, key, value);
         H_TEST_ASSERT(value == parser.Get(section, key));
 
@@ -586,63 +586,63 @@ void test_ini_parser_output_9() {
 void test_ini_parser_chinese_10() {
     const char* rawdata =
         "             \r\n"
-        " ÉË²»Æğ=Ñ§·¨ÓïµÄÈËÄãÉË²»Æğ°¡\r\n"
-        " ÂôÃÈ=µ±ÎÒÃÇ¶¼È¥ÂôÃÈ£¬¶¼È¥×°¿É°®µÄÊ±ºò£¬ËµÃ÷Õâ¸öÊÀ½ç»¹ÊÇÃÈµÄ£¬»¹ÊÇ¿É°®µÄ¡£\r\n"
+        " ä¼¤ä¸èµ·=å­¦æ³•è¯­çš„äººä½ ä¼¤ä¸èµ·å•Š\r\n"
+        " å–èŒ=å½“æˆ‘ä»¬éƒ½å»å–èŒï¼Œéƒ½å»è£…å¯çˆ±çš„æ—¶å€™ï¼Œè¯´æ˜è¿™ä¸ªä¸–ç•Œè¿˜æ˜¯èŒçš„ï¼Œè¿˜æ˜¯å¯çˆ±çš„ã€‚\r\n"
         "             \r\n"
-        " [¿Óµù] \r\n"
+        " [å‘çˆ¹] \r\n"
         "             \r\n"
-        "ÌìÁú°Ë²¿=ÄãÃÃ°¡!\r\n"
-        "ÄãÃÃ=ÄãÃÃÊÇ¸öºÜÉî°ÂµÄÎÊÌâ£¡\r\n"
+        "å¤©é¾™å…«éƒ¨=ä½ å¦¹å•Š!\r\n"
+        "ä½ å¦¹=ä½ å¦¹æ˜¯ä¸ªå¾ˆæ·±å¥¥çš„é—®é¢˜ï¼\r\n"
         "             \r\n"
         "             \r\n"
-        "[±¯´ß ]  \r\n"
+        "[æ‚²å‚¬ ]  \r\n"
         "             \r\n"
-        " ±¯²ÒµÃ´ßÈËÀáÏÂ=Ò»°ã±íÊ¾²»³ÆÒâ£¬²»Ë³ĞÄ£¬Ê§°Ü£¬ÉËĞÄ£¬»ÚºŞµÈÒâË¼   \r\n"
+        " æ‚²æƒ¨å¾—å‚¬äººæ³ªä¸‹=ä¸€èˆ¬è¡¨ç¤ºä¸ç§°æ„ï¼Œä¸é¡ºå¿ƒï¼Œå¤±è´¥ï¼Œä¼¤å¿ƒï¼Œæ‚”æ¨ç­‰æ„æ€   \r\n"
         "appext1=1\r\n"
         "             \r\n"
-        "[ÆÕÍ¨ÇàÄê] \r\n"
+        "[æ™®é€šé’å¹´] \r\n"
         "             \r\n"
-        "ÎÄÒÕÇàÄê=2BÇàÄê\r\n";
+        "æ–‡è‰ºé’å¹´=2Bé’å¹´\r\n";
 
     size_t rawdatalen = strlen(rawdata);
     simcc::INIParser parser;
     parser.Parse(rawdata, rawdatalen, "\r\n", "=");
 
     {
-        std::string key = "ÉË²»Æğ";
-        std::string value = "Ñ§·¨ÓïµÄÈËÄãÉË²»Æğ°¡";
+        std::string key = "ä¼¤ä¸èµ·";
+        std::string value = "å­¦æ³•è¯­çš„äººä½ ä¼¤ä¸èµ·å•Š";
         H_TEST_ASSERT(value == parser.Get(key));
     }
 
     {
-        std::string key = "ÂôÃÈ";
-        std::string value = "µ±ÎÒÃÇ¶¼È¥ÂôÃÈ£¬¶¼È¥×°¿É°®µÄÊ±ºò£¬ËµÃ÷Õâ¸öÊÀ½ç»¹ÊÇÃÈµÄ£¬»¹ÊÇ¿É°®µÄ¡£";
+        std::string key = "å–èŒ";
+        std::string value = "å½“æˆ‘ä»¬éƒ½å»å–èŒï¼Œéƒ½å»è£…å¯çˆ±çš„æ—¶å€™ï¼Œè¯´æ˜è¿™ä¸ªä¸–ç•Œè¿˜æ˜¯èŒçš„ï¼Œè¿˜æ˜¯å¯çˆ±çš„ã€‚";
         H_TEST_ASSERT(value == parser.Get(key));
     }
 
 
     {
-        std::string section = "¿Óµù";
-        std::string key = "ÌìÁú°Ë²¿";
-        std::string value = "ÄãÃÃ°¡!";
+        std::string section = "å‘çˆ¹";
+        std::string key = "å¤©é¾™å…«éƒ¨";
+        std::string value = "ä½ å¦¹å•Š!";
         H_TEST_ASSERT(value == parser.Get(section, key));
 
-        key = "ÄãÃÃ";
-        value = "ÄãÃÃÊÇ¸öºÜÉî°ÂµÄÎÊÌâ£¡";
-        H_TEST_ASSERT(value == parser.Get(section, key));
-    }
-
-    {
-        std::string section = "±¯´ß";
-        std::string key = "±¯²ÒµÃ´ßÈËÀáÏÂ";
-        std::string value = "Ò»°ã±íÊ¾²»³ÆÒâ£¬²»Ë³ĞÄ£¬Ê§°Ü£¬ÉËĞÄ£¬»ÚºŞµÈÒâË¼";
+        key = "ä½ å¦¹";
+        value = "ä½ å¦¹æ˜¯ä¸ªå¾ˆæ·±å¥¥çš„é—®é¢˜ï¼";
         H_TEST_ASSERT(value == parser.Get(section, key));
     }
 
     {
-        std::string section = "ÆÕÍ¨ÇàÄê";
-        std::string key = "ÎÄÒÕÇàÄê";
-        std::string value = "2BÇàÄê";
+        std::string section = "æ‚²å‚¬";
+        std::string key = "æ‚²æƒ¨å¾—å‚¬äººæ³ªä¸‹";
+        std::string value = "ä¸€èˆ¬è¡¨ç¤ºä¸ç§°æ„ï¼Œä¸é¡ºå¿ƒï¼Œå¤±è´¥ï¼Œä¼¤å¿ƒï¼Œæ‚”æ¨ç­‰æ„æ€";
+        H_TEST_ASSERT(value == parser.Get(section, key));
+    }
+
+    {
+        std::string section = "æ™®é€šé’å¹´";
+        std::string key = "æ–‡è‰ºé’å¹´";
+        std::string value = "2Bé’å¹´";
         H_TEST_ASSERT(value == parser.Get(section, key));
     }
 }
@@ -700,7 +700,7 @@ void test_ini_parser_11() {
 
 class MyParseListener {
 public:
-    void OnValue(simcc::INIParser& parser, const std::string& section, const std::string& key, const std::string& value) {
+    void OnValue(simcc::INIParser& parser, const std::string& /*section*/, const std::string& /*key*/, const std::string& /*value*/) {
         parser.StopParsing(true);
     }
 };
@@ -733,12 +733,12 @@ void test_ini_parser_stop_parse_11() {
         "appext1=c1\r\n"
         "             \r\n"
         "             \r\n"
-        "[hold×¡]\r\n"
-        "ÓĞÄ¾ÓĞ=²»ÏëÉÏ°àµÄÓĞÄ¾ÓĞ!!!!\r\n";
+        "[holdä½]\r\n"
+        "æœ‰æœ¨æœ‰=ä¸æƒ³ä¸Šç­çš„æœ‰æœ¨æœ‰!!!!\r\n";
 
     size_t rawdatalen = strlen(rawdata);
     simcc::INIParser parser(false);
-    auto f = [](simcc::INIParser & p, const std::string & section, const std::string & key, const std::string & value) {
+    auto f = [](simcc::INIParser & p, const std::string & /*section*/, const std::string & /*key*/, const std::string & /*value*/) {
         p.StopParsing(true);
     };
     parser.SetParseListener(f);
@@ -812,7 +812,7 @@ public:
         init(ini_string);
     }
 
-    virtual void visit(const simcc::INIParser& parser, const std::string& section, const std::string& key, const std::string& value) {
+    virtual void visit(const simcc::INIParser& /*parser*/, const std::string& section, const std::string& key, const std::string& value) {
         H_TEST_ASSERT(value == parser_.Get(section, key));
     }
 
@@ -863,7 +863,7 @@ public:
         a_index_ = 0;
     }
 
-    virtual void visit(const simcc::INIParser& parser, const std::string& section, const std::string& key, const std::string& value) {
+    virtual void visit(const simcc::INIParser& /*parser*/, const std::string& section, const std::string& key, const std::string& value) {
         H_TEST_ASSERT(value == parser_.Get(section, key));
 
         if (section == "") {
