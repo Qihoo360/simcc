@@ -292,7 +292,7 @@ void JSONObject::Quote(const string& source, bool utf8_to_unicode, simcc::DataSt
 
     const char* readp = source.data();
     const char* readend = readp + source.size();
-    register char c = 0;
+    char c = 0;
     while (readp < readend) {
         c = *readp++;
         switch (c) {

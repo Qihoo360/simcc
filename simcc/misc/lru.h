@@ -132,7 +132,7 @@ struct SizeofFunctor : public std::unary_function<V, size_t>
 template<class V>
 struct NonFunctor : public std::unary_function<V, void>
 {
-    void operator()(V& v) const {}
+    void operator()(V&) const {}
 };
 
 // LRU Cache

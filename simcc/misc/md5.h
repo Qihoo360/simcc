@@ -139,7 +139,7 @@ inline string MD5::Sumh(const void* data, size_t data_len) {
 }
 
 inline void MD5::Bin2Hex(const void* binary, size_t binary_len, char* hex) {
-    register int m = 0;
+    int m = 0;
     const uint8_t* ubinary = reinterpret_cast<const uint8_t*>(binary);
 
     for (size_t i = 0; i < binary_len; ++i) {
@@ -171,7 +171,7 @@ inline string MD5::Bin2Hex(const void* binary, size_t binary_len) {
 }
 
 inline bool MD5::Hex2Bin(const char* hex, const size_t hex_len, void* binary) {
-    register int m = 0;
+    int m = 0;
     uint8_t* ubinary = reinterpret_cast<uint8_t*>(binary);
     size_t i = 0;
     size_t hex_len_1 = hex_len - 1;

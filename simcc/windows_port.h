@@ -81,6 +81,8 @@
 
 #ifdef H_OS_WINDOWS
 #   define H_LITTLE_ENDIAN
+#elif defined(__APPLE__)
+#   include <machine/endian.h>
 #elif defined(H_OS_FREEBSD)
 #   include <sys/endian.h>
 #else
