@@ -21,7 +21,8 @@ RTFLAGS := \
 
 LDFLAGS= $(RTFLAGS) \
 	 -L$(CURRENT_DIR)/../simcc \
-	 -lsimcc
+	 -lsimcc \
+	-lpthread
 
 DIRNAME=$(shell basename `pwd`)
 
