@@ -207,6 +207,55 @@ TEST_UNIT(http_multi_part_parse_new_boundary)
     H_TEST_ASSERT(kv["sign"] == "4ce0ca187c711072");
 }
 
+TEST_UNIT(http_multi_part_parse_new_boundary_by_no_header)
+{
+    std::string post = "--------------------------27a30c35baa06fc7" CRLF
+        "Content-Disposition: form-data; name=\"urls\"" CRLF
+        CRLF
+        "5cc909e534d0da2f4a877e49b1b0a22e	nUE0pQbiY3q3ql5knJuiol5wo20iZF5bqT1f\n"
+        CRLF
+        "--------------------------27a30c35baa06fc7" CRLF
+        "Content-Disposition: form-data; name=\"kws\"" CRLF
+        CRLF
+        "	5rWL6K+VMQ==\n"
+        CRLF
+        "--------------------------27a30c35baa06fc7" CRLF
+        "Content-Disposition: form-data; name=\"product\"" CRLF
+        CRLF
+        "internal" CRLF
+        "--------------------------27a30c35baa06fc7" CRLF
+        "Content-Disposition: form-data; name=\"combo\"" CRLF
+        CRLF
+        "cloudquery_tool" CRLF
+        "--------------------------27a30c35baa06fc7" CRLF
+        "Content-Disposition: form-data; name=\"v\"" CRLF
+        CRLF
+        "3" CRLF
+        "--------------------------27a30c35baa06fc7" CRLF
+        "Content-Disposition: form-data; name=\"mid\"" CRLF
+        CRLF
+        "a16cf365149a8aed21fdd04ae2545824" CRLF
+        "--------------------------27a30c35baa06fc7" CRLF
+        "Content-Disposition: form-data; name=\"vk\"" CRLF
+        CRLF
+        "bcaa437f" CRLF
+        "--------------------------27a30c35baa06fc7--";
+
+    std::string boundary;
+    H_TEST_ASSERT(simcc::HttpMultiDataParser::GetBoundary(post.data(), post.size(), boundary));
+
+    H_TEST_ASSERT(boundary == "------------------------27a30c35baa06fc7");
+    ssmap kv;
+    H_TEST_ASSERT(simcc::HttpMultiDataParser::Parse<std::string>(post.data(), post.size(), boundary, kv));
+
+    H_TEST_ASSERT(kv.size() > 0);
+    H_TEST_ASSERT(kv["product"] == "internal");
+    H_TEST_ASSERT(kv["combo"] == "cloudquery_tool");
+    H_TEST_ASSERT(kv["v"] == "3");
+    H_TEST_ASSERT(kv["mid"] == "a16cf365149a8aed21fdd04ae2545824");
+    H_TEST_ASSERT(kv["vk"] == "bcaa437f");
+}
+
 
 
 

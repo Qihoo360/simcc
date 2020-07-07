@@ -266,6 +266,43 @@ public:
 
         return false;
     }
+
+    // 若 http 头未传入
+    // 硬解获取 http_multipart_boundary
+    //
+    //  --yQmSenn8dvtLUKEV8bRcq8uiATfXEf5H^M$
+    //  Content-Disposition: form-data; name="Fileinfo"^M$
+    //  ^M$
+    //  [CONTENT]^M$
+    //  --yQmSenn8dvtLUKEV8bRcq8uiATfXEf5H--^M$
+    static bool GetBoundary(const void* d, size_t dlen, std::string& http_multipart_boundary)
+    {
+        static std::string tag_name_prefix = "Content-Disposition:";
+
+        const char* end = (const char*)d + dlen;
+        const char* p = (const char*)d;
+        std::string tag_value_end(tag_name_prefix.size() + 2, 0);
+        tag_value_end = CRLF;
+        tag_value_end.append(tag_name_prefix);
+
+        const char* found = static_cast<const char*>(memmem(p, end - p, tag_value_end.data(), tag_value_end.size()));
+        if (!found || found >= end) {
+            return false;
+        }
+        std::string multipart_boundary(p + 2, found - p - 2);
+
+        // find end multipart_boundary
+        std::string end_multipart_boundary(multipart_boundary.size() +2, 0);
+        end_multipart_boundary = multipart_boundary;
+        end_multipart_boundary.append("--", 2);
+        found = static_cast<const char*>(memmem(end - 128, 128, end_multipart_boundary.data(), end_multipart_boundary.size()));
+        if (!found || found >= end) {
+            return false;
+        }
+
+        http_multipart_boundary.swap(multipart_boundary);
+        return true;
+    }
 };
 }
 
