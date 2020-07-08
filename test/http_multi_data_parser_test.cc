@@ -207,6 +207,43 @@ TEST_UNIT(http_multi_part_parse_new_boundary)
     H_TEST_ASSERT(kv["sign"] == "4ce0ca187c711072");
 }
 
+TEST_UNIT(http_multi_part_parse_new_boundary_by_no_header)
+{
+    std::string post = "--------------------------27a30c35baa06fc7" CRLF
+        "Content-Disposition: form-data; name=\"key1\"" CRLF
+        CRLF
+        "value1"
+        CRLF
+        "--------------------------27a30c35baa06fc7" CRLF
+        "Content-Disposition: form-data; name=\"key2\"" CRLF
+        CRLF
+        "value2"
+        CRLF
+        "--------------------------27a30c35baa06fc7" CRLF
+        "Content-Disposition: form-data; name=\"key3\"" CRLF
+        CRLF
+        "3"
+        CRLF
+        "--------------------------27a30c35baa06fc7" CRLF
+        "Content-Disposition: form-data; name=\"key4\"" CRLF
+        CRLF
+        "bcaa437f"
+        CRLF
+        "--------------------------27a30c35baa06fc7--";
+
+    std::string boundary;
+    H_TEST_ASSERT(simcc::HttpMultiDataParser::GetBoundary(post.data(), post.size(), boundary));
+
+    H_TEST_ASSERT(boundary == "------------------------27a30c35baa06fc7");
+    ssmap kv;
+    H_TEST_ASSERT(simcc::HttpMultiDataParser::Parse<std::string>(post.data(), post.size(), boundary, kv));
+
+    H_TEST_ASSERT(kv.size() > 0);
+    H_TEST_ASSERT(kv["key1"] == "value1");
+    H_TEST_ASSERT(kv["key2"] == "value2");
+    H_TEST_ASSERT(kv["key3"] == "3");
+    H_TEST_ASSERT(kv["key4"] == "bcaa437f");
+}
 
 
 
