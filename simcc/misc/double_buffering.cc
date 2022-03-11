@@ -46,9 +46,7 @@ bool DoubleBufferingManager::Add(const string& name,
                                  DoubleBuffering::TargetCreator f) {
     std::lock_guard<std::mutex> g(mutex_);
     DoubleBufferingPtr& db = dbufs_[name];
-    if (db.get() == NULL) {
-        db.reset(new DoubleBuffering(f));
-    }
+    db.reset(new DoubleBuffering(f));
     return db->Reload(conf);
 }
 
