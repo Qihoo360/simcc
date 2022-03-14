@@ -35,10 +35,10 @@ $(TARGET_A) : $(OBJS)
 	ranlib $@			   
 
 $(TARGET_SO) : $(OBJS)
-	$(CXX) $(LDFLAGS) $(OBJS) -shared -o $@.$(FULL)
+	$(CXX) $(LDFLAGS) $(OBJS) -shared -o $@.$(RPM_VERSION)
 	@rm -fr $(@)
 	@rm -fr $(@).$(MAJOR)
-	ln -s $(@).$(FULL) $(@).$(MAJOR)
+	ln -s $(@).$(RPM_VERSION) $(@).$(MAJOR)
 	ln -s $(@).$(MAJOR) $(@)
 	
 	
@@ -57,5 +57,5 @@ t:
 install: $(TARGET_A) $(TARGET_SO) 
 
 clean:
-	rm -rf $(OBJS) $(DEPS) $(TARGET_SO) $(TARGET_A)
+	rm -rf $(OBJS) $(DEPS) $(TARGET_SO)* $(TARGET_A)
 
