@@ -92,10 +92,8 @@ popd
 #   _sysconfdir       /etc
 #   _initrddir        %{_sysconfdir}/rc.d/init.d
 #   _var              /var
-%dir %{approot}/
-%dir %{approot}/lib
 
-%{libpath}/lib*.* 
+%{libpath}/libsimcc.*
 
 %files devel
 #%{binpath}/*
